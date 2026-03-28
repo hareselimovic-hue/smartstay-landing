@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartStay — Digitalni vodič za vaše goste</title>
+  <meta name="description" content="SmartStay je digitalna platforma koja vašim gostima daje sve informacije o apartmanu na jednom mjestu — bez štampanja, bez ponavljanja." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#0F2F61',
+            accent: '#FF6700',
+            surface: '#F7F7F5',
+            muted: '#6B6B6B',
+            border: '#EDEDE9',
+          },
+          fontFamily: {
+            jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, h4, .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    /* Phone mockup */
+    .phone-frame {
+      width: 240px;
+      height: 490px;
+      background: #1a1a2e;
+      border-radius: 40px;
+      padding: 10px;
+      box-shadow: 0 40px 80px rgba(15,47,97,0.4), inset 0 0 0 2px #2a2a4a;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .phone-notch {
+      width: 80px;
+      height: 22px;
+      background: #1a1a2e;
+      border-radius: 0 0 16px 16px;
+      margin: 0 auto 6px;
+      position: relative;
+      z-index: 10;
+    }
+    .phone-screen {
+      background: #F7F7F5;
+      border-radius: 30px;
+      height: calc(100% - 0px);
+      overflow: hidden;
+      position: relative;
+    }
+    .phone-screen-inner {
+      height: 100%;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .phone-screen-inner::-webkit-scrollbar { display: none; }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .animate-fade-up { animation: fadeUp 0.7s ease forwards; }
+    .animate-float { animation: float 4s ease-in-out infinite; }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Nav scroll */
+    .nav-scrolled { background: rgba(15,47,97,0.95) !important; backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0,0,0,0.2); }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 0%, #8ba3c7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Code block */
+    .code-block { font-family: 'Courier New', monospace; font-size: 13px; }
+  </style>
+</head>
+<body class="bg-white text-[#262626] antialiased">
+
+  <!-- ═══════════════════════════════════════
+       NAVIGACIJA
+  ═══════════════════════════════════════ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="background: transparent;">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <a href="#" class="font-jakarta font-bold text-2xl text-white tracking-tight">SmartStay</a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#funkcionalnosti" class="text-[#8ba3c7] hover:text-white text-sm font-medium transition-colors">Funkcionalnosti</a>
+        <a href="#kako-radi" class="text-[#8ba3c7] hover:text-white text-sm font-medium transition-colors">Kako radi</a>
+        <a href="#tech" class="text-[#8ba3c7] hover:text-white text-sm font-medium transition-colors">Tech</a>
+        <a href="#iskustva" class="text-[#8ba3c7] hover:text-white text-sm font-medium transition-colors">Iskustva</a>
+      </div>
+      <a href="#kontakt" class="bg-[#FF6700] hover:bg-[#e05c00] text-white font-jakarta font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors">
+        Zatraži pristup
+      </a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section class="min-h-screen bg-[#0F2F61] relative overflow-hidden flex items-center">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute -top-40 -right-40 w-96 h-96 bg-[#FF6700] opacity-10 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-white opacity-5 rounded-full blur-3xl"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#1a4a8a] opacity-30 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-20 relative z-10 w-full">
+      <div class="flex flex-col lg:flex-row items-center gap-16">
+
+        <!-- Tekst -->
+        <div class="flex-1 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 bg-white/10 text-white/80 text-xs font-medium px-4 py-2 rounded-full mb-8 animate-fade-up">
+            <span class="w-2 h-2 bg-[#FF6700] rounded-full animate-pulse"></span>
+            Novo · Digitalni vodič za iznajmljivače
+          </div>
+          <h1 class="font-jakarta font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6 animate-fade-up delay-100">
+            Sve što vaš gost<br/>
+            treba da zna —<br/>
+            <span class="text-[#FF6700]">na jednom mjestu.</span>
+          </h1>
+          <p class="text-[#8ba3c7] text-lg sm:text-xl leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0 animate-fade-up delay-200">
+            SmartStay vam omogućava da kreirate digitalni vodič za svaki apartman. WiFi, check-in, pravila, lokacija — vaš gost dobija sve jednim skeniranjem QR koda.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-up delay-300">
+            <a href="#kako-radi" class="bg-[#FF6700] hover:bg-[#e05c00] text-white font-jakarta font-bold text-base px-8 py-4 rounded-2xl transition-all hover:scale-105 hover:shadow-lg hover:shadow-orange-500/30 text-center">
+              Pogledaj kako radi →
+            </a>
+            <a href="#kontakt" class="bg-white/10 hover:bg-white/20 text-white font-jakarta font-semibold text-base px-8 py-4 rounded-2xl transition-all border border-white/20 text-center">
+              Zatraži pristup
+            </a>
+          </div>
+
+          <!-- Stats -->
+          <div class="flex gap-8 justify-center lg:justify-start mt-14 animate-fade-up delay-300">
+            <div>
+              <div class="font-jakarta font-extrabold text-3xl text-white">9</div>
+              <div class="text-[#8ba3c7] text-sm mt-1">tipova sekcija</div>
+            </div>
+            <div class="w-px bg-white/10"></div>
+            <div>
+              <div class="font-jakarta font-extrabold text-3xl text-white">QR</div>
+              <div class="text-[#8ba3c7] text-sm mt-1">jedan sken, sve info</div>
+            </div>
+            <div class="w-px bg-white/10"></div>
+            <div>
+              <div class="font-jakarta font-extrabold text-3xl text-white">∞</div>
+              <div class="text-[#8ba3c7] text-sm mt-1">apartmana</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone mockup -->
+        <div class="flex-shrink-0 animate-float">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="phone-screen-inner">
+                <!-- Guest view simulacija -->
+                <!-- Hero -->
+                <div style="background: linear-gradient(135deg, #0F2F61, #1a4a8a); padding: 20px 14px 16px; color: white;">
+                  <div style="font-size: 10px; opacity: 0.7; margin-bottom: 2px; font-family: Inter, sans-serif;">Dobrodošli</div>
+                  <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 15px; line-height: 1.2; margin-bottom: 4px;">Apartman Sarajevo<br/>Centar</div>
+                  <div style="font-size: 9px; opacity: 0.6; font-family: Inter, sans-serif;">Check-in: 15:00 · Check-out: 11:00</div>
+                </div>
+                <!-- Sekcije -->
+                <div style="padding: 10px 10px; background: #F7F7F5;">
+
+                  <!-- WiFi -->
+                  <div style="background: white; border-radius: 12px; margin-bottom: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px;">
+                      <div style="width: 28px; height: 28px; background: #EFF6FF; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0;">📶</div>
+                      <div style="flex: 1;">
+                        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; color: #262626;">WiFi</div>
+                        <div style="font-size: 9px; color: #6B6B6B;">Mreža i lozinka</div>
+                      </div>
+                      <div style="font-size: 10px; color: #6B6B6B;">▼</div>
+                    </div>
+                    <div style="padding: 0 12px 10px; border-top: 1px solid #F0F0EE;">
+                      <div style="margin-top: 8px; background: #F7F7F5; border-radius: 8px; padding: 8px 10px;">
+                        <div style="font-size: 9px; color: #6B6B6B; margin-bottom: 3px;">Naziv mreže</div>
+                        <div style="font-size: 11px; font-weight: 600; color: #262626; font-family: 'Plus Jakarta Sans', sans-serif;">Apartman_5G</div>
+                      </div>
+                      <div style="margin-top: 6px; background: #F7F7F5; border-radius: 8px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                          <div style="font-size: 9px; color: #6B6B6B; margin-bottom: 3px;">Lozinka</div>
+                          <div style="font-size: 11px; font-weight: 600; color: #262626; font-family: 'Plus Jakarta Sans', sans-serif;">sarajevo2024</div>
+                        </div>
+                        <div style="background: #0F2F61; color: white; font-size: 8px; padding: 3px 7px; border-radius: 6px;">Kopiraj</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Check-in -->
+                  <div style="background: white; border-radius: 12px; margin-bottom: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px;">
+                      <div style="width: 28px; height: 28px; background: #FFFBEB; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0;">🔑</div>
+                      <div style="flex: 1;">
+                        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; color: #262626;">Check-in</div>
+                        <div style="font-size: 9px; color: #6B6B6B;">Upute za dolazak</div>
+                      </div>
+                      <div style="font-size: 10px; color: #6B6B6B;">▶</div>
+                    </div>
+                  </div>
+
+                  <!-- Pravila -->
+                  <div style="background: white; border-radius: 12px; margin-bottom: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px;">
+                      <div style="width: 28px; height: 28px; background: #FAF5FF; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0;">📜</div>
+                      <div style="flex: 1;">
+                        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; color: #262626;">Pravila kuće</div>
+                        <div style="font-size: 9px; color: #6B6B6B;">4 pravila</div>
+                      </div>
+                      <div style="font-size: 10px; color: #6B6B6B;">▶</div>
+                    </div>
+                  </div>
+
+                  <!-- Lokacija -->
+                  <div style="background: white; border-radius: 12px; margin-bottom: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px;">
+                      <div style="width: 28px; height: 28px; background: #F0FDF4; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0;">📍</div>
+                      <div style="flex: 1;">
+                        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; color: #262626;">Lokacija</div>
+                        <div style="font-size: 9px; color: #6B6B6B;">Adresa i upute</div>
+                      </div>
+                      <div style="font-size: 10px; color: #6B6B6B;">▶</div>
+                    </div>
+                  </div>
+
+                  <!-- Kontakt -->
+                  <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+                    <div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px;">
+                      <div style="width: 28px; height: 28px; background: #F0FDFA; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0;">☎️</div>
+                      <div style="flex: 1;">
+                        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; color: #262626;">Kontakt</div>
+                        <div style="font-size: 9px; color: #6B6B6B;">Poziv · Viber · WhatsApp</div>
+                      </div>
+                      <div style="font-size: 10px; color: #6B6B6B;">▶</div>
+                    </div>
+                  </div>
+
+                  <!-- Footer -->
+                  <div style="text-align: center; padding: 14px 0 4px; font-size: 9px; color: #BABAB5;">
+                    Powered by <strong style="color: #0F2F61;">SmartStay</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Wave separator -->
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 80L1440 80L1440 40C1440 40 1080 0 720 0C360 0 0 40 0 40L0 80Z" fill="#F7F7F5"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       LOGO STRIP (social proof)
+  ═══════════════════════════════════════ -->
+  <section class="bg-[#F7F7F5] py-12">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <p class="text-muted text-sm font-medium mb-8 tracking-wide uppercase">Koriste iznajmljivači širom BiH</p>
+      <div class="flex flex-wrap justify-center items-center gap-8 opacity-50">
+        <span class="font-jakarta font-bold text-xl text-[#262626]">Sarajevo</span>
+        <span class="w-1.5 h-1.5 bg-[#262626] rounded-full opacity-30"></span>
+        <span class="font-jakarta font-bold text-xl text-[#262626]">Mostar</span>
+        <span class="w-1.5 h-1.5 bg-[#262626] rounded-full opacity-30"></span>
+        <span class="font-jakarta font-bold text-xl text-[#262626]">Banja Luka</span>
+        <span class="w-1.5 h-1.5 bg-[#262626] rounded-full opacity-30"></span>
+        <span class="font-jakarta font-bold text-xl text-[#262626]">Trebinje</span>
+        <span class="w-1.5 h-1.5 bg-[#262626] rounded-full opacity-30"></span>
+        <span class="font-jakarta font-bold text-xl text-[#262626]">Neum</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FUNKCIONALNOSTI
+  ═══════════════════════════════════════ -->
+  <section id="funkcionalnosti" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Funkcionalnosti</span>
+        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3 mb-4">Sve što vam treba.<br/>Ništa suvišno.</h2>
+        <p class="text-muted text-lg max-w-xl mx-auto">Kreirajte profesionalan digitalni vodič za svaki apartman za nekoliko minuta.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Feature 1 -->
+        <div class="reveal bg-[#F7F7F5] rounded-2xl p-7 hover:shadow-lg transition-all hover:-translate-y-1 group">
+          <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-2xl mb-5">📋</div>
+          <h3 class="font-jakarta font-bold text-lg text-[#262626] mb-2">9 tipova sekcija</h3>
+          <p class="text-muted text-sm leading-relaxed">WiFi, check-in, pravila, lokacija, preporuke, kontakt, parking i custom sekcije — sve što gost može trebati.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="reveal bg-[#F7F7F5] rounded-2xl p-7 hover:shadow-lg transition-all hover:-translate-y-1 group delay-100">
+          <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center text-2xl mb-5">📱</div>
+          <h3 class="font-jakarta font-bold text-lg text-[#262626] mb-2">QR kod</h3>
+          <p class="text-muted text-sm leading-relaxed">Generirajte QR kod za svaki apartman. Printajte i zalijepite — gost skenira i ima sve informacije odmah.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="reveal bg-[#F7F7F5] rounded-2xl p-7 hover:shadow-lg transition-all hover:-translate-y-1 group delay-200">
+          <div class="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center text-2xl mb-5">💬</div>
+          <h3 class="font-jakarta font-bold text-lg text-[#262626] mb-2">WhatsApp & Viber</h3>
+          <p class="text-muted text-sm leading-relaxed">Podijelite link s gostom direktno putem WhatsAppa ili Vibera jednim klikom — bez copy-paste.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="reveal bg-[#F7F7F5] rounded-2xl p-7 hover:shadow-lg transition-all hover:-translate-y-1 group">
+          <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-2xl mb-5">👥</div>
+          <h3 class="font-jakarta font-bold text-lg text-[#262626] mb-2">Tim pristup</h3>
+          <p class="text-muted text-sm leading-relaxed">Dodajte članove tima koji upravljaju nekretninama zajedno s vama — svako vidi iste apartmane i vodiče.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="reveal bg-[#F7F7F5] rounded-2xl p-7 hover:shadow-lg transition-all hover:-translate-y-1 group delay-100">
+          <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center text-2xl mb-5">🌐</div>
+          <h3 class="font-jakarta font-bold text-lg text-[#262626] mb-2">Svi uređaji</h3>
+          <p class="text-muted text-sm leading-relaxed">Vodič savršeno izgleda na mobilnom, tabletu i desktopu. Gost ne mora instalirati ništa — otvori u browseru.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="reveal bg-[#F7F7F5] rounded-2xl p-7 hover:shadow-lg transition-all hover:-translate-y-1 group delay-200">
+          <div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-xl flex items-center justify-center text-2xl mb-5">✏️</div>
+          <h3 class="font-jakarta font-bold text-lg text-[#262626] mb-2">Šabloni</h3>
+          <p class="text-muted text-sm leading-relaxed">Kopirajte sekcije između apartmana. Jednom napišite upute za check-in, koristite na svim nekretninama.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       KAKO RADI
+  ═══════════════════════════════════════ -->
+  <section id="kako-radi" class="py-24 bg-[#F7F7F5]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Kako radi</span>
+        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3 mb-4">Tri koraka do<br/>profesionalnog vodiča.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <div class="reveal text-center">
+          <div class="w-16 h-16 bg-[#0F2F61] text-white font-jakarta font-extrabold text-2xl rounded-2xl flex items-center justify-center mx-auto mb-6">1</div>
+          <h3 class="font-jakarta font-bold text-xl text-[#262626] mb-3">Kreirajte nekretninu</h3>
+          <p class="text-muted leading-relaxed">Dodajte apartman, popunite sekcije s informacijama — WiFi, check-in proceduru, pravila, lokaciju i ostalo.</p>
+        </div>
+
+        <div class="reveal text-center delay-100">
+          <div class="w-16 h-16 bg-[#FF6700] text-white font-jakarta font-extrabold text-2xl rounded-2xl flex items-center justify-center mx-auto mb-6">2</div>
+          <h3 class="font-jakarta font-bold text-xl text-[#262626] mb-3">Generirajte QR ili link</h3>
+          <p class="text-muted leading-relaxed">Jednim klikom dobijete QR kod za printanje ili link koji šaljete gostu putem WhatsAppa, Vibera ili emaila.</p>
+        </div>
+
+        <div class="reveal text-center delay-200">
+          <div class="w-16 h-16 bg-[#0F2F61] text-white font-jakarta font-extrabold text-2xl rounded-2xl flex items-center justify-center mx-auto mb-6">3</div>
+          <h3 class="font-jakarta font-bold text-xl text-[#262626] mb-3">Gost ima sve informacije</h3>
+          <p class="text-muted leading-relaxed">Gost otvori link ili skenira QR kod i odmah vidi sve — bez instalacije aplikacija, bez registracije.</p>
+        </div>
+
+      </div>
+
+      <!-- Visual connector -->
+      <div class="hidden md:flex items-center justify-center gap-0 mt-0 -mt-32 pointer-events-none select-none">
+        <div class="flex-1 max-w-xs"></div>
+        <div class="flex-1 max-w-xs flex justify-center">
+          <div class="w-full h-0.5 bg-[#EDEDE9] relative top-16"></div>
+        </div>
+        <div class="flex-1 max-w-xs flex justify-center">
+          <div class="w-full h-0.5 bg-[#EDEDE9] relative top-16"></div>
+        </div>
+        <div class="flex-1 max-w-xs"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       ISKUSTVA / TESTIMONIJALI
+  ═══════════════════════════════════════ -->
+  <section id="iskustva" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Iskustva</span>
+        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3 mb-4">Šta kažu iznajmljivači.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <div class="reveal bg-[#F7F7F5] rounded-2xl p-8 hover:shadow-lg transition-all">
+          <div class="flex gap-1 mb-5">
+            <span class="text-[#FF6700]">★★★★★</span>
+          </div>
+          <p class="text-[#262626] leading-relaxed mb-6 italic">"Gosti mi više ne šalju poruke sa pitanjem za WiFi lozinku u 2 ujutro. Sve im je odmah dostupno. SmartStay je uštedio nebrojeno sati."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-[#0F2F61] rounded-full flex items-center justify-center font-jakarta font-bold text-white text-sm">AB</div>
+            <div>
+              <div class="font-jakarta font-bold text-[#262626] text-sm">Armin B.</div>
+              <div class="text-muted text-xs">Iznajmljivač · Sarajevo · 4 apartmana</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal bg-[#0F2F61] rounded-2xl p-8 delay-100">
+          <div class="flex gap-1 mb-5">
+            <span class="text-[#FF6700]">★★★★★</span>
+          </div>
+          <p class="text-white leading-relaxed mb-6 italic">"Postavio sam QR kod na frižider i to je to. Gosti skeniraju, pročitaju sve sami. Manje poziva, zadovoljniji gosti, bolje recenzije."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-[#FF6700] rounded-full flex items-center justify-center font-jakarta font-bold text-white text-sm">MK</div>
+            <div>
+              <div class="font-jakarta font-bold text-white text-sm">Maja K.</div>
+              <div class="text-[#8ba3c7] text-xs">Iznajmljivač · Mostar · Airbnb Superhost</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal bg-[#F7F7F5] rounded-2xl p-8 delay-200 hover:shadow-lg transition-all">
+          <div class="flex gap-1 mb-5">
+            <span class="text-[#FF6700]">★★★★★</span>
+          </div>
+          <p class="text-[#262626] leading-relaxed mb-6 italic">"Moj tim od 3 osobe upravlja 12 apartmana. Svi vidimo iste vodiče, sve je na jednom mjestu. Organizacija je konačno na nivou."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-[#0F2F61] rounded-full flex items-center justify-center font-jakarta font-bold text-white text-sm">EH</div>
+            <div>
+              <div class="font-jakarta font-bold text-[#262626] text-sm">Edin H.</div>
+              <div class="text-muted text-xs">Property Manager · Banja Luka · 12 apartmana</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TECH NOTA
+  ═══════════════════════════════════════ -->
+  <section id="tech" class="py-24 bg-[#0F2F61] relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="absolute -top-20 -right-20 w-80 h-80 bg-[#FF6700] opacity-5 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-white opacity-5 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="flex flex-col lg:flex-row gap-16 items-start">
+
+        <!-- Left: opis -->
+        <div class="flex-1 reveal">
+          <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Tech nota</span>
+          <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-white mt-3 mb-6">Izgrađeno na modernom stacku.</h2>
+          <p class="text-[#8ba3c7] text-lg leading-relaxed mb-8">SmartStay je izgrađen kao serverless SaaS platforma s fokusom na brzinu, sigurnost i skalabilnost. Svaki apartman ima vlastiti URL i QR kod koji radi bez prijave.</p>
+
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 bg-[#FF6700] rounded-full flex-shrink-0"></div>
+              <span class="text-[#8ba3c7]">Serverless deploy — nema servera za održavati</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 bg-[#FF6700] rounded-full flex-shrink-0"></div>
+              <span class="text-[#8ba3c7]">Multi-tenant arhitektura — jedan account, više korisnika</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 bg-[#FF6700] rounded-full flex-shrink-0"></div>
+              <span class="text-[#8ba3c7]">Media upload za slike i video instrukcije</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 bg-[#FF6700] rounded-full flex-shrink-0"></div>
+              <span class="text-[#8ba3c7]">REST API — spreman za integracije</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: tech stack grid -->
+        <div class="flex-1 reveal delay-100">
+          <div class="grid grid-cols-2 gap-4">
+
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-colors">
+              <div class="text-2xl mb-3">⚡</div>
+              <div class="font-jakarta font-bold text-white text-sm mb-1">Next.js 16</div>
+              <div class="text-[#8ba3c7] text-xs">App Router · Turbopack · React 19</div>
+            </div>
+
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-colors">
+              <div class="text-2xl mb-3">🗄️</div>
+              <div class="font-jakarta font-bold text-white text-sm mb-1">Prisma + PostgreSQL</div>
+              <div class="text-[#8ba3c7] text-xs">Type-safe ORM · Neon serverless DB</div>
+            </div>
+
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-colors">
+              <div class="text-2xl mb-3">🔐</div>
+              <div class="font-jakarta font-bold text-white text-sm mb-1">Better Auth</div>
+              <div class="text-[#8ba3c7] text-xs">Session-based · Workspace support</div>
+            </div>
+
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-colors">
+              <div class="text-2xl mb-3">☁️</div>
+              <div class="font-jakarta font-bold text-white text-sm mb-1">Vercel Blob</div>
+              <div class="text-[#8ba3c7] text-xs">Cloud media storage · Slike i videi</div>
+            </div>
+
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-colors">
+              <div class="text-2xl mb-3">📧</div>
+              <div class="font-jakarta font-bold text-white text-sm mb-1">Resend</div>
+              <div class="text-[#8ba3c7] text-xs">Transakcijski emailovi · Pozivnice</div>
+            </div>
+
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-colors">
+              <div class="text-2xl mb-3">🚀</div>
+              <div class="font-jakarta font-bold text-white text-sm mb-1">Vercel</div>
+              <div class="text-[#8ba3c7] text-xs">Edge deploy · Global CDN</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CTA / KONTAKT
+  ═══════════════════════════════════════ -->
+  <section id="kontakt" class="py-24 bg-[#F7F7F5]">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center">
+      <div class="reveal">
+        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Počnite danas</span>
+        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3 mb-4">Spremi/na za<br/>prvi vodič?</h2>
+        <p class="text-muted text-lg mb-10">Ostavite email i kontaktirat ćemo vas u roku 24h s pristupnim podacima.</p>
+
+        <form id="contactForm" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-8" onsubmit="handleSubmit(event)">
+          <input
+            type="email"
+            placeholder="vas@email.com"
+            required
+            class="flex-1 h-14 px-5 rounded-2xl border border-[#EDEDE9] bg-white text-[#262626] text-base outline-none focus:border-[#0F2F61] transition-colors"
+          />
+          <button type="submit" class="bg-[#FF6700] hover:bg-[#e05c00] text-white font-jakarta font-bold text-base px-8 h-14 rounded-2xl transition-all hover:scale-105 whitespace-nowrap">
+            Zatraži pristup
+          </button>
+        </form>
+
+        <div id="formSuccess" class="hidden bg-green-50 border border-green-200 text-green-700 font-medium py-4 px-6 rounded-2xl mb-8">
+          ✓ Hvala! Javit ćemo vam se uskoro.
+        </div>
+
+        <div class="flex items-center justify-center gap-6 text-sm text-muted">
+          <a href="mailto:info@smartstay.ba" class="hover:text-[#0F2F61] transition-colors flex items-center gap-2">
+            <span>✉</span> info@smartstay.ba
+          </a>
+          <span class="text-[#EDEDE9]">|</span>
+          <span class="flex items-center gap-2">
+            <span>🔒</span> Bez automatskog naplaćivanja
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="bg-[#0F2F61] py-14">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row justify-between items-start gap-10 mb-10">
+
+        <div class="max-w-xs">
+          <div class="font-jakarta font-bold text-2xl text-white mb-3">SmartStay</div>
+          <p class="text-[#8ba3c7] text-sm leading-relaxed">Digitalni vodič za goste. Manje poziva, zadovoljniji gosti, bolje recenzije.</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-10">
+          <div>
+            <div class="font-jakarta font-semibold text-white text-sm mb-4">Platforma</div>
+            <div class="space-y-2.5">
+              <a href="#funkcionalnosti" class="block text-[#8ba3c7] hover:text-white text-sm transition-colors">Funkcionalnosti</a>
+              <a href="#kako-radi" class="block text-[#8ba3c7] hover:text-white text-sm transition-colors">Kako radi</a>
+              <a href="#tech" class="block text-[#8ba3c7] hover:text-white text-sm transition-colors">Tech stack</a>
+            </div>
+          </div>
+          <div>
+            <div class="font-jakarta font-semibold text-white text-sm mb-4">Kontakt</div>
+            <div class="space-y-2.5">
+              <a href="mailto:info@smartstay.ba" class="block text-[#8ba3c7] hover:text-white text-sm transition-colors">info@smartstay.ba</a>
+              <a href="#kontakt" class="block text-[#8ba3c7] hover:text-white text-sm transition-colors">Zatraži pristup</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-[#1a3d75] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="text-[#8ba3c7] text-xs">© 2025 SmartStay. Sva prava zadržana.</div>
+        <div class="text-[#8ba3c7] text-xs">Izgrađeno s Next.js & Vercel</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       JS
+  ═══════════════════════════════════════ -->
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('nav-scrolled');
+        navbar.style.background = '';
+      } else {
+        navbar.classList.remove('nav-scrolled');
+        navbar.style.background = 'transparent';
+      }
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Form submit
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('formSuccess').classList.remove('hidden');
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+
+</body>
+</html>
