@@ -538,57 +538,82 @@
           <p class="text-[#6B6B6B] text-sm mt-4">Otvara se pravi vodič — bez registracije.</p>
         </div>
 
-        <!-- Right: 3x3 section grid -->
-        <div class="lg:w-3/5 reveal">
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-              <span class="text-3xl">🏠</span>
-              <span class="font-jakarta font-semibold text-[#262626] text-sm">Dobrodošlica</span>
-              <span class="text-[#6B6B6B] text-xs">Opis apartmana i prve upute</span>
-            </div>
-            <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-              <span class="text-3xl">📶</span>
-              <span class="font-jakarta font-semibold text-[#262626] text-sm">WiFi pristup</span>
-              <span class="text-[#6B6B6B] text-xs">Naziv mreže i lozinka</span>
-            </div>
-            <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-              <span class="text-3xl">🔑</span>
-              <span class="font-jakarta font-semibold text-[#262626] text-sm">Check-in</span>
-              <span class="text-[#6B6B6B] text-xs">Upute za ulaz i ključeve</span>
-            </div>
-            <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-              <span class="text-3xl">📋</span>
-              <span class="font-jakarta font-semibold text-[#262626] text-sm">Pravila kuće</span>
-              <span class="text-[#6B6B6B] text-xs">Pušenje, kućni ljubimci, buka</span>
-            </div>
-            <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-              <span class="text-3xl">📍</span>
-              <span class="font-jakarta font-semibold text-[#262626] text-sm">Lokacija</span>
-              <span class="text-[#6B6B6B] text-xs">Adresa i kako doći</span>
-            </div>
-            <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-              <span class="text-3xl">⭐</span>
-              <span class="font-jakarta font-semibold text-[#262626] text-sm">Preporuke</span>
-              <span class="text-[#6B6B6B] text-xs">Restorani, kafići, atrakcije</span>
-            </div>
-            <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-              <span class="text-3xl">📞</span>
-              <span class="font-jakarta font-semibold text-[#262626] text-sm">Kontakt</span>
-              <span class="text-[#6B6B6B] text-xs">Broj vlasnika za hitne slučajeve</span>
-            </div>
-            <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-              <span class="text-3xl">🚗</span>
-              <span class="font-jakarta font-semibold text-[#262626] text-sm">Parking</span>
-              <span class="text-[#6B6B6B] text-xs">Gdje i kako parkirati</span>
-            </div>
-            <div class="bg-[#0F2F61] border border-[#0F2F61] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:shadow-md transition-all">
-              <span class="text-3xl">✏️</span>
-              <span class="font-jakarta font-semibold text-white text-sm">Custom</span>
-              <span class="text-[#8ba3c7] text-xs">Bilo šta — mašina za veš, roštilj...</span>
+        <!-- Right: phone mockup with demo video -->
+        <div class="lg:w-3/5 flex justify-center reveal">
+          <div class="phone-frame animate-float">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <video
+                src="demo.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                class="w-full h-full object-cover"
+              ></video>
             </div>
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       9 SEKCIJA
+  ═══════════════════════════════════════ -->
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10 reveal">
+        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Šta gosti vide</span>
+        <h2 class="font-jakarta font-extrabold text-3xl sm:text-4xl text-[#262626] mt-3">9 tipova sekcija — sve na jednom linku.</h2>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 reveal">
+        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
+          <span class="text-3xl">🏠</span>
+          <span class="font-jakarta font-semibold text-[#262626] text-sm">Dobrodošlica</span>
+          <span class="text-[#6B6B6B] text-xs">Opis apartmana i prve upute</span>
+        </div>
+        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
+          <span class="text-3xl">📶</span>
+          <span class="font-jakarta font-semibold text-[#262626] text-sm">WiFi pristup</span>
+          <span class="text-[#6B6B6B] text-xs">Naziv mreže i lozinka</span>
+        </div>
+        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
+          <span class="text-3xl">🔑</span>
+          <span class="font-jakarta font-semibold text-[#262626] text-sm">Check-in</span>
+          <span class="text-[#6B6B6B] text-xs">Upute za ulaz i ključeve</span>
+        </div>
+        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
+          <span class="text-3xl">📋</span>
+          <span class="font-jakarta font-semibold text-[#262626] text-sm">Pravila kuće</span>
+          <span class="text-[#6B6B6B] text-xs">Pušenje, kućni ljubimci, buka</span>
+        </div>
+        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
+          <span class="text-3xl">📍</span>
+          <span class="font-jakarta font-semibold text-[#262626] text-sm">Lokacija</span>
+          <span class="text-[#6B6B6B] text-xs">Adresa i kako doći</span>
+        </div>
+        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
+          <span class="text-3xl">⭐</span>
+          <span class="font-jakarta font-semibold text-[#262626] text-sm">Preporuke</span>
+          <span class="text-[#6B6B6B] text-xs">Restorani, kafići, atrakcije</span>
+        </div>
+        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
+          <span class="text-3xl">📞</span>
+          <span class="font-jakarta font-semibold text-[#262626] text-sm">Kontakt</span>
+          <span class="text-[#6B6B6B] text-xs">Broj vlasnika za hitne slučajeve</span>
+        </div>
+        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
+          <span class="text-3xl">🚗</span>
+          <span class="font-jakarta font-semibold text-[#262626] text-sm">Parking</span>
+          <span class="text-[#6B6B6B] text-xs">Gdje i kako parkirati</span>
+        </div>
+        <div class="bg-[#0F2F61] border border-[#0F2F61] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:shadow-md transition-all">
+          <span class="text-3xl">✏️</span>
+          <span class="font-jakarta font-semibold text-white text-sm">Custom</span>
+          <span class="text-[#8ba3c7] text-xs">Bilo šta — mašina za veš, roštilj...</span>
+        </div>
       </div>
     </div>
   </section>
