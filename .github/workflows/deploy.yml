@@ -14,8 +14,8 @@ jobs:
       - name: Upload via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: 144.76.61.188
-          username: smartsta@smartstay.ba
+          server: ftp.smartstay.ba
+          username: smartsta
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./
           server-dir: /public_html/
