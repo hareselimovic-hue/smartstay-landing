@@ -98,6 +98,25 @@
 
     /* Code block */
     .code-block { font-family: 'Courier New', monospace; font-size: 13px; }
+
+    /* Hero photo — responsive */
+    .hero-photo {
+      flex-shrink: 0;
+      width: 100%;
+      height: 240px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 20px 48px rgba(0,0,0,0.4);
+    }
+    @media (min-width: 1024px) {
+      .hero-photo {
+        width: 440px;
+        height: 520px;
+        border-radius: 24px;
+        box-shadow: 0 40px 80px rgba(0,0,0,0.45);
+      }
+    }
   </style>
 </head>
 <body class="bg-white text-[#262626] antialiased">
@@ -133,7 +152,7 @@
     </div>
 
     <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-20 relative z-10 w-full">
-      <div class="flex flex-col lg:flex-row items-center gap-16">
+      <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
 
         <!-- Tekst -->
         <div class="flex-1 text-center lg:text-left">
@@ -160,14 +179,10 @@
 
         </div>
 
-        <!-- Phone mockup -->
-        <div class="flex-shrink-0 animate-float">
-          <div class="phone-frame">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <video src="demo.mp4" autoplay muted loop playsinline style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:top center;"></video>
-            </div>
-          </div>
+        <!-- Hero photo -->
+        <div class="hero-photo animate-fade-up delay-200">
+          <img src="hero-photo.jpg" alt="SmartStay host" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+          <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,47,97,0.20) 0%,rgba(0,0,0,0) 55%);"></div>
         </div>
 
       </div>
