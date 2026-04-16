@@ -11,16 +11,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Upload via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ftp.smartstay.ba
-          username: deploy@smartstay.ba
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./
-          server-dir: /
-          dangerous-clean-slate: true
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
+      - name: Deploy via cPanel API
+        run: |
+          for file in index.html hero-photo.jpg demo.mp4; do
+            if [ -f "$file" ]; then
+              echo "Uploading $file..."
+              curl -s -X POST "https://cpanel.smartstay.ba/execute/Fileman/upload_files" \
+                -H "Authorization: cpanel smartsta:${{ secrets.LEFTOR_API_TOKEN }}" \
+                -F "dir=/home/smartsta/public_html" \
+                -F "overwrite=1" \
+                -F "file-1=@$file"
+            fi
+          done
+          echo "Deploy complete."
