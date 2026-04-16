@@ -914,8 +914,16 @@
     }
 
     // Form submit
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
       e.preventDefault();
+      const email = e.target.querySelector('input[type="email"]').value;
+      try {
+        await fetch('https://app.smartstay.ba/api/contact-form', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+      } catch (_) {}
       document.getElementById('contactForm').style.display = 'none';
       document.getElementById('formSuccess').classList.remove('hidden');
     }
