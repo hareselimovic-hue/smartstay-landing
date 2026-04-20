@@ -132,6 +132,7 @@
         <a href="#kako-radi" class="text-[#8ba3c7] hover:text-white text-sm font-medium transition-colors">Kako radi</a>
         <a href="#faq" class="text-[#8ba3c7] hover:text-white text-sm font-medium transition-colors">FAQ</a>
         <a href="#iskustva" class="text-[#8ba3c7] hover:text-white text-sm font-medium transition-colors">Iskustva</a>
+        <a href="#pricing" class="text-[#8ba3c7] hover:text-white text-sm font-medium transition-colors">Cijena</a>
         <a href="https://app.smartstay.ba/g/modern-apartment-in-center-of-sarajevo/preview" target="_blank" rel="noopener" class="text-[#FF6700] hover:text-[#ffaa77] text-sm font-semibold transition-colors">Demo ↗</a>
       </div>
 <a href="#kontakt" class="bg-[#FF6700] hover:bg-[#e05c00] text-white font-jakarta font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors">
@@ -727,6 +728,144 @@
       </div>
     </div>
   </section>
+
+  <!-- ═══════════════════════════════════════
+       PRICING
+  ═══════════════════════════════════════ -->
+  <section id="pricing" class="py-24 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+
+      <!-- Header -->
+      <div class="text-center mb-10 reveal">
+        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Cijene</span>
+        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3 mb-4">Transparentne cijene.<br/>Bez iznenađenja.</h2>
+        <p class="text-[#6B6B6B] text-lg max-w-xl mx-auto">Plaćate po broju objekata. Više objekata — niža cijena po objektu.</p>
+      </div>
+
+      <!-- Monthly / Annual toggle -->
+      <div class="flex justify-center mb-10 reveal">
+        <div class="inline-flex bg-[#F7F7F5] rounded-2xl p-1 border border-[#EDEDE9]">
+          <button id="btn-monthly" onclick="setPricing(false)"
+            class="px-5 py-2 rounded-xl text-sm font-semibold transition-all bg-white text-[#262626] shadow-sm">
+            Mjesečno
+          </button>
+          <button id="btn-annual" onclick="setPricing(true)"
+            class="px-5 py-2 rounded-xl text-sm font-semibold transition-all text-[#6B6B6B]">
+            Godišnje <span class="text-[#FF6700]">–20%</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
+
+        <!-- Starter -->
+        <div class="bg-white rounded-2xl border border-[#EDEDE9] p-8 flex flex-col">
+          <div class="mb-6">
+            <h3 class="font-jakarta font-bold text-xl text-[#262626] mb-1">Starter</h3>
+            <p class="text-[#6B6B6B] text-sm">1–3 objekta</p>
+          </div>
+          <div class="mb-1">
+            <span class="font-jakarta font-extrabold text-4xl text-[#262626]" data-monthly="8.49" data-annual="6.79">8.49</span>
+            <span class="text-[#6B6B6B] text-sm"> KM / obj / mj</span>
+          </div>
+          <p class="text-xs text-[#6B6B6B] mb-6" data-example data-monthly-text="npr. 3 objekta = 25.47 KM/mj" data-annual-text="npr. 3 objekta = 20.37 KM/mj">npr. 3 objekta = 25.47 KM/mj</p>
+          <ul class="space-y-2 mb-8 flex-1">
+            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> Digitalni vodič za goste</li>
+            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> QR kod & direktni link</li>
+            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> WiFi, upute, preporuke</li>
+            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> WhatsApp / Viber dijeljenje</li>
+          </ul>
+          <a href="#kontakt" class="text-center bg-[#F7F7F5] hover:bg-[#EDEDE9] text-[#262626] font-semibold text-sm px-5 py-3 rounded-xl transition-colors">
+            Počnite besplatno →
+          </a>
+        </div>
+
+        <!-- Standard (highlighted) -->
+        <div class="bg-[#0F2F61] rounded-2xl p-8 flex flex-col relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+            <span class="bg-[#FF6700] text-white text-xs font-bold px-4 py-1.5 rounded-full">Najpopularnije</span>
+          </div>
+          <div class="mb-6">
+            <h3 class="font-jakarta font-bold text-xl text-white mb-1">Standard</h3>
+            <p class="text-[#8ba3c7] text-sm">4–10 objekata</p>
+          </div>
+          <div class="mb-1">
+            <span class="font-jakarta font-extrabold text-4xl text-white" data-monthly="5.99" data-annual="4.79">5.99</span>
+            <span class="text-[#8ba3c7] text-sm"> KM / obj / mj</span>
+          </div>
+          <p class="text-xs text-[#8ba3c7] mb-6" data-example data-monthly-text="npr. 6 objekata = 35.94 KM/mj" data-annual-text="npr. 6 objekata = 28.74 KM/mj">npr. 6 objekata = 35.94 KM/mj</p>
+          <ul class="space-y-2 mb-8 flex-1">
+            <li class="flex items-center gap-2 text-sm text-white"><span class="text-[#FF6700]">✓</span> Sve iz Starter plana</li>
+            <li class="flex items-center gap-2 text-sm text-white"><span class="text-[#FF6700]">✓</span> Više objekata, jedna naplata</li>
+            <li class="flex items-center gap-2 text-sm text-white"><span class="text-[#FF6700]">✓</span> Prioritetna podrška</li>
+            <li class="flex items-center gap-2 text-sm text-white"><span class="text-[#FF6700]">✓</span> Branding prilagodba</li>
+          </ul>
+          <a href="#kontakt" class="text-center bg-[#FF6700] hover:bg-[#e05c00] text-white font-semibold text-sm px-5 py-3 rounded-xl transition-colors">
+            Počnite besplatno →
+          </a>
+        </div>
+
+        <!-- Pro -->
+        <div class="bg-white rounded-2xl border border-[#EDEDE9] p-8 flex flex-col">
+          <div class="mb-6">
+            <h3 class="font-jakarta font-bold text-xl text-[#262626] mb-1">Pro</h3>
+            <p class="text-[#6B6B6B] text-sm">10+ objekata</p>
+          </div>
+          <div class="mb-1">
+            <span class="font-jakarta font-extrabold text-4xl text-[#262626]" data-monthly="4.49" data-annual="3.59">4.49</span>
+            <span class="text-[#6B6B6B] text-sm"> KM / obj / mj</span>
+          </div>
+          <p class="text-xs text-[#6B6B6B] mb-6" data-example data-monthly-text="npr. 12 objekata = 53.88 KM/mj" data-annual-text="npr. 12 objekata = 43.08 KM/mj">npr. 12 objekata = 53.88 KM/mj</p>
+          <ul class="space-y-2 mb-8 flex-1">
+            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> Sve iz Standard plana</li>
+            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> Neograničeni objekti</li>
+            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> Dedicated account manager</li>
+            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> Onboarding podrška</li>
+          </ul>
+          <a href="#kontakt" class="text-center bg-[#F7F7F5] hover:bg-[#EDEDE9] text-[#262626] font-semibold text-sm px-5 py-3 rounded-xl transition-colors">
+            Počnite besplatno →
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Free trial note -->
+      <p class="text-center text-sm text-[#6B6B6B] mt-8 reveal">
+        🎁 Svi planovi uključuju <strong>1 mjesec besplatno</strong> · bez kreditne kartice
+      </p>
+
+    </div>
+  </section>
+
+  <script>
+    function setPricing(isAnnual) {
+      // Toggle button styles
+      const btnMonthly = document.getElementById('btn-monthly');
+      const btnAnnual = document.getElementById('btn-annual');
+      if (isAnnual) {
+        btnAnnual.classList.add('bg-white', 'text-[#262626]', 'shadow-sm');
+        btnAnnual.classList.remove('text-[#6B6B6B]');
+        btnMonthly.classList.remove('bg-white', 'text-[#262626]', 'shadow-sm');
+        btnMonthly.classList.add('text-[#6B6B6B]');
+      } else {
+        btnMonthly.classList.add('bg-white', 'text-[#262626]', 'shadow-sm');
+        btnMonthly.classList.remove('text-[#6B6B6B]');
+        btnAnnual.classList.remove('bg-white', 'text-[#262626]', 'shadow-sm');
+        btnAnnual.classList.add('text-[#6B6B6B]');
+      }
+      // Swap prices
+      document.querySelectorAll('[data-monthly]').forEach(el => {
+        if (el.dataset.monthly && el.dataset.annual) {
+          el.textContent = isAnnual ? el.dataset.annual : el.dataset.monthly;
+        }
+      });
+      // Swap example texts
+      document.querySelectorAll('[data-example]').forEach(el => {
+        el.textContent = isAnnual ? el.dataset.annualText : el.dataset.monthlyText;
+      });
+    }
+  </script>
 
   <!-- ═══════════════════════════════════════
        FAQ
