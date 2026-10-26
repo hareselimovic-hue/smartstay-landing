@@ -1,1239 +1,1033 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SmartStay — Digitalni vodič za vaše goste</title>
-  <meta name="description" content="SmartStay je digitalna platforma koja vašim gostima daje sve informacije o apartmanu na jednom mjestu — bez štampanja, bez ponavljanja." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: '#0F2F61',
-            accent: '#FF6700',
-            surface: '#F7F7F5',
-            muted: '#6B6B6B',
-            border: '#EDEDE9',
-          },
-          fontFamily: {
-            jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
-            inter: ['Inter', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
+  <meta name="description" content="SmartStay je digitalna platforma koja vašim gostima daje sve informacije o apartmanu na jednom mjestu — bez štampanja, bez ponavljanja."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    h1, h2, h3, h4, .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+    /* ─── TOKENS ─── */
+    :root {
+      --navy:      #0F2F61;
+      --navy-2:    #1a3d73;
+      --navy-3:    #e8eef7;
+      --orange:    #FF6700;
+      --orange-2:  #e05d00;
+      --white:     #ffffff;
+      --off:       #F8F9FC;
+      --off-2:     #EEF1F8;
+      --gray:      #6B7280;
+      --gray-2:    #9CA3AF;
+      --border:    #E5E9F2;
+      --text:      #111827;
+      --text-2:    #374151;
+      --r-sm: 8px; --r-md: 14px; --r-lg: 20px; --r-xl: 28px; --r-2xl: 40px;
+    }
 
-    /* Phone mockup */
-    .phone-frame {
-      width: 240px;
-      height: 490px;
-      background: #1a1a2e;
-      border-radius: 40px;
-      padding: 10px;
-      box-shadow: 0 40px 80px rgba(15,47,97,0.4), inset 0 0 0 2px #2a2a4a;
-      position: relative;
-      flex-shrink: 0;
-    }
-    .phone-notch {
-      width: 80px;
-      height: 22px;
-      background: #1a1a2e;
-      border-radius: 0 0 16px 16px;
-      margin: 0 auto 6px;
-      position: relative;
-      z-index: 10;
-    }
-    .phone-screen {
-      background: #F7F7F5;
-      border-radius: 30px;
-      height: 100%;
-      overflow: hidden;
-      position: relative;
-    }
-    .phone-screen-inner {
-      height: 100%;
-      overflow-y: auto;
-      scrollbar-width: none;
-    }
-    .phone-screen-inner::-webkit-scrollbar { display: none; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--white); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
 
-    /* Animations */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 100px;
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    .animate-fade-up { animation: fadeUp 0.7s ease forwards; }
-    .animate-float { animation: float 4s ease-in-out infinite; }
-    .delay-100 { animation-delay: 0.1s; }
-    .delay-200 { animation-delay: 0.2s; }
-    .delay-300 { animation-delay: 0.3s; }
+    .chip-orange { background: rgba(255,103,0,0.1); color: var(--orange); border: 1px solid rgba(255,103,0,0.2); }
+    .chip-navy  { background: rgba(15,47,97,0.08); color: var(--navy); border: 1px solid rgba(15,47,97,0.15); }
 
     /* Scroll reveal */
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .sr { opacity: 0; transform: translateY(24px); transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .sr.in { opacity: 1; transform: none; }
+    .sr-d1 { transition-delay: 0.08s; } .sr-d2 { transition-delay: 0.16s; }
+    .sr-d3 { transition-delay: 0.24s; } .sr-d4 { transition-delay: 0.32s; }
+    @media (prefers-reduced-motion: reduce) { .sr { opacity:1; transform:none; transition:none; } }
 
-    /* Nav scroll */
-    .nav-scrolled { background: rgba(15,47,97,0.95) !important; backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0,0,0,0.2); }
-
-    /* Gradient text */
-    .gradient-text {
-      background: linear-gradient(135deg, #ffffff 0%, #8ba3c7 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.9); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.2s;
     }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(15,47,97,0.08); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; gap: 24px; }
+    .nav-logo { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 21px; font-weight: 900; color: var(--navy); letter-spacing: -0.02em; }
+    .nav-logo span { color: var(--orange); }
+    .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--gray); padding: 6px 14px; border-radius: var(--r-sm); transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover { color: var(--navy); background: var(--off); }
+    .btn-nav {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--navy); color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700;
+      padding: 9px 20px; border-radius: var(--r-md); border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-nav:hover { background: var(--navy-2); box-shadow: 0 4px 16px rgba(15,47,97,0.25); transform: translateY(-1px); }
 
-    /* Code block */
-    .code-block { font-family: 'Courier New', monospace; font-size: 13px; }
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh; padding: 120px 0 80px;
+      display: flex; align-items: center;
+      background: var(--white);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 0; right: 0; width: 55%; height: 100%;
+      background: var(--off);
+      clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
+      z-index: 0;
+    }
+    .hero-layout {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+    }
+    .hero-eyebrow { margin-bottom: 20px; }
+    .hero-h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(38px, 5vw, 64px); font-weight: 900;
+      line-height: 1.06; letter-spacing: -0.03em;
+      color: var(--navy); margin-bottom: 20px;
+    }
+    .hero-h1 em { font-style: normal; color: var(--orange); }
+    .hero-sub { font-size: 17px; color: var(--gray); line-height: 1.75; margin-bottom: 32px; max-width: 440px; }
+    .hero-form {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;
+      max-width: 460px;
+    }
+    .hero-input {
+      flex: 1; min-width: 200px; height: 52px; padding: 0 18px;
+      border-radius: var(--r-md); border: 1.5px solid var(--border);
+      background: var(--white); font-size: 15px; color: var(--text);
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .hero-input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255,103,0,0.1); }
+    .hero-input::placeholder { color: var(--gray-2); }
+    .btn-hero {
+      height: 52px; padding: 0 28px;
+      background: var(--orange); color: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 800;
+      border: none; border-radius: var(--r-md); cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(255,103,0,0.35);
+    }
+    .btn-hero:hover { background: var(--orange-2); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,103,0,0.4); }
+    .hero-trust { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 13px; color: var(--gray); }
+    .trust-av { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #fff; margin-left: -8px; }
+    .trust-av:first-child { margin-left: 0; }
+    .hero-note { font-size: 12px; color: var(--gray-2); margin-top: 8px; }
 
-    /* Hero photo — responsive */
-    .hero-photo {
-      flex-shrink: 0;
-      width: 100%;
-      height: 240px;
-      border-radius: 16px;
-      overflow: hidden;
+    /* Hero visual */
+    .hero-visual { position: relative; }
+    .hero-img-wrap {
+      border-radius: var(--r-2xl); overflow: hidden;
+      box-shadow: 0 32px 80px rgba(15,47,97,0.15), 0 0 0 1px var(--border);
       position: relative;
-      box-shadow: 0 20px 48px rgba(0,0,0,0.4);
     }
-    @media (min-width: 1024px) {
-      .hero-photo {
-        width: 440px;
-        height: 520px;
-        border-radius: 24px;
-        box-shadow: 0 40px 80px rgba(0,0,0,0.45);
-      }
+    .hero-img-wrap img { width: 100%; height: 520px; object-fit: cover; object-position: center top; display: block; }
+    .hero-float {
+      position: absolute; bottom: 28px; left: -24px;
+      background: var(--white); border-radius: var(--r-lg);
+      padding: 14px 18px; box-shadow: 0 8px 40px rgba(15,47,97,0.15);
+      display: flex; align-items: center; gap: 12px;
+      animation: float 5s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .hf-icon { width: 40px; height: 40px; border-radius: 12px; background: rgba(255,103,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .hf-num { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; font-weight: 900; color: var(--navy); line-height: 1; }
+    .hf-lbl { font-size: 11px; color: var(--gray); margin-top: 1px; }
+    .hero-badge {
+      position: absolute; top: 24px; right: -16px;
+      background: var(--navy); color: #fff; border-radius: var(--r-md);
+      padding: 10px 14px; font-size: 12px; font-weight: 600;
+      display: flex; align-items: center; gap: 7px;
+      box-shadow: 0 8px 24px rgba(15,47,97,0.3);
+    }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #34D399; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    /* Signup success → open the app right away (doesn't depend on the confirmation email) */
+    .signup-ok { text-align:center; }
+    .signup-ok-title { color:#15803d; font-weight:700; font-size:15px; margin-bottom:6px; }
+    .signup-ok-sub { color:#555; font-size:13.5px; margin-bottom:14px; line-height:1.5; }
+    .btn-open-app { display:inline-flex; align-items:center; justify-content:center; gap:6px; background:var(--orange); color:#fff !important; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px; padding:14px 26px; border-radius:12px; text-decoration:none; box-shadow:0 8px 24px rgba(255,103,0,0.3); }
+    .btn-open-app:hover { filter:brightness(0.95); }
+    .signup-err { color:#dc2626; font-size:13px; margin-top:8px; }
+    #ctaSuccess .signup-ok-title { color:#4ade80; }
+    #ctaSuccess .signup-ok-sub { color:rgba(255,255,255,0.8); }
+    #ctaForm + .signup-err { color:#fca5a5; }
+
+    /* Hero success */
+    #heroSuccess { display:none; background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; border-radius: var(--r-md); padding: 14px 20px; font-weight: 600; font-size: 14px; max-width: 460px; }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      background: var(--navy); padding: 36px 0;
+    }
+    .stats-grid { display: flex; justify-content: center; gap: 0; }
+    .stat-item { flex: 1; max-width: 240px; text-align: center; padding: 0 32px; border-right: 1px solid rgba(255,255,255,0.12); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 42px; font-weight: 900; color: var(--orange); letter-spacing: -0.03em; line-height: 1; }
+    .stat-lbl { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 6px; }
+
+    /* ─── WHAT IS ─── */
+    .what-section { padding: 100px 0; background: var(--white); }
+    .what-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .what-layout > * { min-width: 0; }
+    .what-phone { max-width: 280px; justify-self: center; }
+    .phone-frame-light {
+      border-radius: 40px; overflow: hidden;
+      border: 8px solid #222;
+      box-shadow: 0 32px 80px rgba(15,47,97,0.2), 0 0 0 1px rgba(0,0,0,0.06);
+    }
+    .phone-frame-light img { display: block; width: 100%; }
+    .what-h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(28px,4vw,44px); font-weight: 900; letter-spacing: -0.025em; line-height: 1.12; color: var(--navy); margin: 14px 0 16px; }
+    .what-h2 em { font-style: normal; color: var(--orange); }
+    .what-body { font-size: 16px; color: var(--gray); line-height: 1.8; margin-bottom: 28px; }
+    .what-pts { display: flex; flex-direction: column; gap: 14px; }
+    .wp { display: flex; gap: 14px; align-items: flex-start; }
+    .wp-icon { flex-shrink:0; width:36px; height:36px; border-radius:10px; background:rgba(255,103,0,0.1); border:1px solid rgba(255,103,0,0.18); display:flex; align-items:center; justify-content:center; font-size:16px; }
+    .wp h4 { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:2px; }
+    .wp p { font-size:13px; color:var(--gray); line-height:1.6; }
+
+    /* ─── PAIN ─── */
+    .pain-section { padding: 80px 0; background: var(--navy); }
+    .pain-inner { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+    .pain-h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(28px,4vw,48px); font-weight: 900; letter-spacing: -0.025em; color: #fff; line-height: 1.12; margin: 14px 0 12px; }
+    .pain-h2 em { font-style: normal; color: var(--orange); }
+    .pain-sub { font-size: 16px; color: rgba(255,255,255,0.55); line-height: 1.7; }
+    .pain-msgs { display: flex; flex-direction: column; gap: 10px; max-width: 600px; margin: 0 auto; }
+    .pain-msg { display: flex; align-items: flex-start; gap: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--r-lg); padding: 16px 20px; }
+    .pain-time { flex-shrink:0; font-size:11px; font-weight:700; color:#fff; background:rgba(255,255,255,0.12); padding:3px 8px; border-radius:6px; margin-top:2px; }
+    .pain-text { font-size:15px; color:rgba(255,255,255,0.8); }
+    .pain-text span { font-size:12px; color:rgba(255,255,255,0.4); display:block; margin-top:3px; }
+
+    /* ─── FEATURES ─── */
+    .features-section { padding: 100px 0; background: var(--off); }
+    .sec-headline { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(28px,4vw,48px); font-weight: 900; letter-spacing: -0.025em; line-height: 1.12; color: var(--navy); margin: 14px 0 10px; }
+    .sec-sub { font-size: 16px; color: var(--gray); line-height: 1.7; max-width: 540px; margin: 0 auto 56px; }
+    .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .feat-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--r-xl); padding: 28px;
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    }
+    .feat-card:hover { box-shadow: 0 8px 32px rgba(15,47,97,0.1); transform: translateY(-3px); border-color: var(--off-2); }
+    .feat-icon { width: 48px; height: 48px; border-radius: var(--r-md); background: rgba(15,47,97,0.07); border: 1px solid rgba(15,47,97,0.1); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+    .feat-card h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 7px; }
+    .feat-card p { font-size: 14px; color: var(--gray); line-height: 1.65; }
+    .feat-wide { grid-column: 1 / -1; display: flex; align-items: center; gap: 24px; border-color: rgba(255,103,0,0.3); }
+    .feat-wide .feat-icon { margin-bottom: 0; flex-shrink: 0; background: rgba(255,103,0,0.08); border-color: rgba(255,103,0,0.2); }
+    .feat-wide h3 { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .feat-new { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #fff; background: var(--orange); padding: 3px 9px; border-radius: 100px; }
+    @media (max-width: 600px) { .feat-wide { flex-direction: column; align-items: flex-start; gap: 0; } .feat-wide .feat-icon { margin-bottom: 16px; } }
+
+    /* ─── HOW IT WORKS ─── */
+    .how-section { padding: 100px 0; background: var(--white); }
+    .how-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .how-steps { display: flex; flex-direction: column; }
+    .how-step { display: flex; gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+    .how-step:last-child { border-bottom: none; }
+    .hs-num { flex-shrink:0; width:40px; height:40px; border-radius:50%; border:2px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:800; color:var(--gray-2); transition:all 0.2s; }
+    .how-step.active .hs-num { background:var(--orange); border-color:var(--orange); color:#fff; }
+    .hs-title { font-size:16px; font-weight:700; color:var(--gray); margin-bottom:6px; transition:color 0.2s; }
+    .how-step.active .hs-title { color:var(--navy); }
+    .hs-desc { font-size:14px; color:var(--gray-2); line-height:1.65; }
+    .how-screen {
+      background: var(--navy); border-radius: var(--r-xl); padding: 28px;
+      box-shadow: 0 24px 80px rgba(15,47,97,0.2); position: sticky; top: 120px;
+    }
+    .hs-topbar { display:flex; align-items:center; gap:8px; padding-bottom:16px; margin-bottom:18px; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .hs-dot { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.15); }
+    .hs-url { font-size:12px; color:rgba(255,255,255,0.3); margin-left:8px; }
+    .guide-list { display:flex; flex-direction:column; gap:8px; }
+    .guide-row { display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:10px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08); font-size:13px; color:rgba(255,255,255,0.65); }
+    .guide-row.hl { background:rgba(255,103,0,0.12); border-color:rgba(255,103,0,0.25); color:rgba(255,255,255,0.9); }
+    .gr-check { color:#34D399; } .gr-ai { color:var(--orange); }
+
+    /* ─── DEMO ─── */
+    .demo-section { padding: 80px 0; background: var(--off); border-top: 1px solid var(--border); }
+    .demo-header { text-align: center; margin-bottom: 48px; }
+    .demo-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .demo-phone-wrap { display: flex; justify-content: center; }
+    .demo-phone-frame-light { width:100%; max-width:240px; border-radius:40px; overflow:hidden; border:8px solid #222; box-shadow:0 32px 80px rgba(15,47,97,0.2); }
+    .demo-try-card-light { background:var(--white); border:1px solid var(--border); border-radius:var(--r-xl); padding:36px 32px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; box-shadow:0 8px 32px rgba(15,47,97,0.08); }
+    .dtc-label { font-family:'Plus Jakarta Sans',sans-serif; font-size:22px; font-weight:800; color:var(--navy); }
+    .dtc-desc { font-size:14px; color:var(--gray); line-height:1.65; }
+    .dtc-qr { background:var(--off); border:1px solid var(--border); border-radius:var(--r-md); padding:14px; width:160px; height:160px; display:flex; align-items:center; justify-content:center; }
+    .dtc-qr img { width:132px; height:132px; object-fit:contain; }
+    .btn-demo-try { display:inline-flex; align-items:center; gap:6px; background:var(--orange); color:#fff; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:800; padding:13px 24px; border-radius:var(--r-md); transition:all 0.2s; box-shadow:0 4px 20px rgba(255,103,0,0.3); width:100%; justify-content:center; }
+    .btn-demo-try:hover { background:var(--orange-2); transform:translateY(-2px); box-shadow:0 8px 28px rgba(255,103,0,0.4); }
+    .dtc-note { font-size:11px; color:var(--gray-2); font-style:italic; }
+
+    /* Ali ima jos */
+    .ali-bar { background:var(--white); padding:16px 0 36px; text-align:center; border-top:1px solid var(--border); }
+    .ali-bar p { font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(20px,3vw,34px); font-weight:900; color:var(--navy); letter-spacing:-0.02em; }
+    .ali-bar em { font-style:normal; color:var(--orange); }
+
+    /* ─── AI SECTION ─── */
+    .ai-section { padding: 100px 0; background: var(--white); }
+    .ai-layout-light { display:flex; flex-direction:column; max-width:760px; margin:0 auto; }
+    .ai-header { text-align:center; margin-bottom:48px; }
+    .ai-h2 { font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(28px,4vw,48px); font-weight:900; letter-spacing:-0.025em; color:var(--navy); margin:14px 0 12px; }
+    .ai-h2 em { font-style:normal; color:var(--orange); }
+    .ai-sub { font-size:16px; color:var(--gray); line-height:1.75; max-width:540px; margin:0 auto; }
+    .ai-chat-light { background:var(--navy); border-radius:var(--r-xl); padding:28px; box-shadow:0 24px 80px rgba(15,47,97,0.2); }
+    .ach-light { display:flex; align-items:center; gap:12px; padding-bottom:18px; margin-bottom:18px; border-bottom:1px solid rgba(255,255,255,0.1); }
+    .ach-av { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,var(--orange),#e05d00); display:flex; align-items:center; justify-content:center; font-size:18px; }
+    .ach-status { font-size:12px; color:#34D399; display:flex; align-items:center; gap:5px; }
+    .ach-status::before { content:''; width:6px; height:6px; border-radius:50%; background:#34D399; animation:pulse 2s infinite; }
+    .lang-row { display:flex; gap:5px; flex-wrap:wrap; }
+    .lr { font-size:11px; font-weight:600; padding:3px 9px; border-radius:100px; background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.45); }
+    .lr.on { background:rgba(255,103,0,0.2); color:var(--orange); }
+    .ac-msgs { display:flex; flex-direction:column; gap:10px; }
+    .ac-u { align-self:flex-end; max-width:78%; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.12); border-radius:16px 4px 16px 16px; padding:10px 14px; font-size:13px; color:rgba(255,255,255,0.75); }
+    .ac-b { align-self:flex-start; max-width:86%; background:rgba(255,103,0,0.15); border:1px solid rgba(255,103,0,0.25); border-radius:4px 16px 16px 16px; padding:10px 14px; font-size:13px; color:rgba(255,255,255,0.9); line-height:1.55; }
+    .ac-b strong { color:var(--orange); }
+    .ai-feats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:32px; }
+    .af { background:var(--off); border:1px solid var(--border); border-radius:var(--r-lg); padding:20px; }
+    .af-icon { font-size:22px; margin-bottom:10px; }
+    .af h4 { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:4px; }
+    .af p { font-size:13px; color:var(--gray); line-height:1.6; }
+
+    /* ─── TESTIMONIALS ─── */
+    .testi-section { padding: 100px 0; background: var(--off); }
+    .testi-grid-light { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .tc-light { background:var(--white); border:1px solid var(--border); border-radius:var(--r-xl); padding:28px; transition:box-shadow 0.2s, transform 0.2s; }
+    .tc-light:hover { box-shadow:0 8px 32px rgba(15,47,97,0.1); transform:translateY(-4px); }
+    .tc-light.featured { background:var(--navy); border-color:var(--navy); }
+    .tc-stars { color:var(--orange); font-size:14px; margin-bottom:14px; }
+    .tc-text { font-size:15px; line-height:1.75; margin-bottom:20px; font-style:italic; color:var(--text-2); }
+    .tc-light.featured .tc-text { color:rgba(255,255,255,0.7); }
+    .tc-author { display:flex; align-items:center; gap:12px; }
+    .tc-av { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:800; color:#fff; }
+    .tc-name { font-size:14px; font-weight:700; color:var(--navy); }
+    .tc-role { font-size:12px; color:var(--gray-2); }
+    .tc-light.featured .tc-name { color:#fff; }
+    .tc-light.featured .tc-role { color:rgba(255,255,255,0.45); }
+
+    /* ─── PRICING ─── */
+    .pricing-section { padding: 100px 0; background: var(--white); }
+    .pricing-grid-light { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:48px; }
+    .pc-light { background:var(--off); border:1px solid var(--border); border-radius:var(--r-xl); padding:32px; position:relative; transition:all 0.2s; }
+    .pc-light:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(15,47,97,0.1); }
+    .pc-light.hot { background:var(--navy); border-color:var(--navy); box-shadow:0 20px 60px rgba(15,47,97,0.25); }
+    .hot-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--orange); color:#fff; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; padding:4px 14px; border-radius:100px; }
+    .pc-plan { font-size:12px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--gray-2); margin-bottom:14px; }
+    .pc-light.hot .pc-plan { color:rgba(255,255,255,0.5); }
+    .pc-amount { font-family:'Plus Jakarta Sans',sans-serif; font-size:52px; font-weight:900; letter-spacing:-0.04em; color:var(--navy); line-height:1; }
+    .pc-light.hot .pc-amount { color:#fff; }
+    .pc-curr { font-size:22px; vertical-align:middle; }
+    .pc-period { font-size:13px; color:var(--gray-2); margin-bottom:8px; }
+    .pc-light.hot .pc-period { color:rgba(255,255,255,0.45); }
+    .pc-desc { font-size:13px; color:var(--gray); margin-bottom:24px; line-height:1.55; }
+    .pc-light.hot .pc-desc { color:rgba(255,255,255,0.55); }
+    .pc-div { height:1px; background:var(--border); margin-bottom:22px; }
+    .pc-light.hot .pc-div { background:rgba(255,255,255,0.12); }
+    .pc-feats { display:flex; flex-direction:column; gap:10px; margin-bottom:28px; }
+    .pf { display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-2); }
+    .pf::before { content:'✓'; font-weight:800; color:#22c55e; font-size:12px; }
+    .pc-light.hot .pf { color:rgba(255,255,255,0.8); }
+    .pc-light.hot .pf::before { color:rgba(255,255,255,0.6); }
+    .btn-pc { width:100%; padding:13px; border-radius:var(--r-md); font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:800; cursor:pointer; transition:all 0.2s; }
+    .btn-outline { background:transparent; border:1.5px solid var(--border); color:var(--navy); }
+    .btn-outline:hover { border-color:var(--navy); background:var(--off); }
+    .btn-solid { background:var(--orange); border:none; color:#fff; box-shadow:0 4px 20px rgba(255,103,0,0.35); }
+    .btn-solid:hover { background:var(--orange-2); box-shadow:0 8px 28px rgba(255,103,0,0.45); }
+
+    /* ─── FAQ ─── */
+    .faq-section-light { padding:80px 0; background:var(--off); border-top:1px solid var(--border); }
+    .faq-list-light { display:flex; flex-direction:column; gap:10px; max-width:760px; margin:48px auto 0; }
+    .fq { background:var(--white); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; transition:border-color 0.2s,box-shadow 0.2s; }
+    .fq:hover { border-color:var(--off-2); box-shadow:0 4px 16px rgba(15,47,97,0.06); }
+    .fq-btn { width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:20px 24px; background:transparent; border:none; cursor:pointer; text-align:left; }
+    .fq-q { font-size:15px; font-weight:600; color:var(--navy); }
+    .fq-arr { flex-shrink:0; color:var(--gray-2); transition:transform 0.25s; font-size:18px; }
+    .fq.open .fq-arr { transform:rotate(180deg); }
+    .fq-ans { display:none; padding:0 24px 20px; }
+    .fq-ans p { font-size:14px; color:var(--gray); line-height:1.7; }
+
+    /* ─── CTA / FORM ─── */
+    .cta-section-light { padding: 60px 0 80px; background: var(--white); }
+    .cta-box-light {
+      background: var(--navy);
+      border-radius: var(--r-2xl); padding: 72px 48px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-box-light::before { content:''; position:absolute; top:0; left:50%; transform:translateX(-50%); width:70%; height:1px; background:linear-gradient(90deg,transparent,rgba(255,103,0,0.5),transparent); }
+    .cta-box-light::after { content:''; position:absolute; top:-100px; right:-100px; width:400px; height:400px; background:radial-gradient(circle,rgba(255,103,0,0.1) 0%,transparent 65%); }
+    .cta-h2 { font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(28px,5vw,56px); font-weight:900; letter-spacing:-0.03em; color:#fff; line-height:1.1; margin:12px 0 16px; position:relative; z-index:1; }
+    .cta-h2 em { font-style:normal; color:var(--orange); }
+    .cta-sub-txt { font-size:17px; color:rgba(255,255,255,0.55); margin-bottom:32px; position:relative; z-index:1; }
+    .cta-form { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; max-width:460px; margin:0 auto 14px; position:relative; z-index:1; }
+    .cta-input { flex:1; min-width:200px; height:52px; padding:0 18px; border-radius:var(--r-md); border:1.5px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.08); color:#fff; font-size:15px; outline:none; transition:border-color 0.2s; }
+    .cta-input:focus { border-color:var(--orange); }
+    .cta-input::placeholder { color:rgba(255,255,255,0.35); }
+    .btn-cta { height:52px; padding:0 28px; background:var(--orange); color:#fff; font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:800; border:none; border-radius:var(--r-md); cursor:pointer; white-space:nowrap; transition:all 0.2s; box-shadow:0 4px 20px rgba(255,103,0,0.4); }
+    .btn-cta:hover { background:var(--orange-2); transform:translateY(-2px); box-shadow:0 8px 28px rgba(255,103,0,0.5); }
+    .cta-note { font-size:12px; color:rgba(255,255,255,0.3); position:relative; z-index:1; }
+    #ctaSuccess { display:none; background:rgba(52,211,153,0.15); border:1px solid rgba(52,211,153,0.3); color:#34D399; font-weight:600; padding:14px 24px; border-radius:var(--r-md); margin:0 auto 14px; max-width:460px; text-align:center; position:relative; z-index:1; }
+
+    /* ─── FOOTER ─── */
+    footer { background: var(--navy); padding: 56px 0 28px; }
+    .footer-grid-light { display:grid; grid-template-columns:1.6fr 1fr; gap:48px; margin-bottom:40px; }
+    .f-brand-light .f-logo { font-family:'Plus Jakarta Sans',sans-serif; font-size:22px; font-weight:900; color:#fff; display:block; margin-bottom:10px; }
+    .f-brand-light .f-logo span { color:var(--orange); }
+    .f-tagline { font-size:14px; color:rgba(255,255,255,0.4); line-height:1.7; }
+    .f-email-txt { margin-top:14px; font-size:13px; color:rgba(255,255,255,0.3); }
+    .f-col-light h5 { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:rgba(255,255,255,0.35); margin-bottom:14px; }
+    .f-links-light { list-style:none; display:flex; flex-direction:column; gap:9px; }
+    .f-links-light a { font-size:14px; color:rgba(255,255,255,0.45); transition:color 0.2s; }
+    .f-links-light a:hover { color:rgba(255,255,255,0.8); }
+    .f-bottom-light { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.07); font-size:13px; color:rgba(255,255,255,0.25); }
+    .f-bottom-light a { color:rgba(255,255,255,0.25); transition:color 0.2s; }
+    .f-bottom-light a:hover { color:rgba(255,255,255,0.5); }
+
+    /* ─── RESPONSIVE ─── */
+    /* ── Tablet ── */
+    @media (max-width: 960px) {
+      .nav-links { display:none; }
+      .hero-layout { grid-template-columns:1fr; gap:40px; }
+      .hero::before { display:none; }
+      .hero-visual { order:1; }
+      .hero-img-wrap img { height:320px; object-position:center 20%; }
+      .hero-float { display:none; }
+      .what-layout { grid-template-columns:1fr; gap:36px; }
+      .what-text { order:0; } .what-phone { order:1; max-width:240px; margin:0 auto; }
+      .how-layout { grid-template-columns:1fr; gap:40px; }
+      .how-screen { position:static; }
+      .demo-layout { grid-template-columns:1fr; gap:32px; }
+      .demo-try-card-light { max-width:100%; }
+      .ai-feats-row { grid-template-columns:1fr 1fr; gap:12px; }
+      .testi-grid-light { grid-template-columns:1fr; }
+      .pricing-grid-light { grid-template-columns:1fr; max-width:380px; margin:48px auto 0; }
+      .footer-grid-light { grid-template-columns:1fr; gap:28px; }
+      .features-grid { grid-template-columns:1fr 1fr; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      .hero { padding:100px 0 60px; }
+      .hero-h1 { font-size:46px; }
+      .hero-sub { font-size:15px; }
+      .hero-img-wrap img { height:260px; }
+      .features-grid { grid-template-columns:1fr; }
+      .ai-feats-row { grid-template-columns:1fr; }
+      .stats-bar { padding:28px 0; }
+      .stats-grid { flex-direction:column; align-items:center; gap:0; }
+      .stat-item { border-right:none; border-bottom:1px solid rgba(255,255,255,0.1); padding:18px 0; width:100%; max-width:100%; }
+      .stat-item:last-child { border-bottom:none; }
+      .stat-num { font-size:36px; }
+      .pain-section { padding:60px 0; }
+      .features-section { padding:60px 0; }
+      .how-section { padding:60px 0; }
+      .ai-section { padding:60px 0; }
+      .testi-section { padding:60px 0; }
+      .pricing-section { padding:60px 0; }
+      .faq-section-light { padding:60px 0; }
+      .cta-section-light { padding:40px 0 60px; }
+      .cta-box-light { padding:40px 20px; }
+      .cta-h2 { font-size:30px; line-height:1.2; }
+      .cta-form { flex-direction:column; }
+      .cta-input { min-width:unset; width:100%; height:58px; }
+      .btn-cta { width:100%; }
+      .demo-phone-frame-light { max-width:220px; }
+      .what-phone { max-width:200px; }
+      .fq-btn { padding:16px 18px; }
+      .pc-amount { font-size:42px; }
+    }
+
+    /* ── Small mobile ── */
+    @media (max-width: 400px) {
+      .btn-nav { font-size:13px; padding:8px 14px; }
     }
   </style>
 </head>
-<body class="bg-white text-[#262626] antialiased">
+<body>
 
-  <!-- ═══════════════════════════════════════
-       NAVIGACIJA
-  ═══════════════════════════════════════ -->
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="background: transparent;">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-      <a href="#" class="font-jakarta font-bold text-2xl text-white tracking-tight">SmartStay</a>
-      <div class="hidden md:flex items-center gap-8">
-        <a href="#funkcionalnosti" class="text-[#8ba3c7] hover:text-white text-sm font-medium transition-colors">Funkcionalnosti</a>
-        <a href="#ai-asistent" class="text-[#8ba3c7] hover:text-white text-sm font-medium transition-colors">AI Asistent</a>
-        <a href="#kako-radi" class="text-[#8ba3c7] hover:text-white text-sm font-medium transition-colors">Kako radi</a>
-        <a href="#faq" class="text-[#8ba3c7] hover:text-white text-sm font-medium transition-colors">FAQ</a>
-        <a href="#iskustva" class="text-[#8ba3c7] hover:text-white text-sm font-medium transition-colors">Iskustva</a>
-        <a href="#pricing" class="text-[#8ba3c7] hover:text-white text-sm font-medium transition-colors">Cijena</a>
-        <a href="https://app.smartstay.ba/g/modern-apartment-in-center-of-sarajevo/preview" target="_blank" rel="noopener" class="text-[#FF6700] hover:text-[#ffaa77] text-sm font-semibold transition-colors">Demo ↗</a>
-      </div>
-<a href="#kontakt" class="bg-[#FF6700] hover:bg-[#e05c00] text-white font-jakarta font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors">
-        Zatraži pristup
-      </a>
+<!-- NAV -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <span class="nav-logo">Smart<span>Stay</span></span>
+      <ul class="nav-links">
+        <li><a href="#features">Funkcionalnosti</a></li>
+        <li><a href="#ai">AI Asistent</a></li>
+        <li><a href="#how">Kako radi</a></li>
+        <li><a href="#pricing">Cijene</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a href="#kontakt" class="btn-nav">Zatraži pristup →</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- ═══════════════════════════════════════
-       HERO
-  ═══════════════════════════════════════ -->
-  <section class="min-h-screen bg-[#0F2F61] relative overflow-hidden flex items-center">
-    <!-- Background decoration -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="absolute -top-40 -right-40 w-96 h-96 bg-[#FF6700] opacity-10 rounded-full blur-3xl"></div>
-      <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-white opacity-5 rounded-full blur-3xl"></div>
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#1a4a8a] opacity-30 rounded-full blur-3xl"></div>
-    </div>
-
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-20 relative z-10 w-full">
-      <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-
-        <!-- Tekst -->
-        <div class="flex-1 text-center lg:text-left">
-          <div class="inline-flex items-center gap-2 bg-white/10 text-white/80 text-xs font-medium px-4 py-2 rounded-full mb-8 animate-fade-up">
-            <span class="w-2 h-2 bg-[#FF6700] rounded-full animate-pulse"></span>
-            Novo · Digitalni vodič za iznajmljivače
-          </div>
-          <h1 class="font-jakarta font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6 animate-fade-up delay-100">
-            Prestanite odgovarati<br/>
-            na ista pitanja<br/>
-            <span class="text-[#FF6700]">svaki dan.</span>
-          </h1>
-          <p class="text-[#8ba3c7] text-lg sm:text-xl leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0 animate-fade-up delay-200">
-            Automatizujte komunikaciju sa gostima i povećajte zaradu po rezervaciji.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-up delay-300">
-            <a href="https://app.smartstay.ba/g/modern-apartment-in-center-of-sarajevo/preview" target="_blank" rel="noopener" class="bg-[#FF6700] hover:bg-[#e05c00] text-white font-jakarta font-bold text-base px-8 py-4 rounded-2xl transition-all hover:scale-105 hover:shadow-lg hover:shadow-orange-500/30 text-center">
-              Pogledaj demo →
-            </a>
-            <a href="#kontakt" class="bg-white/10 hover:bg-white/20 text-white font-jakarta font-semibold text-base px-8 py-4 rounded-2xl transition-all border border-white/20 text-center">
-              Zatraži pristup
-            </a>
-          </div>
-
+<!-- HERO -->
+<section class="hero">
+  <div class="container" style="width:100%">
+    <div class="hero-layout">
+      <div class="sr">
+        <div class="hero-eyebrow">
+          <span class="chip chip-orange">Novo — AI odgovara umjesto vas</span>
         </div>
-
-        <!-- Hero photo -->
-        <div class="hero-photo animate-fade-up delay-200">
-          <img src="hero-photo.jpg" alt="SmartStay host" style="width:100%;height:100%;object-fit:cover;object-position:center;">
-          <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,47,97,0.20) 0%,rgba(0,0,0,0) 55%);"></div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Wave separator -->
-    <div class="absolute bottom-0 left-0 right-0">
-      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 80L1440 80L1440 40C1440 40 1080 0 720 0C360 0 0 40 0 40L0 80Z" fill="#F7F7F5"/>
-      </svg>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       BENEFITS STRIP
-  ═══════════════════════════════════════ -->
-  <section class="py-16 bg-[#F7F7F5] border-b border-[#EDEDE9]">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-        <div class="reveal bg-white rounded-2xl p-7 border border-[#EDEDE9] shadow-sm flex flex-col items-start gap-3">
-          <div class="w-11 h-11 bg-orange-100 rounded-xl flex items-center justify-center text-2xl">📉</div>
-          <h3 class="font-jakarta font-bold text-[#262626] text-base leading-snug">Uštedite sate svaki dan</h3>
-          <p class="text-[#6B6B6B] text-sm leading-relaxed">WiFi, check-in, pravila — gost sam pronađe odgovor. Bez poruka u 2 ujutro.</p>
-        </div>
-
-        <div class="reveal bg-white rounded-2xl p-7 border border-[#EDEDE9] shadow-sm flex flex-col items-start gap-3 delay-100">
-          <div class="w-11 h-11 bg-blue-100 rounded-xl flex items-center justify-center text-2xl">🔑</div>
-          <h3 class="font-jakarta font-bold text-[#262626] text-base leading-snug">Profesionalniji dojam</h3>
-          <p class="text-[#6B6B6B] text-sm leading-relaxed">Sve upute na jednom linku koji pošalješ unaprijed. Gost stiže spreman.</p>
-        </div>
-
-        <div class="reveal bg-white rounded-2xl p-7 border border-[#EDEDE9] shadow-sm flex flex-col items-start gap-3 delay-100">
-          <div class="w-11 h-11 bg-green-100 rounded-xl flex items-center justify-center text-2xl">💼</div>
-          <h3 class="font-jakarta font-bold text-[#262626] text-base leading-snug">Dodatna zarada po gostu</h3>
-          <p class="text-[#6B6B6B] text-sm leading-relaxed">Transfer, obilazak grada, najam auta — ponudi gostu direktno kroz stranicu.</p>
-        </div>
-
-        <div class="reveal bg-white rounded-2xl p-7 border border-[#EDEDE9] shadow-sm flex flex-col items-start gap-3 delay-200 sm:col-span-3 lg:col-span-1">
-          <div class="w-11 h-11 bg-purple-100 rounded-xl flex items-center justify-center text-2xl">🌍</div>
-          <h3 class="font-jakarta font-bold text-[#262626] text-base leading-snug">Automatski prijevod na 3 jezika</h3>
-          <p class="text-[#6B6B6B] text-sm leading-relaxed">Vodič se automatski prevodi na engleski, njemački i turski — gost bira jezik jednim klikom.</p>
-          <div class="flex gap-2 mt-1">
-            <span class="text-xs font-semibold bg-[#F7F7F5] text-[#262626] px-2.5 py-1 rounded-lg">🇬🇧 EN</span>
-            <span class="text-xs font-semibold bg-[#F7F7F5] text-[#262626] px-2.5 py-1 rounded-lg">🇩🇪 DE</span>
-            <span class="text-xs font-semibold bg-[#F7F7F5] text-[#262626] px-2.5 py-1 rounded-lg">🇹🇷 TR</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       PROBLEM / RJEŠENJE
-  ═══════════════════════════════════════ -->
-  <section class="py-24 bg-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-16 reveal">
-        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Poznato vam je ovo?</span>
-        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3 mb-4">Svaki gost pita<br/>ista pitanja.</h2>
-        <p class="text-muted text-lg max-w-2xl mx-auto">Iznajmljivači prosječno prime 8–12 poruka po rezervaciji prije check-ina. Većina su ista pitanja iznova i iznova.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-        <!-- Problem kolona -->
-        <div class="reveal bg-red-50 border border-red-100 rounded-2xl p-8">
-          <div class="font-jakarta font-bold text-lg text-red-700 mb-6 flex items-center gap-2">
-            <span class="text-2xl">😩</span> Svaki dan bez SmartStay-a
-          </div>
-          <div class="space-y-4">
-            <div class="flex items-start gap-3">
-              <span class="text-red-400 mt-0.5 text-lg shrink-0">✗</span>
-              <p class="text-[#262626] text-sm leading-relaxed"><strong>"Koja je WiFi lozinka?"</strong> — poruka u 23h, noć uoči check-outa</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="text-red-400 mt-0.5 text-lg shrink-0">✗</span>
-              <p class="text-[#262626] text-sm leading-relaxed"><strong>"Gdje se nalazi ključ?"</strong> — pitanje koje ste odgovorili 50 puta ove godine</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="text-red-400 mt-0.5 text-lg shrink-0">✗</span>
-              <p class="text-[#262626] text-sm leading-relaxed"><strong>"Do kada mogu ostati?"</strong> — check-out pravila koja ste napisali u opisu, ali gost nije pročitao</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="text-red-400 mt-0.5 text-lg shrink-0">✗</span>
-              <p class="text-[#262626] text-sm leading-relaxed"><strong>"Gdje da parkiram?"</strong> — i svako slijedeće trivijalno pitanje koje oduzima vaše vrijeme</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="text-red-400 mt-0.5 text-lg shrink-0">✗</span>
-              <p class="text-[#262626] text-sm leading-relaxed"><strong>Ručno slanje informacija</strong> — copy-paste iste poruke za svakog gosta iznova</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Rješenje kolona -->
-        <div class="reveal bg-[#0F2F61] rounded-2xl p-8 delay-100">
-          <div class="font-jakarta font-bold text-lg text-white mb-6 flex items-center gap-2">
-            <span class="text-2xl">✨</span> Sa SmartStay-em
-          </div>
-          <div class="space-y-4">
-            <div class="flex items-start gap-3">
-              <span class="text-[#FF6700] mt-0.5 text-lg shrink-0">✓</span>
-              <p class="text-[#8ba3c7] text-sm leading-relaxed"><strong class="text-white">Gost dobije link automatski</strong> — putem platforme za iznajmljivanje, odmah po rezervaciji</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="text-[#FF6700] mt-0.5 text-lg shrink-0">✓</span>
-              <p class="text-[#8ba3c7] text-sm leading-relaxed"><strong class="text-white">Sve informacije na jednom mjestu</strong> — WiFi, check-in, pravila, lokacija, parking i ostalo</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="text-[#FF6700] mt-0.5 text-lg shrink-0">✓</span>
-              <p class="text-[#8ba3c7] text-sm leading-relaxed"><strong class="text-white">Gost ne mora pitati</strong> — otvori link, nađe odgovor, vi ste slobodni</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="text-[#FF6700] mt-0.5 text-lg shrink-0">✓</span>
-              <p class="text-[#8ba3c7] text-sm leading-relaxed"><strong class="text-white">Manje poruka, bolje recenzije</strong> — gosti koji imaju informacije su zadovoljniji gosti</p>
-            </div>
-            <div class="flex items-start gap-3">
-              <span class="text-[#FF6700] mt-0.5 text-lg shrink-0">✓</span>
-              <p class="text-[#8ba3c7] text-sm leading-relaxed"><strong class="text-white">Jednom podesiti, koristiti zauvijek</strong> — vodič vrijedi za sve buduće goste</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Stat highlight -->
-      <div class="reveal grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="bg-[#F7F7F5] rounded-2xl p-8 text-center">
-          <div class="font-jakarta font-extrabold text-5xl text-[#0F2F61] mb-2">8–12</div>
-          <div class="text-muted text-sm leading-relaxed">poruka po rezervaciji prima prosječan iznajmljivač prije check-ina</div>
-        </div>
-        <div class="bg-[#FF6700] rounded-2xl p-8 text-center">
-          <div class="font-jakarta font-extrabold text-5xl text-white mb-2">~2h</div>
-          <div class="text-white/80 text-sm leading-relaxed">tjedno izgubljeno na odgovaranje istih pitanja iznova i iznova</div>
-        </div>
-        <div class="bg-[#F7F7F5] rounded-2xl p-8 text-center">
-          <div class="font-jakarta font-extrabold text-5xl text-[#0F2F61] mb-2">0</div>
-          <div class="text-muted text-sm leading-relaxed">pitanja o WiFi lozinki nakon što gost dobije SmartStay link</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       LOGO STRIP (social proof)
-  ═══════════════════════════════════════ -->
-  <section class="bg-[#F7F7F5] py-12">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <p class="text-muted text-sm font-medium mb-8 tracking-wide uppercase">Koriste iznajmljivači širom BiH</p>
-      <div class="flex flex-wrap justify-center items-center gap-8 opacity-50">
-        <span class="font-jakarta font-bold text-xl text-[#262626]">Sarajevo</span>
-        <span class="w-1.5 h-1.5 bg-[#262626] rounded-full opacity-30"></span>
-        <span class="font-jakarta font-bold text-xl text-[#262626]">Mostar</span>
-        <span class="w-1.5 h-1.5 bg-[#262626] rounded-full opacity-30"></span>
-        <span class="font-jakarta font-bold text-xl text-[#262626]">Banja Luka</span>
-        <span class="w-1.5 h-1.5 bg-[#262626] rounded-full opacity-30"></span>
-        <span class="font-jakarta font-bold text-xl text-[#262626]">Trebinje</span>
-        <span class="w-1.5 h-1.5 bg-[#262626] rounded-full opacity-30"></span>
-        <span class="font-jakarta font-bold text-xl text-[#262626]">Neum</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       FUNKCIONALNOSTI
-  ═══════════════════════════════════════ -->
-  <section id="funkcionalnosti" class="py-24 bg-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-16 reveal">
-        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Funkcionalnosti</span>
-        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3 mb-4">Jedan link<br/>rješava sve.</h2>
-        <p class="text-muted text-lg max-w-xl mx-auto">Svaki gost dobija svoju stranicu sa svim informacijama — bez dodatnih poruka.</p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <!-- Feature 1 -->
-        <div class="reveal bg-[#F7F7F5] rounded-2xl p-7 hover:shadow-lg transition-all hover:-translate-y-1 group">
-          <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-2xl mb-5">📋</div>
-          <h3 class="font-jakarta font-bold text-lg text-[#262626] mb-2">9 tipova sekcija</h3>
-          <p class="text-muted text-sm leading-relaxed">WiFi, check-in, pravila, lokacija, preporuke, kontakt, parking i custom sekcije — sve što gost može trebati.</p>
-        </div>
-
-        <!-- Feature 2 -->
-        <div class="reveal bg-[#F7F7F5] rounded-2xl p-7 hover:shadow-lg transition-all hover:-translate-y-1 group delay-100">
-          <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center text-2xl mb-5">⚡</div>
-          <h3 class="font-jakarta font-bold text-lg text-[#262626] mb-2">Automated poruka</h3>
-          <p class="text-muted text-sm leading-relaxed">Pošaljite link gostu kroz automatsku poruku vaše platforme (Airbnb, Booking.com) — gost dobije sve informacije prije dolaska.</p>
-        </div>
-
-        <!-- Feature 3 -->
-        <div class="reveal bg-[#F7F7F5] rounded-2xl p-7 hover:shadow-lg transition-all hover:-translate-y-1 group delay-200">
-          <div class="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center text-2xl mb-5">💬</div>
-          <h3 class="font-jakarta font-bold text-lg text-[#262626] mb-2">WhatsApp & Viber</h3>
-          <p class="text-muted text-sm leading-relaxed">Podijelite link s gostom direktno putem WhatsAppa ili Vibera jednim klikom — bez copy-paste.</p>
-        </div>
-
-        <!-- Feature 4 -->
-        <div class="reveal bg-[#F7F7F5] rounded-2xl p-7 hover:shadow-lg transition-all hover:-translate-y-1 group">
-          <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-2xl mb-5">💼</div>
-          <h3 class="font-jakarta font-bold text-lg text-[#262626] mb-2">Prodajte usluge gostima</h3>
-          <p class="text-muted text-sm leading-relaxed">Ponudite transfer, obilazak grada ili najam bicikla direktno kroz stranicu. Gost naruči, vi zaradite više.</p>
-        </div>
-
-        <!-- Feature 5 -->
-        <div class="reveal bg-[#F7F7F5] rounded-2xl p-7 hover:shadow-lg transition-all hover:-translate-y-1 group delay-100">
-          <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-2xl mb-5">👥</div>
-          <h3 class="font-jakarta font-bold text-lg text-[#262626] mb-2">Tim pristup</h3>
-          <p class="text-muted text-sm leading-relaxed">Dodajte članove tima koji upravljaju nekretninama zajedno s vama — svako vidi iste apartmane i vodiče.</p>
-        </div>
-
-        <!-- Feature 6 -->
-        <div class="reveal bg-[#F7F7F5] rounded-2xl p-7 hover:shadow-lg transition-all hover:-translate-y-1 group delay-200">
-          <div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-xl flex items-center justify-center text-2xl mb-5">📱</div>
-          <h3 class="font-jakarta font-bold text-lg text-[#262626] mb-2">QR kod</h3>
-          <p class="text-muted text-sm leading-relaxed">Preuzmite QR kod jednim klikom i zalijepite ga u apartman. Gost skenira i odmah vidi vodič.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       KAKO RADI
-  ═══════════════════════════════════════ -->
-  <section id="kako-radi" class="py-24 bg-[#F7F7F5]">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-16 reveal">
-        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Kako radi</span>
-        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3 mb-4">Tri koraka do<br/>profesionalnog vodiča.</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-        <div class="reveal text-center">
-          <div class="w-16 h-16 bg-[#0F2F61] text-white font-jakarta font-extrabold text-2xl rounded-2xl flex items-center justify-center mx-auto mb-6">1</div>
-          <h3 class="font-jakarta font-bold text-xl text-[#262626] mb-3">Kreirajte nekretninu</h3>
-          <p class="text-muted leading-relaxed">Dodajte apartman, popunite sekcije s informacijama — WiFi, check-in proceduru, pravila, lokaciju i ostalo.</p>
-        </div>
-
-        <div class="reveal text-center delay-100">
-          <div class="w-16 h-16 bg-[#FF6700] text-white font-jakarta font-extrabold text-2xl rounded-2xl flex items-center justify-center mx-auto mb-6">2</div>
-          <h3 class="font-jakarta font-bold text-xl text-[#262626] mb-3">Pošaljite gostu link</h3>
-          <p class="text-muted leading-relaxed">Kopirajte link i dodajte ga u automatsku poruku na Airbnbu, Booking.com-u ili pošaljite direktno putem WhatsAppa ili Vibera.</p>
-        </div>
-
-        <div class="reveal text-center delay-200">
-          <div class="w-16 h-16 bg-[#0F2F61] text-white font-jakarta font-extrabold text-2xl rounded-2xl flex items-center justify-center mx-auto mb-6">3</div>
-          <h3 class="font-jakarta font-bold text-xl text-[#262626] mb-3">Gost ima sve informacije</h3>
-          <p class="text-muted leading-relaxed">Gost otvori link ili skenira QR kod i odmah vidi sve — bez instalacije aplikacija, bez registracije.</p>
-        </div>
-
-      </div>
-
-      <!-- Visual connector -->
-      <div class="hidden md:flex items-center justify-center gap-0 mt-0 -mt-32 pointer-events-none select-none">
-        <div class="flex-1 max-w-xs"></div>
-        <div class="flex-1 max-w-xs flex justify-center">
-          <div class="w-full h-0.5 bg-[#EDEDE9] relative top-16"></div>
-        </div>
-        <div class="flex-1 max-w-xs flex justify-center">
-          <div class="w-full h-0.5 bg-[#EDEDE9] relative top-16"></div>
-        </div>
-        <div class="flex-1 max-w-xs"></div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       ŠTA GOSTI VIDE — SEKCIJE + DEMO
-  ═══════════════════════════════════════ -->
-  <section id="demo" class="py-24 bg-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="flex flex-col lg:flex-row items-center gap-12">
-
-        <!-- Left: text + CTA -->
-        <div class="flex-1 text-center lg:text-left reveal">
-          <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Demo</span>
-          <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3 mb-5 leading-tight">
-            Sve što gostu treba<br/>— na jednom mjestu.
-          </h2>
-          <p class="text-[#6B6B6B] text-lg leading-relaxed mb-8">
-            9 tipova sekcija, svaka prilagođena da gosti dobiju tačno ono što im treba — bez štampanja, bez WhatsApp poruka u 2 ujutro.
-          </p>
-          <a href="https://app.smartstay.ba/g/modern-apartment-in-center-of-sarajevo/preview" target="_blank" rel="noopener"
-             class="inline-flex items-center gap-2 bg-[#FF6700] hover:bg-[#e05c00] text-white font-jakarta font-bold text-base px-8 py-4 rounded-2xl transition-all hover:scale-105 hover:shadow-lg hover:shadow-orange-500/30">
-            Pogledaj demo stranicu za gosta
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
-          <p class="text-[#6B6B6B] text-sm mt-4">Otvara se pravi vodič — bez registracije.</p>
-        </div>
-
-        <!-- Right: phone mockup with demo video -->
-        <div class="flex-shrink-0 flex justify-center reveal">
-          <div class="phone-frame">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <video src="demo.mp4" autoplay muted loop playsinline style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:top center;"></video>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       9 SEKCIJA
-  ═══════════════════════════════════════ -->
-  <section class="py-16 bg-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-10 reveal">
-        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Šta gosti vide</span>
-        <h2 class="font-jakarta font-extrabold text-3xl sm:text-4xl text-[#262626] mt-3">9 tipova sekcija — sve na jednom linku.</h2>
-      </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 reveal">
-        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-          <span class="text-3xl">🏠</span>
-          <span class="font-jakarta font-semibold text-[#262626] text-sm">Dobrodošlica</span>
-          <span class="text-[#6B6B6B] text-xs">Opis apartmana i prve upute</span>
-        </div>
-        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-          <span class="text-3xl">📶</span>
-          <span class="font-jakarta font-semibold text-[#262626] text-sm">WiFi pristup</span>
-          <span class="text-[#6B6B6B] text-xs">Naziv mreže i lozinka</span>
-        </div>
-        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-          <span class="text-3xl">🔑</span>
-          <span class="font-jakarta font-semibold text-[#262626] text-sm">Check-in</span>
-          <span class="text-[#6B6B6B] text-xs">Upute za ulaz i ključeve</span>
-        </div>
-        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-          <span class="text-3xl">📋</span>
-          <span class="font-jakarta font-semibold text-[#262626] text-sm">Pravila kuće</span>
-          <span class="text-[#6B6B6B] text-xs">Pušenje, kućni ljubimci, buka</span>
-        </div>
-        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-          <span class="text-3xl">📍</span>
-          <span class="font-jakarta font-semibold text-[#262626] text-sm">Lokacija</span>
-          <span class="text-[#6B6B6B] text-xs">Adresa i kako doći</span>
-        </div>
-        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-          <span class="text-3xl">⭐</span>
-          <span class="font-jakarta font-semibold text-[#262626] text-sm">Preporuke</span>
-          <span class="text-[#6B6B6B] text-xs">Restorani, kafići, atrakcije</span>
-        </div>
-        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-          <span class="text-3xl">📞</span>
-          <span class="font-jakarta font-semibold text-[#262626] text-sm">Kontakt</span>
-          <span class="text-[#6B6B6B] text-xs">Broj vlasnika za hitne slučajeve</span>
-        </div>
-        <div class="bg-[#F7F7F5] border border-[#EDEDE9] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:border-[#0F2F61]/30 hover:shadow-md transition-all">
-          <span class="text-3xl">🚗</span>
-          <span class="font-jakarta font-semibold text-[#262626] text-sm">Parking</span>
-          <span class="text-[#6B6B6B] text-xs">Gdje i kako parkirati</span>
-        </div>
-        <div class="bg-[#0F2F61] border border-[#0F2F61] rounded-2xl p-4 flex flex-col items-center text-center gap-2 hover:shadow-md transition-all">
-          <span class="text-3xl">✏️</span>
-          <span class="font-jakarta font-semibold text-white text-sm">Custom</span>
-          <span class="text-[#8ba3c7] text-xs">Bilo šta — mašina za veš, roštilj...</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       AI ASISTENT
-  ═══════════════════════════════════════ -->
-  <section id="ai-asistent" class="py-24 bg-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-
-      <!-- Heading -->
-      <div class="text-center mb-16 reveal">
-        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Novo</span>
-        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3 mb-4">
-          AI asistent za vaše <span class="text-[#FF6700]">goste.</span>
-        </h2>
-        <p class="text-[#6B6B6B] text-lg max-w-2xl mx-auto">
-          Gosti postavljaju pitanja prirodnim jezikom — AI odgovara odmah, na osnovu informacija koje ste vi unijeli u guidebook.
+        <h1 class="hero-h1">
+          Gostima sve info.<br>
+          Vama <em>manje poruka.</em>
+        </h1>
+        <p class="hero-sub">
+          SmartStay kreira personalizovani digitalni vodič za vaš apartman — gosti sami pronalaze WiFi, check-in upute, preporuke i još mnogo toga.
         </p>
-      </div>
-
-      <!-- 2-col layout -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
-
-        <!-- Left: feature points -->
-        <div class="space-y-7 reveal">
-          <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-[#FF6700]/10 flex items-center justify-center shrink-0 mt-0.5">
-              <span class="text-xl">💬</span>
-            </div>
-            <div>
-              <p class="font-jakarta font-semibold text-[#262626] mb-1">Odgovori u sekundi</p>
-              <p class="text-[#6B6B6B] text-sm leading-relaxed">Gost upiše pitanje — "Gdje je ključ?", "Ima li parking?" — i dobije konkretan odgovor na osnovu vašeg guidebooka, bez čekanja.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-[#FF6700]/10 flex items-center justify-center shrink-0 mt-0.5">
-              <span class="text-xl">🌍</span>
-            </div>
-            <div>
-              <p class="font-jakarta font-semibold text-[#262626] mb-1">Višejezična podrška</p>
-              <p class="text-[#6B6B6B] text-sm leading-relaxed">AI automatski prepoznaje jezik gosta i odgovara na njemu — engleski, njemački, turski, talijanski i više.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-[#FF6700]/10 flex items-center justify-center shrink-0 mt-0.5">
-              <span class="text-xl">🔒</span>
-            </div>
-            <div>
-              <p class="font-jakarta font-semibold text-[#262626] mb-1">Vi kontrolišete šta AI zna</p>
-              <p class="text-[#6B6B6B] text-sm leading-relaxed">AI odgovara isključivo na osnovu informacija koje ste vi unijeli. Nema izmišljanja — ako informacija ne postoji, AI to kaže i predlaže kontakt s vama.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-[#FF6700]/10 flex items-center justify-center shrink-0 mt-0.5">
-              <span class="text-xl">🧠</span>
-            </div>
-            <div>
-              <p class="font-jakarta font-semibold text-[#262626] mb-1">AI Context — skrivena sekcija</p>
-              <p class="text-[#6B6B6B] text-sm leading-relaxed">Dodajte ekstra napomene za AI koje gosti ne vide: specifičnosti apartmana, posebne upute, lokalne savjete. AI koristi sve to za preciznije odgovore.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: chat mockup -->
-        <div class="reveal flex justify-center">
-          <div class="w-full max-w-sm bg-white rounded-2xl shadow-2xl border border-[#EDEDE9] overflow-hidden">
-            <!-- Chat header -->
-            <div class="flex items-center gap-3 px-4 py-3 border-b border-[#EDEDE9]">
-              <div class="w-8 h-8 bg-[#FF6700] rounded-full flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
-              </div>
-              <div>
-                <p class="font-jakarta font-semibold text-sm text-[#262626]">AI asistent</p>
-                <p class="text-xs text-[#9B9B9B]">Powered by AI · odgovara odmah</p>
-              </div>
-            </div>
-            <!-- Messages -->
-            <div class="px-4 py-4 space-y-3 bg-[#F7F7F5] min-h-[200px]">
-              <!-- User message -->
-              <div class="flex justify-end">
-                <div class="bg-[#FF6700] text-white text-sm px-4 py-2.5 rounded-2xl rounded-br-sm max-w-[80%]">
-                  Koja je WiFi lozinka?
-                </div>
-              </div>
-              <!-- AI response -->
-              <div class="flex justify-start">
-                <div class="bg-white text-[#262626] text-sm px-4 py-2.5 rounded-2xl rounded-bl-sm max-w-[85%] shadow-sm border border-[#EDEDE9]">
-                  WiFi mreža je <strong>Apartment_5G</strong>, a lozinka je <strong>Welcome2024!</strong> 🔑
-                </div>
-              </div>
-              <!-- User message 2 -->
-              <div class="flex justify-end">
-                <div class="bg-[#FF6700] text-white text-sm px-4 py-2.5 rounded-2xl rounded-br-sm max-w-[80%]">
-                  Wann ist der Check-out?
-                </div>
-              </div>
-              <!-- AI response 2 -->
-              <div class="flex justify-start">
-                <div class="bg-white text-[#262626] text-sm px-4 py-2.5 rounded-2xl rounded-bl-sm max-w-[85%] shadow-sm border border-[#EDEDE9]">
-                  Der Check-out ist bis <strong>11:00 Uhr</strong>. Bitte hinterlassen Sie den Schlüssel auf dem Tisch. ✅
-                </div>
-              </div>
-            </div>
-            <!-- Input bar -->
-            <div class="px-3 py-3 border-t border-[#EDEDE9] bg-white flex gap-2 items-center">
-              <div class="flex-1 bg-[#F7F7F5] rounded-xl px-4 py-2 text-sm text-[#9B9B9B]">Upiši pitanje...</div>
-              <div class="w-9 h-9 bg-[#FF6700] rounded-xl flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- How it works -->
-      <div class="reveal mb-16">
-        <h3 class="font-jakarta font-bold text-2xl text-[#262626] text-center mb-10">Kako se postavlja?</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-[#F7F7F5] rounded-2xl p-6 text-center">
-            <div class="w-10 h-10 rounded-full bg-[#0F2F61] text-white font-jakarta font-bold flex items-center justify-center mx-auto mb-4 text-lg">1</div>
-            <p class="font-jakarta font-semibold text-[#262626] mb-2">Popunite guidebook</p>
-            <p class="text-[#6B6B6B] text-sm leading-relaxed">Unesite informacije o WiFi-u, check-inu, parkingu, pravilima — sve što gost može trebati znati.</p>
-          </div>
-          <div class="bg-[#F7F7F5] rounded-2xl p-6 text-center">
-            <div class="w-10 h-10 rounded-full bg-[#0F2F61] text-white font-jakarta font-bold flex items-center justify-center mx-auto mb-4 text-lg">2</div>
-            <p class="font-jakarta font-semibold text-[#262626] mb-2">Pošaljite link gostu</p>
-            <p class="text-[#6B6B6B] text-sm leading-relaxed">Gost otvori personalizovani link i vidi vaš guidebook — a u donjem desnom uglu ga čeka chat bubble.</p>
-          </div>
-          <div class="bg-[#F7F7F5] rounded-2xl p-6 text-center">
-            <div class="w-10 h-10 rounded-full bg-[#FF6700] text-white font-jakarta font-bold flex items-center justify-center mx-auto mb-4 text-lg">3</div>
-            <p class="font-jakarta font-semibold text-[#262626] mb-2">AI odgovara umjesto vas</p>
-            <p class="text-[#6B6B6B] text-sm leading-relaxed">Gost pita, AI odgovara odmah. Vi imate manje poruka, gost bolje iskustvo.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI Context callout -->
-      <div class="reveal bg-violet-50 border border-violet-200 rounded-2xl p-8 max-w-3xl mx-auto">
-        <div class="flex items-start gap-4">
-          <div class="w-10 h-10 rounded-xl bg-violet-100 flex items-center justify-center shrink-0 mt-0.5">
-            <span class="text-xl">🧠</span>
-          </div>
-          <div>
-            <p class="font-jakarta font-bold text-[#262626] text-lg mb-2">AI Context — ekstra znanje za AI</p>
-            <p class="text-[#6B6B6B] text-sm leading-relaxed mb-3">
-              U editoru imate posebnu <strong>AI Context</strong> sekciju koja je nevidljiva gostima, ali AI je koristi kao dodatni kontekst. Idealno za napomene poput:
-            </p>
-            <ul class="text-[#6B6B6B] text-sm space-y-1.5">
-              <li class="flex items-start gap-2"><span class="text-violet-500 mt-0.5">•</span> "Ključ je u kutijici iza aparata za kafu"</li>
-              <li class="flex items-start gap-2"><span class="text-violet-500 mt-0.5">•</span> "Bazen radi od 8 do 22h, pristup karticom"</li>
-              <li class="flex items-start gap-2"><span class="text-violet-500 mt-0.5">•</span> "Najbliža apoteka je 2 minute hoda, lijevo od ulaza"</li>
-              <li class="flex items-start gap-2"><span class="text-violet-500 mt-0.5">•</span> "Za hitne slučajeve, portir je dostupan 24/7"</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       ISKUSTVA / TESTIMONIJALI
-  ═══════════════════════════════════════ -->
-  <section id="iskustva" class="py-24 bg-white">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-16 reveal">
-        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Iskustva</span>
-        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3 mb-4">Šta kažu iznajmljivači.</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-        <div class="reveal bg-[#F7F7F5] rounded-2xl p-8 hover:shadow-lg transition-all">
-          <div class="flex gap-1 mb-5">
-            <span class="text-[#FF6700]">★★★★★</span>
-          </div>
-          <p class="text-[#262626] leading-relaxed mb-6 italic">"Gosti mi više ne šalju poruke sa pitanjem za WiFi lozinku u 2 ujutro. Sve im je odmah dostupno. SmartStay je uštedio nebrojeno sati."</p>
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-[#0F2F61] rounded-full flex items-center justify-center font-jakarta font-bold text-white text-sm">AB</div>
-            <div>
-              <div class="font-jakarta font-bold text-[#262626] text-sm">Armin B.</div>
-              <div class="text-muted text-xs">Iznajmljivač · Sarajevo · 4 apartmana</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="reveal bg-[#0F2F61] rounded-2xl p-8 delay-100">
-          <div class="flex gap-1 mb-5">
-            <span class="text-[#FF6700]">★★★★★</span>
-          </div>
-          <p class="text-white leading-relaxed mb-6 italic">"Dodala sam SmartStay link u automatsku poruku na Airbnbu. Gosti dobiju sve informacije odmah po rezervaciji. Manje poruka, zadovoljniji gosti, bolje recenzije."</p>
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-[#FF6700] rounded-full flex items-center justify-center font-jakarta font-bold text-white text-sm">MK</div>
-            <div>
-              <div class="font-jakarta font-bold text-white text-sm">Maja K.</div>
-              <div class="text-[#8ba3c7] text-xs">Iznajmljivač · Mostar · Airbnb Superhost</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="reveal bg-[#F7F7F5] rounded-2xl p-8 delay-200 hover:shadow-lg transition-all">
-          <div class="flex gap-1 mb-5">
-            <span class="text-[#FF6700]">★★★★★</span>
-          </div>
-          <p class="text-[#262626] leading-relaxed mb-6 italic">"Moj tim od 3 osobe upravlja 12 apartmana. Svi vidimo iste vodiče, sve je na jednom mjestu. Organizacija je konačno na nivou."</p>
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-[#0F2F61] rounded-full flex items-center justify-center font-jakarta font-bold text-white text-sm">EH</div>
-            <div>
-              <div class="font-jakarta font-bold text-[#262626] text-sm">Edin H.</div>
-              <div class="text-muted text-xs">Property Manager · Banja Luka · 12 apartmana</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       ZA KOGA JE OVO
-  ═══════════════════════════════════════ -->
-  <section class="py-24 bg-[#0F2F61] relative overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none overflow-hidden">
-      <div class="absolute -top-20 -right-20 w-80 h-80 bg-[#FF6700] opacity-5 rounded-full blur-3xl"></div>
-      <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-white opacity-5 rounded-full blur-3xl"></div>
-    </div>
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-      <div class="text-center mb-14 reveal">
-        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Za koga je SmartStay</span>
-        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-white mt-3">Prepoznaješ li se?</h2>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-
-        <div class="reveal bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
-          <div class="text-3xl mb-4">🏠</div>
-          <h3 class="font-jakarta font-bold text-white text-base mb-2">Individualni iznajmljivač</h3>
-          <p class="text-[#8ba3c7] text-sm leading-relaxed">Imaš 1–5 apartmana i umoran/na si od istih pitanja svakog gosta.</p>
-        </div>
-
-        <div class="reveal bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors delay-100">
-          <div class="text-3xl mb-4">👥</div>
-          <h3 class="font-jakarta font-bold text-white text-base mb-2">Property manager</h3>
-          <p class="text-[#8ba3c7] text-sm leading-relaxed">Upravljaš nekretninama za više vlasnika i trebaš tim koji može pristupiti svim vodičima.</p>
-        </div>
-
-        <div class="reveal bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors delay-200">
-          <div class="text-3xl mb-4">📈</div>
-          <h3 class="font-jakarta font-bold text-white text-base mb-2">Airbnb/Booking host</h3>
-          <p class="text-[#8ba3c7] text-sm leading-relaxed">Vodiš kratkoročne iznajme i želiš automatizovati komunikaciju s gostima.</p>
-        </div>
-
-        <div class="reveal bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors delay-300">
-          <div class="text-3xl mb-4">🏨</div>
-          <h3 class="font-jakarta font-bold text-white text-base mb-2">Hoteli</h3>
-          <p class="text-[#8ba3c7] text-sm leading-relaxed">Imaš više soba i želiš gostima dati sve informacije bez štampanja ili recepcije.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       ZAŠTO SMARTSTAY
-  ═══════════════════════════════════════ -->
-  <section class="py-20 bg-[#F7F7F5]">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-12 reveal">
-        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Razlozi</span>
-        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3">Zašto vlasnici apartmana<br/>koriste SmartStay.</h2>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 reveal">
-        <div class="bg-white border border-[#EDEDE9] rounded-2xl p-7 flex items-start gap-5">
-          <div class="w-11 h-11 bg-[#0F2F61]/10 rounded-xl flex items-center justify-center shrink-0 text-xl">⏱️</div>
-          <div>
-            <h3 class="font-jakarta font-bold text-[#262626] text-base mb-1">Uštedite sate svaki dan</h3>
-            <p class="text-[#6B6B6B] text-sm leading-relaxed">Automatizujte odgovore na ponavljajuća pitanja i oslobodite se od svakodnevnog copy-paste-a.</p>
-          </div>
-        </div>
-        <div class="bg-white border border-[#EDEDE9] rounded-2xl p-7 flex items-start gap-5">
-          <div class="w-11 h-11 bg-[#0F2F61]/10 rounded-xl flex items-center justify-center shrink-0 text-xl">💬</div>
-          <div>
-            <h3 class="font-jakarta font-bold text-[#262626] text-base mb-1">Manje poruka od gostiju</h3>
-            <p class="text-[#6B6B6B] text-sm leading-relaxed">Gost koji ima sve informacije ne piše. Ni u 2 ujutro, ni dan pred dolazak.</p>
-          </div>
-        </div>
-        <div class="bg-white border border-[#EDEDE9] rounded-2xl p-7 flex items-start gap-5">
-          <div class="w-11 h-11 bg-[#0F2F61]/10 rounded-xl flex items-center justify-center shrink-0 text-xl">⭐</div>
-          <div>
-            <h3 class="font-jakarta font-bold text-[#262626] text-base mb-1">Profesionalniji dojam</h3>
-            <p class="text-[#6B6B6B] text-sm leading-relaxed">Lijepo uređena stranica s logom i informacijama ostavlja bolji dojam od WhatsApp poruke.</p>
-          </div>
-        </div>
-        <div class="bg-white border border-[#EDEDE9] rounded-2xl p-7 flex items-start gap-5">
-          <div class="w-11 h-11 bg-[#FF6700]/10 rounded-xl flex items-center justify-center shrink-0 text-xl">💰</div>
-          <div>
-            <h3 class="font-jakarta font-bold text-[#262626] text-base mb-1">Dodatna zarada po gostu</h3>
-            <p class="text-[#6B6B6B] text-sm leading-relaxed">Transfer, tura, paket dobrodošlice — ponudite direktno kroz stranicu i zaradite više po rezervaciji.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       UPSELL
-  ═══════════════════════════════════════ -->
-  <section class="py-24 bg-[#0F2F61] relative overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute -top-20 -right-20 w-80 h-80 bg-[#FF6700] opacity-5 rounded-full blur-3xl"></div>
-      <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-white opacity-5 rounded-full blur-3xl"></div>
-    </div>
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
-      <div class="text-center mb-14 reveal">
-        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Dodatna zarada</span>
-        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-white mt-3 mb-4">Svaki gost je<br/>prilika za više.</h2>
-        <p class="text-[#8ba3c7] text-lg max-w-xl mx-auto">SmartStay vam omogućava da gostima ponudite dodatne usluge direktno kroz njihovu stranicu — bez dodatnog posla s vaše strane.</p>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 reveal">
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-7 hover:bg-white/10 transition-colors text-center">
-          <div class="text-4xl mb-4">🚗</div>
-          <h3 class="font-jakarta font-bold text-white text-base mb-2">Transfer</h3>
-          <p class="text-[#8ba3c7] text-sm leading-relaxed">Ponudite prijevoz od aerodroma ili stanice — gost rezerviše direktno, vi naplatite.</p>
-        </div>
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-7 hover:bg-white/10 transition-colors text-center">
-          <div class="text-4xl mb-4">🗺️</div>
-          <h3 class="font-jakarta font-bold text-white text-base mb-2">Ture i izleti</h3>
-          <p class="text-[#8ba3c7] text-sm leading-relaxed">Obilazak grada, rafting, planinarenje — ponudite lokalna iskustva i zaradite proviziju.</p>
-        </div>
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-7 hover:bg-white/10 transition-colors text-center">
-          <div class="text-4xl mb-4">🛒</div>
-          <h3 class="font-jakarta font-bold text-white text-base mb-2">Paketi dobrodošlice</h3>
-          <p class="text-[#8ba3c7] text-sm leading-relaxed">Voće, vino, buket cvijeća — neka gost naruči unaprijed i dočeka nešto posebno.</p>
-        </div>
-      </div>
-      <div class="text-center mt-10 reveal">
-        <p class="text-[#8ba3c7] text-sm">Prosječan iznajmljivač može zaraditi <span class="text-white font-semibold">+15–30% po rezervaciji</span> kroz upsell usluge.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       PRICING
-  ═══════════════════════════════════════ -->
-  <section id="pricing" class="py-24 bg-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6">
-
-      <!-- Header -->
-      <div class="text-center mb-10 reveal">
-        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Cijene</span>
-        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3 mb-4">Transparentne cijene.<br/>Bez iznenađenja.</h2>
-        <p class="text-[#6B6B6B] text-lg max-w-xl mx-auto">Plaćate po broju objekata. Više objekata — niža cijena po objektu.</p>
-      </div>
-
-      <!-- Monthly / Annual toggle -->
-      <div class="flex justify-center mb-10 reveal">
-        <div class="inline-flex bg-[#F7F7F5] rounded-2xl p-1 border border-[#EDEDE9]">
-          <button id="btn-monthly" onclick="setPricing(false)"
-            class="px-5 py-2 rounded-xl text-sm font-semibold transition-all bg-white text-[#262626] shadow-sm">
-            Mjesečno
-          </button>
-          <button id="btn-annual" onclick="setPricing(true)"
-            class="px-5 py-2 rounded-xl text-sm font-semibold transition-all text-[#6B6B6B]">
-            Godišnje <span class="text-[#FF6700]">–20%</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
-
-        <!-- Starter -->
-        <div class="bg-white rounded-2xl border border-[#EDEDE9] p-8 flex flex-col">
-          <div class="mb-6">
-            <h3 class="font-jakarta font-bold text-xl text-[#262626] mb-1">Starter</h3>
-            <p class="text-[#6B6B6B] text-sm">1–3 objekta</p>
-          </div>
-          <div class="mb-1">
-            <span class="font-jakarta font-extrabold text-4xl text-[#262626]" data-monthly="9.99" data-annual="7.99">9.99</span>
-            <span class="text-[#6B6B6B] text-sm"> KM / obj / mj</span>
-          </div>
-          <p class="text-xs text-[#6B6B6B] mb-6" data-example data-monthly-text="npr. 3 objekta = 29.97 KM/mj" data-annual-text="npr. 3 objekta = 23.97 KM/mj">npr. 3 objekta = 29.97 KM/mj</p>
-          <ul class="space-y-2 mb-8 flex-1">
-            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> Digitalni vodič za goste</li>
-            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> QR kod & direktni link</li>
-            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> WiFi, upute, preporuke</li>
-            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> WhatsApp / Viber dijeljenje</li>
-          </ul>
-          <a href="#kontakt" class="text-center bg-[#F7F7F5] hover:bg-[#EDEDE9] text-[#262626] font-semibold text-sm px-5 py-3 rounded-xl transition-colors">
-            Počnite besplatno →
+        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
+          <a href="#kontakt"
+             style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:100px;
+                    background:linear-gradient(135deg,#4F6EF7 0%,#7B5CF5 100%);color:#fff;
+                    font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:800;
+                    text-decoration:none;box-shadow:0 4px 28px rgba(79,110,247,0.45);
+                    transition:transform 0.15s,box-shadow 0.2s;"
+             onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 36px rgba(79,110,247,0.55)'"
+             onmouseout="this.style.transform='';this.style.boxShadow='0 4px 28px rgba(79,110,247,0.45)'">
+            Počni besplatno →
+          </a>
+          <a href="#demo-section"
+             style="display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:100px;
+                    border:1.5px solid rgba(15,47,97,0.2);background:rgba(15,47,97,0.04);
+                    color:var(--text-2);font-size:15px;font-weight:500;text-decoration:none;
+                    transition:all 0.2s;"
+             onmouseover="this.style.borderColor='rgba(15,47,97,0.35)';this.style.background='rgba(15,47,97,0.07)'"
+             onmouseout="this.style.borderColor='rgba(15,47,97,0.2)';this.style.background='rgba(15,47,97,0.04)'">
+            <span style="width:28px;height:28px;border-radius:50%;background:rgba(15,47,97,0.1);display:flex;align-items:center;justify-content:center;font-size:10px;padding-left:2px;">▶</span>
+            Pogledaj demo (2 min)
           </a>
         </div>
-
-        <!-- Standard (highlighted) -->
-        <div class="bg-[#0F2F61] rounded-2xl p-8 flex flex-col relative">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-            <span class="bg-[#FF6700] text-white text-xs font-bold px-4 py-1.5 rounded-full">Najpopularnije</span>
+        <p class="hero-note">✓ 30 dana besplatno &nbsp;·&nbsp; ✓ Bez kreditne kartice &nbsp;·&nbsp; ✓ Otkazujete kad god</p>
+        <div class="hero-trust" style="margin-top:20px">
+          <div style="display:flex">
+            <div class="trust-av" style="background:linear-gradient(135deg,#FF6700,#e05d00)">A</div>
+            <div class="trust-av" style="background:linear-gradient(135deg,#0F2F61,#1a3d73)">M</div>
+            <div class="trust-av" style="background:linear-gradient(135deg,#34D399,#0EA5E9)">E</div>
+            <div class="trust-av" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)">S</div>
           </div>
-          <div class="mb-6">
-            <h3 class="font-jakarta font-bold text-xl text-white mb-1">Standard</h3>
-            <p class="text-[#8ba3c7] text-sm">4–10 objekata</p>
-          </div>
-          <div class="mb-1">
-            <span class="font-jakarta font-extrabold text-4xl text-white" data-monthly="7.99" data-annual="6.39">7.99</span>
-            <span class="text-[#8ba3c7] text-sm"> KM / obj / mj</span>
-          </div>
-          <p class="text-xs text-[#8ba3c7] mb-6" data-example data-monthly-text="npr. 6 objekata = 47.94 KM/mj" data-annual-text="npr. 6 objekata = 38.34 KM/mj">npr. 6 objekata = 47.94 KM/mj</p>
-          <ul class="space-y-2 mb-8 flex-1">
-            <li class="flex items-center gap-2 text-sm text-white"><span class="text-[#FF6700]">✓</span> Sve iz Starter plana</li>
-            <li class="flex items-center gap-2 text-sm text-white"><span class="text-[#FF6700]">✓</span> Više objekata, jedna naplata</li>
-            <li class="flex items-center gap-2 text-sm text-white"><span class="text-[#FF6700]">✓</span> Prioritetna podrška</li>
-            <li class="flex items-center gap-2 text-sm text-white"><span class="text-[#FF6700]">✓</span> Upsell za goste</li>
-          </ul>
-          <a href="#kontakt" class="text-center bg-[#FF6700] hover:bg-[#e05c00] text-white font-semibold text-sm px-5 py-3 rounded-xl transition-colors">
-            Počnite besplatno →
-          </a>
-        </div>
-
-        <!-- Pro -->
-        <div class="bg-white rounded-2xl border border-[#EDEDE9] p-8 flex flex-col">
-          <div class="mb-6">
-            <h3 class="font-jakarta font-bold text-xl text-[#262626] mb-1">Pro</h3>
-            <p class="text-[#6B6B6B] text-sm">10+ objekata</p>
-          </div>
-          <div class="mb-1">
-            <span class="font-jakarta font-extrabold text-4xl text-[#262626]" data-monthly="5.99" data-annual="4.79">5.99</span>
-            <span class="text-[#6B6B6B] text-sm"> KM / obj / mj</span>
-          </div>
-          <p class="text-xs text-[#6B6B6B] mb-6" data-example data-monthly-text="npr. 12 objekata = 71.88 KM/mj" data-annual-text="npr. 12 objekata = 57.48 KM/mj">npr. 12 objekata = 71.88 KM/mj</p>
-          <ul class="space-y-2 mb-8 flex-1">
-            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> Sve iz Standard plana</li>
-            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> Neograničeni objekti</li>
-            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> Dedicated account manager</li>
-            <li class="flex items-center gap-2 text-sm text-[#262626]"><span class="text-green-500">✓</span> Onboarding podrška</li>
-          </ul>
-          <a href="#kontakt" class="text-center bg-[#F7F7F5] hover:bg-[#EDEDE9] text-[#262626] font-semibold text-sm px-5 py-3 rounded-xl transition-colors">
-            Počnite besplatno →
-          </a>
-        </div>
-
-      </div>
-
-      <!-- Free trial note -->
-      <p class="text-center text-sm text-[#6B6B6B] mt-8 reveal">
-        🎁 Svi planovi uključuju <strong>1 mjesec besplatno</strong> · bez kreditne kartice
-      </p>
-
-    </div>
-  </section>
-
-  <script>
-    function setPricing(isAnnual) {
-      // Toggle button styles
-      const btnMonthly = document.getElementById('btn-monthly');
-      const btnAnnual = document.getElementById('btn-annual');
-      if (isAnnual) {
-        btnAnnual.classList.add('bg-white', 'text-[#262626]', 'shadow-sm');
-        btnAnnual.classList.remove('text-[#6B6B6B]');
-        btnMonthly.classList.remove('bg-white', 'text-[#262626]', 'shadow-sm');
-        btnMonthly.classList.add('text-[#6B6B6B]');
-      } else {
-        btnMonthly.classList.add('bg-white', 'text-[#262626]', 'shadow-sm');
-        btnMonthly.classList.remove('text-[#6B6B6B]');
-        btnAnnual.classList.remove('bg-white', 'text-[#262626]', 'shadow-sm');
-        btnAnnual.classList.add('text-[#6B6B6B]');
-      }
-      // Swap prices
-      document.querySelectorAll('[data-monthly]').forEach(el => {
-        if (el.dataset.monthly && el.dataset.annual) {
-          el.textContent = isAnnual ? el.dataset.annual : el.dataset.monthly;
-        }
-      });
-      // Swap example texts
-      document.querySelectorAll('[data-example]').forEach(el => {
-        el.textContent = isAnnual ? el.dataset.annualText : el.dataset.monthlyText;
-      });
-    }
-  </script>
-
-  <!-- ═══════════════════════════════════════
-       FAQ
-  ═══════════════════════════════════════ -->
-  <section id="faq" class="py-16 bg-[#F7F7F5]">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-14 reveal">
-        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">FAQ</span>
-        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3">Česta pitanja.</h2>
-      </div>
-
-      <div class="space-y-4 reveal">
-
-        <div class="faq-item bg-white border border-[#EDEDE9] rounded-2xl overflow-hidden">
-          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-5 text-left">
-            <span class="font-jakarta font-semibold text-[#262626]">Treba li gost instalirati neku aplikaciju?</span>
-            <svg class="faq-icon w-5 h-5 text-[#6B6B6B] flex-shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-          </button>
-          <div class="faq-answer hidden px-6 pb-5">
-            <p class="text-[#6B6B6B] leading-relaxed">Ne. Vodič se otvara direktno u browser — gost dobija link ili skenira QR kod i odmah vidi sve informacije. Nema registracije, nema preuzimanja.</p>
-          </div>
-        </div>
-
-        <div class="faq-item bg-white border border-[#EDEDE9] rounded-2xl overflow-hidden">
-          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-5 text-left">
-            <span class="font-jakarta font-semibold text-[#262626]">Koliko apartmana mogu dodati?</span>
-            <svg class="faq-icon w-5 h-5 text-[#6B6B6B] flex-shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-          </button>
-          <div class="faq-answer hidden px-6 pb-5">
-            <p class="text-[#6B6B6B] leading-relaxed">Neograničeno. Svaki apartman ima vlastiti vodič, QR kod i link koji možeš dijeliti gostima.</p>
-          </div>
-        </div>
-
-        <div class="faq-item bg-white border border-[#EDEDE9] rounded-2xl overflow-hidden">
-          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-5 text-left">
-            <span class="font-jakarta font-semibold text-[#262626]">Mogu li imati više članova tima?</span>
-            <svg class="faq-icon w-5 h-5 text-[#6B6B6B] flex-shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-          </button>
-          <div class="faq-answer hidden px-6 pb-5">
-            <p class="text-[#6B6B6B] leading-relaxed">Da. Možeš pozvati članove tima koji zajedno upravljaju nekretninama. Svako vidi iste vodiče i može ih uređivati.</p>
-          </div>
-        </div>
-
-        <div class="faq-item bg-white border border-[#EDEDE9] rounded-2xl overflow-hidden">
-          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-5 text-left">
-            <span class="font-jakarta font-semibold text-[#262626]">Mogu li dodati slike i video u vodič?</span>
-            <svg class="faq-icon w-5 h-5 text-[#6B6B6B] flex-shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-          </button>
-          <div class="faq-answer hidden px-6 pb-5">
-            <p class="text-[#6B6B6B] leading-relaxed">Da. Uz tekst možeš uploadovati slike i videe — korisno za vizualne upute poput "kako otključati bravu" ili "gdje je parking".</p>
-          </div>
-        </div>
-
-        <div class="faq-item bg-white border border-[#EDEDE9] rounded-2xl overflow-hidden">
-          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between px-6 py-5 text-left">
-            <span class="font-jakarta font-semibold text-[#262626]">Kako gost dobija link do vodiča?</span>
-            <svg class="faq-icon w-5 h-5 text-[#6B6B6B] flex-shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
-          </button>
-          <div class="faq-answer hidden px-6 pb-5">
-            <p class="text-[#6B6B6B] leading-relaxed">Pošalješ mu link direktno — WhatsApp, Viber, Airbnb poruka, email. Ili odštampaš QR kod i zalijepig ga u apartman. Gost otvara jednim klikom ili skeniranjem.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       CTA / KONTAKT
-  ═══════════════════════════════════════ -->
-  <section id="kontakt" class="py-24 bg-[#F7F7F5]">
-    <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center">
-      <div class="reveal">
-        <span class="text-[#FF6700] font-semibold text-sm tracking-wide uppercase">Počnite danas</span>
-        <h2 class="font-jakarta font-extrabold text-4xl sm:text-5xl text-[#262626] mt-3 mb-4">Počnite koristiti<br/>SmartStay danas.</h2>
-        <div class="inline-flex items-center gap-2 bg-green-50 border border-green-200 text-green-700 font-semibold text-sm px-5 py-2.5 rounded-full mb-6">
-          🎁 1 mjesec besplatno — bez kreditne kartice
-        </div>
-        <p class="text-muted text-lg mb-8">Ostavite email i javit ćemo vam se s potvrdom o registraciji.</p>
-
-        <form id="contactForm" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-8" onsubmit="handleSubmit(event)">
-          <input
-            type="email"
-            placeholder="vas@email.com"
-            required
-            class="flex-1 h-14 px-5 rounded-2xl border border-[#EDEDE9] bg-white text-[#262626] text-base outline-none focus:border-[#0F2F61] transition-colors"
-          />
-          <button type="submit" class="bg-[#FF6700] hover:bg-[#e05c00] text-white font-jakarta font-bold text-base px-8 h-14 rounded-2xl transition-all hover:scale-105 whitespace-nowrap">
-            Prijavi se
-          </button>
-        </form>
-
-        <div id="formSuccess" class="hidden bg-green-50 border border-green-200 text-green-700 font-medium py-4 px-6 rounded-2xl mb-8">
-          ✓ Hvala! Javit ćemo vam se uskoro.
-        </div>
-
-        <div class="flex items-center justify-center gap-6 text-sm text-muted">
-          <a href="mailto:info@smartstay.ba" class="hover:text-[#0F2F61] transition-colors flex items-center gap-2">
-            <span>✉</span> info@smartstay.ba
-          </a>
+          <span><strong>150+ domaćina</strong> u BiH koristi SmartStay</span>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════ -->
-  <footer class="bg-[#0F2F61] py-14">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="flex flex-col md:flex-row justify-between items-start gap-10 mb-10">
-
-        <div class="max-w-xs">
-          <div class="font-jakarta font-bold text-2xl text-white mb-3">SmartStay</div>
-          <p class="text-[#8ba3c7] text-sm leading-relaxed">Digitalni vodič za goste. Manje poziva, zadovoljniji gosti, bolje recenzije.</p>
+      <div class="hero-visual sr sr-d2">
+        <div class="hero-img-wrap">
+          <img src="hero-photo.jpg" alt="Domaćin koristi SmartStay" />
         </div>
-
-        <div class="grid grid-cols-2 gap-10">
+        <div class="hero-float">
+          <div class="hf-icon">📵</div>
           <div>
-            <div class="font-jakarta font-semibold text-white text-sm mb-4">Platforma</div>
-            <div class="space-y-2.5">
-              <a href="#funkcionalnosti" class="block text-[#8ba3c7] hover:text-white text-sm transition-colors">Funkcionalnosti</a>
-              <a href="#kako-radi" class="block text-[#8ba3c7] hover:text-white text-sm transition-colors">Kako radi</a>
-              <a href="#tech" class="block text-[#8ba3c7] hover:text-white text-sm transition-colors">Tech stack</a>
-            </div>
+            <div class="hf-num">0</div>
+            <div class="hf-lbl">WiFi pitanja ovaj tjedan</div>
           </div>
-          <div>
-            <div class="font-jakarta font-semibold text-white text-sm mb-4">Kontakt</div>
-            <div class="space-y-2.5">
-              <a href="mailto:info@smartstay.ba" class="block text-[#8ba3c7] hover:text-white text-sm transition-colors">info@smartstay.ba</a>
-              <a href="#kontakt" class="block text-[#8ba3c7] hover:text-white text-sm transition-colors">Zatraži pristup</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num">8–12</div>
+        <div class="stat-lbl">poruka po rezervaciji prosječno</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2h</div>
+        <div class="stat-lbl">ušteđeno sedmično</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">0</div>
+        <div class="stat-lbl">WiFi pitanja nakon SmartStay-a</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">150+</div>
+        <div class="stat-lbl">domaćina u BiH</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT IS -->
+<section class="what-section" id="sto-je">
+  <div class="container">
+    <div class="what-layout">
+      <div class="what-text sr">
+        <span class="chip chip-navy">Šta je SmartStay?</span>
+        <h2 class="what-h2">Vaš apartman dobija<br><em>vlastitu web stranicu.</em></h2>
+        <p class="what-body">Digitalni vodič je personalizovana stranica za vaš apartman — gost je otvori odmah po dolasku i pronađe sve informacije koje mu trebaju. Bez PDF-ova. Bez printanih papira. Bez vaše intervencije.</p>
+        <div class="what-pts">
+          <div class="wp"><div class="wp-icon">📲</div><div><h4>Radi na svakom uređaju</h4><p>Gost otvori link na telefonu, tabletu ili laptopu — bez instalacije ikakve aplikacije.</p></div></div>
+          <div class="wp"><div class="wp-icon">🌍</div><div><h4>Automatski na jeziku gosta</h4><p>Bosanski, engleski, njemački, turski — vodič se prilagođava bez vašeg truda.</p></div></div>
+          <div class="wp"><div class="wp-icon">⚡</div><div><h4>Postavite za 10 minuta</h4><p>Unesite informacije jednom — gosti ih koriste zauvijek. Nema ponovnog kucanja.</p></div></div>
+        </div>
+      </div>
+      <div class="what-phone sr sr-d2">
+        <div class="phone-frame-light">
+          <img src="app-screen.jpeg" alt="SmartStay app prikaz" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="pain-section">
+  <div class="container">
+    <div class="pain-inner sr">
+      <span class="chip" style="background:rgba(255,103,0,0.15);color:var(--orange);border:1px solid rgba(255,103,0,0.25);">Problem koji poznaješ</span>
+      <h2 class="pain-h2" style="margin-top:16px">Noć puna <em>istih poruka.</em></h2>
+      <p class="pain-sub">Svaki domaćin zna kako to izgleda. SmartStay ih eliminiše jednom zauvijek.</p>
+    </div>
+    <div class="pain-msgs">
+      <div class="pain-msg sr sr-d1"><span class="pain-time">02:14</span><div class="pain-text">Koji je WiFi password?<span>— Gost · noćni dolazak</span></div></div>
+      <div class="pain-msg sr sr-d2"><span class="pain-time">23:51</span><div class="pain-text">Gdje se parkira? Nisam vidio u opisu.<span>— Gost · dolazi sutra</span></div></div>
+      <div class="pain-msg sr sr-d3"><span class="pain-time">07:02</span><div class="pain-text">Do kada check-out?<span>— Gost · odlazi danas</span></div></div>
+      <div class="pain-msg sr sr-d4" style="border-style:dashed;opacity:0.5;"><span class="pain-time">—</span><div class="pain-text">Nakon SmartStay-a ove poruke ne postoje.<span>— Gosti nađu sve sami</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section" id="features">
+  <div class="container">
+    <div style="text-align:center" class="sr">
+      <span class="chip chip-navy">Funkcionalnosti</span>
+      <h2 class="sec-headline" style="margin-top:14px">Sve što gost treba, na jednom linku</h2>
+      <p class="sec-sub">9 sekcija vodiča. Vaš brend. Vaše informacije.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card sr"><div class="feat-icon">📶</div><h3>WiFi & pristup</h3><p>Password, mreža, upute za router — uvijek pri ruci, bez čekanja.</p></div>
+      <div class="feat-card sr sr-d1"><div class="feat-icon">🔑</div><h3>Check-in upute</h3><p>Korak-po-korak upute za ulaz. Lokacija ključa, sefa, ili smart lock koda.</p></div>
+      <div class="feat-card sr sr-d2"><div class="feat-icon">📋</div><h3>Kućni red</h3><p>Jasna pravila bez nedoumica. Gosti čitaju dobrovoljno.</p></div>
+      <div class="feat-card sr"><div class="feat-icon">📍</div><h3>Lokacija & parking</h3><p>Google Maps link, opis parkinga, ulaz, zgrada — sve na jednom mjestu.</p></div>
+      <div class="feat-card sr sr-d1"><div class="feat-icon">⭐</div><h3>Preporuke domaćina</h3><p>Vaši omiljeni restorani, atrakcije, dostava — personalizovani za svaki apartman.</p></div>
+      <div class="feat-card sr sr-d2"><div class="feat-icon">💰</div><h3>Upsell usluge</h3><p>Transferi, ture, welcome paket — zarađujte 15–30% više po rezervaciji.</p></div>
+      <div class="feat-card sr"><div class="feat-icon">🌍</div><h3>4 jezika automatski</h3><p>Engleski, njemački, turski, bosanski — AI se prilagođava gostu.</p></div>
+      <div class="feat-card sr sr-d1"><div class="feat-icon">📱</div><h3>QR kod</h3><p>Odštampajte i postavite u apartman. Gost skenira, odmah ima sve.</p></div>
+      <div class="feat-card sr sr-d2"><div class="feat-icon">👥</div><h3>Tim pristup</h3><p>Dodajte kolege. Svako ima svoja prava pristupa po nekretnini.</p></div>
+      <div class="feat-card feat-wide sr"><div class="feat-icon">🛂</div><div><h3>Registracija gostiju <span class="feat-new">Novo</span></h3><p>Gosti prije dolaska sami unesu podatke iz pasoša ili lične karte — ime, datum rođenja, državljanstvo, broj dokumenta. Podaci su šifrovani i stižu vam na email, spremni za prijavu boravka. Bez slikanja dokumenata i prepisivanja.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:64px" class="sr">
+      <span class="chip chip-navy">Kako radi</span>
+      <h2 class="sec-headline" style="margin-top:14px">Postavljeno za 10 minuta</h2>
+      <p class="sec-sub" style="margin-bottom:0">Bez tehničkog znanja. Bez aplikacije za goste.</p>
+    </div>
+    <div class="how-layout">
+      <div class="how-steps sr">
+        <div class="how-step active" onclick="setStep(this)">
+          <div class="hs-num">1</div>
+          <div><div class="hs-title">Kreirajte profil apartmana</div><div class="hs-desc">Unesite informacije — WiFi, check-in, pravila, preporuke. Naš editor je jednostavan kao Google Docs.</div></div>
+        </div>
+        <div class="how-step" onclick="setStep(this)">
+          <div class="hs-num">2</div>
+          <div><div class="hs-title">Podijelite link ili QR kod</div><div class="hs-desc">Ubacite SmartStay link u automatsku poruku dobrodošlice na Airbnb ili Booking.com.</div></div>
+        </div>
+        <div class="how-step" onclick="setStep(this)">
+          <div class="hs-num">3</div>
+          <div><div class="hs-title">Gosti sami nađu sve</div><div class="hs-desc">Svaki gost otvori personalizovani vodič na svom jeziku. AI asistent odgovara 24/7.</div></div>
+        </div>
+      </div>
+      <div class="sr sr-d2">
+        <div class="how-screen">
+          <div class="hs-topbar"><div class="hs-dot"></div><div class="hs-dot"></div><div class="hs-dot"></div><span class="hs-url">smartstay.ba/g/modern-centar</span></div>
+          <div class="guide-list">
+            <div class="guide-row"><span class="gr-check">✓</span> 📶 WiFi & pristup internetu</div>
+            <div class="guide-row"><span class="gr-check">✓</span> 🔑 Check-in upute korak po korak</div>
+            <div class="guide-row"><span class="gr-check">✓</span> 📋 Kućni red</div>
+            <div class="guide-row"><span class="gr-check">✓</span> 📍 Lokacija & parking mapa</div>
+            <div class="guide-row"><span class="gr-check">✓</span> ⭐ Preporuke domaćina</div>
+            <div class="guide-row hl"><span class="gr-ai">🤖</span> AI Asistent — odmah odgovara</div>
+          </div>
+          <div style="margin-top:14px;display:flex;gap:8px">
+            <div style="flex:1;background:var(--orange);border-radius:8px;padding:10px;text-align:center;font-size:12px;font-weight:700;color:#fff">Transfer → 40 KM</div>
+            <div style="flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:10px;text-align:center;font-size:12px;color:rgba(255,255,255,0.5)">Tour → 80 KM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="demo-section" id="demo-section">
+  <div class="container">
+    <div class="demo-header sr">
+      <span class="chip chip-navy">Demo</span>
+      <h2 class="sec-headline" style="margin-top:14px">Pogledajte SmartStay u 2 minute</h2>
+      <p style="font-size:16px;color:var(--gray);margin-top:8px">Kako izgleda vodič iz perspektive gosta.</p>
+    </div>
+    <div class="demo-layout">
+      <div class="demo-phone-wrap sr">
+        <div class="demo-phone-frame-light">
+          <video id="demoVideo" src="demo.mp4" controls muted playsinline style="display:block;width:100%;height:auto;border-radius:33px;"></video>
+        </div>
+      </div>
+      <div class="sr sr-d2" style="display:flex;align-items:center;justify-content:center">
+        <div class="demo-try-card-light">
+          <div class="dtc-label">Provjerite i sami</div>
+          <p class="dtc-desc">Skenirajte QR kod ili kliknite ispod — otvorite demo vodič direktno na telefonu.</p>
+          <div class="dtc-qr"><img src="qr-code.png" alt="SmartStay QR" /></div>
+          <a href="https://app.smartstay.ba/g/modern-apartment-in-center-of-sarajevo/preview" target="_blank" class="btn-demo-try">Otvori demo apartman →</a>
+          <p class="dtc-note">Modern apartment in Center of Sarajevo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALI IMA JOS -->
+<div class="ali-bar">
+  <div class="container">
+    <p>Ali ima još<em>…</em></p>
+  </div>
+</div>
+
+<!-- AI SECTION -->
+<section class="ai-section" id="ai">
+  <div class="container">
+    <div class="ai-layout-light">
+      <div class="ai-header sr">
+        <span class="chip chip-navy">AI Asistent</span>
+        <h2 class="ai-h2">Vi spavate.<br><em>AI odgovara.</em></h2>
+        <p class="ai-sub">Napišite jednom šta AI treba da zna o vašem apartmanu. On odgovara na svako pitanje gosta — na njihovom jeziku, u sekundu.</p>
+      </div>
+      <div class="ai-chat-light sr sr-d1">
+        <div class="ach-light">
+          <div class="ach-av">🤖</div>
+          <div style="display:flex;align-items:center;gap:12px;flex:1;flex-wrap:wrap;">
+            <div class="ach-status">Aktivan 24/7</div>
+            <div class="lang-row">
+              <div class="lr on">🇧🇦 BS</div><div class="lr">🇬🇧 EN</div><div class="lr">🇩🇪 DE</div><div class="lr">🇹🇷 TR</div>
             </div>
           </div>
         </div>
-
+        <div class="ac-msgs">
+          <div class="ac-u">Ima li parking u blizini?</div>
+          <div class="ac-b">Da! Parking je <strong>50m od apartmana</strong> na Ferhadiji 12. Cijene 2 KM/sat ili 10 KM/dan. Ulična mjesta dostupna od 21h besplatno. 🚗</div>
+          <div class="ac-u" style="margin-top:8px">Wann ist der Check-out?</div>
+          <div class="ac-b">Check-out ist um <strong>11:00 Uhr</strong>. Gepäck können Sie bis 13:00 Uhr lassen — kein Problem! ✅</div>
+        </div>
       </div>
-
-      <div class="border-t border-[#1a3d75] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <div class="text-[#8ba3c7] text-xs">© 2025 SmartStay. Sva prava zadržana.</div>
-        <div class="text-[#8ba3c7] text-xs">Powered by <a href="https://www.sarajevopropertymanagement.ba" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Sarajevo Rent &amp; Manage</a></div>
+      <div class="ai-feats-row sr sr-d2">
+        <div class="af"><div class="af-icon">⚡</div><h4>Trenutni odgovori</h4><p>Gost dobije odgovor u sekundi, čak i u 3 ujutro.</p></div>
+        <div class="af"><div class="af-icon">🌍</div><h4>4 jezika automatski</h4><p>AI prepoznaje jezik gosta i odgovara na istom.</p></div>
+        <div class="af"><div class="af-icon">🔒</div><h4>Vi kontrolišete sadržaj</h4><p>AI odgovara samo na osnovu vaših informacija.</p></div>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <!-- ═══════════════════════════════════════
-       JS
-  ═══════════════════════════════════════ -->
-  <script>
-    // Navbar scroll effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('nav-scrolled');
-        navbar.style.background = '';
-      } else {
-        navbar.classList.remove('nav-scrolled');
-        navbar.style.background = 'transparent';
-      }
-    });
+<!-- TESTIMONIALS -->
+<section class="testi-section" id="testimonials">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px" class="sr">
+      <span class="chip chip-navy">Iskustva</span>
+      <h2 class="sec-headline" style="margin-top:14px">150+ domaćina. Ista priča.</h2>
+    </div>
+    <div class="testi-grid-light">
+      <div class="tc-light sr">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"Gosti su prestali da me zovu noću zbog WiFi passworda. To samo po sebi vrijedi svaki fenig pretplate. Dodao sam upsell za transfer — zarađujem ekstra 50–80 KM po rezervaciji."</p>
+        <div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#FF6700,#e05d00)">A</div><div><div class="tc-name">Armin B.</div><div class="tc-role">4 apartmana · Sarajevo</div></div></div>
+      </div>
+      <div class="tc-light featured sr sr-d1">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"Ubacila sam SmartStay link u automatsku Airbnb poruku. Ocjene su mi porasle — gosti hvale koliko je sve jasno i organizovano. Superhost status potvrđen drugi put zaredom."</p>
+        <div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#FF6700,#E8527A)">M</div><div><div class="tc-name">Maja K.</div><div class="tc-role">Airbnb Superhost · Mostar</div></div></div>
+      </div>
+      <div class="tc-light sr sr-d2">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"Sa 12 apartmana i 3 zaposlenika, organizacija je bila noćna mora. SmartStay tim-pristup je promijenio sve. Svako vidi samo apartmane za koje je zadužen."</p>
+        <div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#0F2F61,#1a3d73)">E</div><div><div class="tc-name">Edin H.</div><div class="tc-role">12 apartmana · Banja Luka</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div style="text-align:center" class="sr">
+      <span class="chip chip-navy">Cijene</span>
+      <h2 class="sec-headline" style="margin-top:14px">Bez skrivenih troškova</h2>
+      <p style="font-size:16px;color:var(--gray);margin-top:8px">Počnite besplatno 30 dana. Otkazujete kad god hoćete.</p>
+    </div>
+    <div class="pricing-grid-light">
+      <div class="pc-light sr">
+        <div class="pc-plan">Starter</div>
+        <div class="pc-amount"><span class="pc-curr">KM</span> 9.99</div>
+        <div class="pc-period">/nekretnina/mj</div>
+        <p class="pc-desc">Za domaćine sa 1–3 apartmana koji žele uštedjeti vrijeme.</p>
+        <div class="pc-div"></div>
+        <div class="pc-feats">
+          <div class="pf">Digitalni vodič (9 sekcija)</div>
+          <div class="pf">QR kod & link za dijeljenje</div>
+          <div class="pf">WhatsApp & Viber dijeljenje</div>
+          <div class="pf">AI Asistent (4 jezika, 24/7)</div>
+          <div class="pf">Tim pristup</div>
+          <div class="pf">Analitika posjeta</div>
+        </div>
+        <button class="btn-pc btn-outline" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">Počni besplatno</button>
+      </div>
+      <div class="pc-light hot sr sr-d1">
+        <div class="hot-badge">Najpopularniji</div>
+        <div class="pc-plan">Standard</div>
+        <div class="pc-amount"><span class="pc-curr">KM</span> 7.99</div>
+        <div class="pc-period">/nekretnina/mj</div>
+        <p class="pc-desc">Za domaćine sa 4–10 nekretnina koji žele rasti.</p>
+        <div class="pc-div"></div>
+        <div class="pc-feats">
+          <div class="pf">Digitalni vodič (9 sekcija)</div>
+          <div class="pf">QR kod & link za dijeljenje</div>
+          <div class="pf">WhatsApp & Viber dijeljenje</div>
+          <div class="pf">AI Asistent (4 jezika, 24/7)</div>
+          <div class="pf">Tim pristup</div>
+          <div class="pf">Analitika posjeta</div>
+        </div>
+        <button class="btn-pc btn-solid" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">Počni besplatno →</button>
+      </div>
+      <div class="pc-light sr sr-d2">
+        <div class="pc-plan">Pro</div>
+        <div class="pc-amount"><span class="pc-curr">KM</span> 5.99</div>
+        <div class="pc-period">/nekretnina/mj</div>
+        <p class="pc-desc">Za property menadžere s 10+ nekretnina koji trebaju sve.</p>
+        <div class="pc-div"></div>
+        <div class="pc-feats">
+          <div class="pf">Digitalni vodič (9 sekcija)</div>
+          <div class="pf">QR kod & link za dijeljenje</div>
+          <div class="pf">WhatsApp & Viber dijeljenje</div>
+          <div class="pf">AI Asistent (4 jezika, 24/7)</div>
+          <div class="pf">Tim pristup</div>
+          <div class="pf">Analitika posjeta</div>
+          <div class="pf">Upsell usluge (transferi, ture)</div>
+        </div>
+        <button class="btn-pc btn-outline" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">Kontaktirajte nas</button>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:20px;font-size:13px;color:var(--gray-2)">✓ 30 dana besplatno &nbsp;·&nbsp; ✓ Bez kreditne kartice &nbsp;·&nbsp; ✓ Otkazujete u bilo kom momentu</p>
+  </div>
+</section>
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+<!-- FAQ -->
+<section class="faq-section-light" id="faq">
+  <div class="container">
+    <div style="text-align:center" class="sr">
+      <span class="chip chip-navy">FAQ</span>
+      <h2 class="sec-headline" style="margin-top:14px">Česta pitanja</h2>
+    </div>
+    <div class="faq-list-light">
+      <div class="fq sr"><button class="fq-btn" onclick="toggleFaqLight(this)"><span class="fq-q">Treba li gost instalirati neku aplikaciju?</span><span class="fq-arr">▾</span></button><div class="fq-ans"><p>Ne. Vodič se otvara direktno u browser — gost dobija link ili skenira QR kod i odmah vidi sve informacije. Nema registracije, nema preuzimanja.</p></div></div>
+      <div class="fq sr sr-d1"><button class="fq-btn" onclick="toggleFaqLight(this)"><span class="fq-q">Koliko apartmana mogu dodati?</span><span class="fq-arr">▾</span></button><div class="fq-ans"><p>Neograničeno. Svaki apartman ima vlastiti vodič, QR kod i link koji možete dijeliti gostima.</p></div></div>
+      <div class="fq sr sr-d2"><button class="fq-btn" onclick="toggleFaqLight(this)"><span class="fq-q">Mogu li imati više članova tima?</span><span class="fq-arr">▾</span></button><div class="fq-ans"><p>Da. Možete pozvati članove tima koji zajedno upravljaju nekretninama. Svako vidi iste vodiče i može ih uređivati.</p></div></div>
+      <div class="fq sr sr-d3"><button class="fq-btn" onclick="toggleFaqLight(this)"><span class="fq-q">Mogu li dodati slike i video u vodič?</span><span class="fq-arr">▾</span></button><div class="fq-ans"><p>Da. Uz tekst možete uploadovati slike i videe — korisno za vizualne upute poput "kako otključati bravu" ili "gdje je parking".</p></div></div>
+      <div class="fq sr sr-d4"><button class="fq-btn" onclick="toggleFaqLight(this)"><span class="fq-q">Kako gost dobija link do vodiča?</span><span class="fq-arr">▾</span></button><div class="fq-ans"><p>Pošaljete link direktno — WhatsApp, Viber, Airbnb poruka, email. Ili odštampate QR kod i zalijepite ga u apartman.</p></div></div>
+    </div>
+  </div>
+</section>
 
-    // FAQ toggle
-    function toggleFaq(btn) {
-      const answer = btn.nextElementSibling;
-      const icon = btn.querySelector('.faq-icon');
-      const isOpen = !answer.classList.contains('hidden');
-      // Close all
-      document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
-      document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = '');
-      // Open clicked if it was closed
-      if (!isOpen) {
-        answer.classList.remove('hidden');
-        icon.style.transform = 'rotate(180deg)';
-      }
-    }
+<!-- CTA / EMAIL -->
+<section class="cta-section-light" id="kontakt">
+  <div class="container">
+    <div class="cta-box-light sr">
+      <span class="chip chip-orange" style="position:relative;z-index:1;margin-bottom:14px;display:inline-flex;">Počnite danas</span>
+      <h2 class="cta-h2">Manje poruka.<br>Zadovoljniji gosti.<br><em>Veći prihod.</em></h2>
+      <p class="cta-sub-txt">Ostavite email i odmah kreirajte nalog — 30 dana besplatno.</p>
+      <form class="cta-form" id="ctaForm" onsubmit="handleCtaSubmit(event)">
+        <input class="cta-input" type="email" placeholder="vas@email.com" required />
+        <button class="btn-cta" type="submit">Počni besplatno →</button>
+      </form>
+      <div id="ctaSuccess"></div>
+      <p class="cta-note">✓ 1 mjesec besplatno &nbsp;·&nbsp; ✓ Bez kreditne kartice &nbsp;·&nbsp; ✓ Otkaz kad god</p>
+    </div>
+  </div>
+</section>
 
-    // Form submit
-    async function handleSubmit(e) {
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid-light">
+      <div class="f-brand-light">
+        <span class="f-logo">Smart<span>Stay</span></span>
+        <p class="f-tagline">Digitalni vodiči za goste koji uštede domaćinima sate sedmično. Prilagođen tržištu Bosne i Hercegovine.</p>
+        <p class="f-email-txt">info@smartstay.ba</p>
+      </div>
+      <div class="f-col-light">
+        <h5>Proizvod</h5>
+        <ul class="f-links-light">
+          <li><a href="#features">Funkcionalnosti</a></li>
+          <li><a href="#ai">AI Asistent</a></li>
+          <li><a href="#pricing">Cijene</a></li>
+          <li><a href="#how">Kako radi</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bottom-light">
+      <span>© 2025 SmartStay. Sva prava zadržana.</span>
+      <div style="display:flex;gap:20px"><a href="#">Privatnost</a><a href="#">Uvjeti korištenja</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- TRIAL POPUP -->
+<div id="trialPopup" style="display:none;position:fixed;inset:0;z-index:200;align-items:flex-end;justify-content:center;padding:16px;">
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);" onclick="dismissPopup()"></div>
+  <div style="position:relative;width:100%;max-width:420px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 24px 80px rgba(15,47,97,0.3);margin-bottom:16px;">
+    <div style="background:var(--orange);padding:20px 24px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+      <div>
+        <div style="color:rgba(255,255,255,0.8);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;">🎁 Ograničena ponuda</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:800;color:#fff;">30 dana besplatno</div>
+        <div style="color:rgba(255,255,255,0.75);font-size:13px;margin-top:2px;">Bez kreditne kartice</div>
+      </div>
+      <button onclick="dismissPopup()" style="background:transparent;border:none;color:rgba(255,255,255,0.7);cursor:pointer;font-size:20px;padding:4px;line-height:1;">✕</button>
+    </div>
+    <div style="padding:20px 24px;">
+      <p style="color:#444;font-size:14px;line-height:1.65;margin-bottom:14px;">Isprobajte SmartStay potpuno besplatno — digitalni vodič za vaše goste, AI chatbot 24/7.</p>
+      <ul style="margin-bottom:18px;list-style:none;display:flex;flex-direction:column;gap:8px;">
+        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:#262626;"><span style="color:#22c55e;font-weight:700;">✓</span> Neograničen broj gostiju</li>
+        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:#262626;"><span style="color:#22c55e;font-weight:700;">✓</span> AI chatbot uključen</li>
+        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:#262626;"><span style="color:#22c55e;font-weight:700;">✓</span> Otkaz kad god, bez obaveze</li>
+      </ul>
+      <form id="popupForm" onsubmit="handlePopupSubmit(event)" style="display:flex;flex-direction:column;gap:10px;">
+        <input type="email" placeholder="vas@email.com" required style="height:46px;padding:0 16px;border-radius:10px;border:1.5px solid var(--border);font-size:14px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='var(--border)'"/>
+        <button type="submit" style="height:46px;background:var(--navy);color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;border:none;border-radius:10px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--navy-2)'" onmouseout="this.style.background='var(--navy)'">Počnite besplatni trial →</button>
+      </form>
+      <div id="popupSuccess" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+
+  // Scroll reveal
+  const srObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); srObs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.sr').forEach(el => srObs.observe(el));
+
+  // Video on scroll
+  const demoVideo = document.getElementById('demoVideo');
+  if (demoVideo) {
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) demoVideo.play(); else demoVideo.pause(); });
+    }, { threshold: 0.4 }).observe(demoVideo);
+  }
+
+  // How steps
+  function setStep(el) {
+    document.querySelectorAll('.how-step').forEach(s => s.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // FAQ
+  function toggleFaqLight(btn) {
+    var item = btn.closest('.fq');
+    var ans = item.querySelector('.fq-ans');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.fq.open').forEach(function(el) { el.classList.remove('open'); el.querySelector('.fq-ans').style.display = 'none'; });
+    if (!isOpen) { item.classList.add('open'); ans.style.display = 'block'; }
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
       e.preventDefault();
-      const email = e.target.querySelector('input[type="email"]').value;
-      try {
-        await fetch('https://app.smartstay.ba/api/contact-form', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
-        });
-      } catch (_) {}
-      document.getElementById('contactForm').style.display = 'none';
-      document.getElementById('formSuccess').classList.remove('hidden');
-    }
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+      const t = document.querySelector(this.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
-  </script>
+  });
 
+  // Form submissions — after a successful signup show "Kreiraj nalog" right away,
+  // so the visitor goes straight to the app instead of waiting for the email.
+  const APP_REGISTER = 'https://app.smartstay.ba/register';
+  async function submitEmail(email, source) {
+    try {
+      const res = await fetch('https://app.smartstay.ba/api/contact-form', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source }),
+      });
+      return res.ok;
+    } catch (_) { return false; }
+  }
+
+  function showOpenApp(boxId, email) {
+    const box = document.getElementById(boxId);
+    if (!box) return;
+    const url = APP_REGISTER + '?email=' + encodeURIComponent(email);
+    box.innerHTML =
+      '<div class="signup-ok">' +
+        '<div class="signup-ok-title">✓ Vaš pristup je spreman!</div>' +
+        '<div class="signup-ok-sub">Kreirajte nalog i počnite odmah — 30 dana besplatno, bez kartice.</div>' +
+        '<a class="btn-open-app" href="' + url + '">Kreiraj nalog i otvori aplikaciju →</a>' +
+      '</div>';
+    box.style.display = 'block';
+  }
+
+  async function handleSignup(e, source, successId) {
+    e.preventDefault();
+    const form = e.target;
+    const input = form.querySelector('input[type="email"]');
+    const btn = form.querySelector('button[type="submit"]');
+    const email = input.value.trim();
+    const old = form.parentNode.querySelector('.signup-err'); if (old) old.remove();
+    if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Šaljem…'; }
+    const ok = await submitEmail(email, source);
+    if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label; }
+    if (!ok) {
+      const err = document.createElement('div');
+      err.className = 'signup-err';
+      err.textContent = 'Nešto nije u redu — provjerite email i pokušajte ponovo.';
+      form.insertAdjacentElement('afterend', err);
+      return false;
+    }
+    form.style.display = 'none';
+    showOpenApp(successId, email);
+    return true;
+  }
+
+  async function handleHeroSubmit(e) { await handleSignup(e, 'hero_form', 'heroSuccess'); }
+  async function handleCtaSubmit(e) { await handleSignup(e, 'cta_form', 'ctaSuccess'); }
+
+  // Popup
+  function dismissPopup() {
+    localStorage.setItem('smartstay_trial_popup_v1', '1');
+    document.getElementById('trialPopup').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  async function handlePopupSubmit(e) {
+    if (await handleSignup(e, 'trial_popup', 'popupSuccess')) {
+      localStorage.setItem('smartstay_trial_popup_v1', '1'); // don't show the popup again
+    }
+  }
+  window.addEventListener('load', () => {
+    if (localStorage.getItem('smartstay_trial_popup_v1')) return;
+    setTimeout(() => {
+      document.getElementById('trialPopup').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }, 4000);
+  });
+</script>
 </body>
 </html>
