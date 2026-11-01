@@ -3,8 +3,57 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SmartStay — Digitalni vodič za vaše goste</title>
-  <meta name="description" content="SmartStay je digitalna platforma koja vašim gostima daje sve informacije o apartmanu na jednom mjestu — bez štampanja, bez ponavljanja."/>
+  <title>Automatizacija komunikacije s gostima apartmana | SmartStay</title>
+  <meta name="description" content="Izdajete apartman? SmartStay automatizuje komunikaciju s gostima: WiFi, check-in, kućna pravila, preporuke i AI asistent 24/7. Isprobajte besplatno."/>
+  <link rel="canonical" href="https://smartstay.ba/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="SmartStay"/>
+  <meta property="og:locale" content="bs_BA"/>
+  <meta property="og:url" content="https://smartstay.ba/"/>
+  <meta property="og:title" content="SmartStay — Automatizacija komunikacije s gostima apartmana"/>
+  <meta property="og:description" content="Digitalni vodič i AI asistent za goste: WiFi, check-in, kućna pravila i preporuke na jednom linku. Manje poruka, zadovoljniji gosti."/>
+  <meta property="og:image" content="https://smartstay.ba/og-image.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="SmartStay digitalni vodič za goste apartmana"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="SmartStay — Automatizacija komunikacije s gostima apartmana"/>
+  <meta name="twitter:description" content="Digitalni vodič i AI asistent za goste: WiFi, check-in, kućna pravila i preporuke na jednom linku."/>
+  <meta name="twitter:image" content="https://smartstay.ba/og-image.jpg"/>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://smartstay.ba/#org",
+        "name": "SmartStay",
+        "url": "https://smartstay.ba/",
+        "email": "info@smartstay.ba"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "SmartStay",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "url": "https://smartstay.ba/",
+        "inLanguage": "bs",
+        "description": "Aplikacija za iznajmljivače apartmana: digitalni vodič za goste, QR kod, registracija gostiju i AI asistent koji odgovara gostima 24/7.",
+        "publisher": { "@id": "https://smartstay.ba/#org" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Treba li gost instalirati neku aplikaciju?", "acceptedAnswer": { "@type": "Answer", "text": "Ne. Vodič se otvara direktno u browser — gost dobija link ili skenira QR kod i odmah vidi sve informacije. Nema registracije, nema preuzimanja." } },
+          { "@type": "Question", "name": "Koliko apartmana mogu dodati?", "acceptedAnswer": { "@type": "Answer", "text": "Neograničeno. Svaki apartman ima vlastiti vodič, QR kod i link koji možete dijeliti gostima." } },
+          { "@type": "Question", "name": "Mogu li imati više članova tima?", "acceptedAnswer": { "@type": "Answer", "text": "Da. Možete pozvati članove tima koji zajedno upravljaju nekretninama. Svako vidi iste vodiče i može ih uređivati." } },
+          { "@type": "Question", "name": "Mogu li dodati slike i video u vodič?", "acceptedAnswer": { "@type": "Answer", "text": "Da. Uz tekst možete uploadovati slike i videe — korisno za vizualne upute poput \"kako otključati bravu\" ili \"gdje je parking\"." } },
+          { "@type": "Question", "name": "Kako gost dobija link do vodiča?", "acceptedAnswer": { "@type": "Answer", "text": "Pošaljete link direktno — WhatsApp, Viber, Airbnb poruka, email. Ili odštampate QR kod i zalijepite ga u apartman." } }
+        ]
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -94,7 +143,7 @@
     .hero-eyebrow { margin-bottom: 20px; }
     .hero-h1 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(38px, 5vw, 64px); font-weight: 900;
+      font-size: clamp(32px, 3.8vw, 50px); font-weight: 900;
       line-height: 1.06; letter-spacing: -0.03em;
       color: var(--navy); margin-bottom: 20px;
     }
@@ -418,7 +467,7 @@
     /* ── Mobile ── */
     @media (max-width: 600px) {
       .hero { padding:100px 0 60px; }
-      .hero-h1 { font-size:46px; }
+      .hero-h1 { font-size:34px; }
       .hero-sub { font-size:15px; }
       .hero-img-wrap img { height:260px; }
       .features-grid { grid-template-columns:1fr; }
@@ -481,11 +530,11 @@
           <span class="chip chip-orange">Novo — AI odgovara umjesto vas</span>
         </div>
         <h1 class="hero-h1">
-          Gostima sve info.<br>
-          Vama <em>manje poruka.</em>
+          Automatizujte komunikaciju s&nbsp;gostima<br>
+          i <em>unaprijedite njihov boravak.</em>
         </h1>
         <p class="hero-sub">
-          SmartStay kreira personalizovani digitalni vodič za vaš apartman — gosti sami pronalaze WiFi, check-in upute, preporuke i još mnogo toga.
+          Aplikacija za iznajmljivače apartmana: informacije o smještaju, check-in upute, WiFi i lokalne preporuke na jednom mjestu. Pametni digitalni vodič koji gostima olakšava boravak, a vama štedi vrijeme.
         </p>
         <div style="display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
           <a href="#kontakt"
@@ -606,7 +655,7 @@
   <div class="container">
     <div style="text-align:center" class="sr">
       <span class="chip chip-navy">Funkcionalnosti</span>
-      <h2 class="sec-headline" style="margin-top:14px">Sve što gost treba, na jednom linku</h2>
+      <h2 class="sec-headline" style="margin-top:14px">Digitalni vodič za apartman: sve što gost treba na jednom linku</h2>
       <p class="sec-sub">9 sekcija vodiča. Vaš brend. Vaše informacije.</p>
     </div>
     <div class="features-grid">
@@ -629,7 +678,7 @@
   <div class="container">
     <div style="text-align:center;margin-bottom:64px" class="sr">
       <span class="chip chip-navy">Kako radi</span>
-      <h2 class="sec-headline" style="margin-top:14px">Postavljeno za 10 minuta</h2>
+      <h2 class="sec-headline" style="margin-top:14px">Spremno za izdavanje apartmana za 10 minuta</h2>
       <p class="sec-sub" style="margin-bottom:0">Bez tehničkog znanja. Bez aplikacije za goste.</p>
     </div>
     <div class="how-layout">

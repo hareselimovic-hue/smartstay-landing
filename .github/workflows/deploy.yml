@@ -13,7 +13,7 @@ jobs:
 
       - name: Deploy via cPanel API
         run: |
-          for file in index.html hero-photo.jpg demo.mp4; do
+          for file in index.html hero-photo.jpg og-image.jpg demo.mp4; do
             if [ -f "$file" ]; then
               echo "Uploading $file..."
               curl -s -X POST "https://cpanel.smartstay.ba/execute/Fileman/upload_files" \
