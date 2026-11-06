@@ -24,13 +24,25 @@ jobs:
             local dir="$ROOT"
             [ "$sub" != "." ] && dir="$ROOT/$sub"
             echo "Uploading $file -> $dir"
-            curl -s -X POST "$CPANEL/execute/Fileman/upload_files" \
-              -H "Authorization: $AUTH" \
-              -F "dir=$dir" \
-              -F "overwrite=1" \
-              -F "file-1=@$file"
-            echo
+            # Server vraća 429 kad ide prebrzo: pauza + ponovni pokušaj
+            for attempt in 1 2 3 4 5; do
+              resp=$(curl -s -X POST "$CPANEL/execute/Fileman/upload_files" \
+                -H "Authorization: $AUTH" \
+                -F "dir=$dir" \
+                -F "overwrite=1" \
+                -F "file-1=@$file")
+              if echo "$resp" | grep -q '"succeeded":1'; then
+                echo "  OK"
+                sleep 2
+                return 0
+              fi
+              echo "  attempt $attempt failed: $(echo "$resp" | head -c 200)"
+              sleep $((attempt * 10))
+            done
+            echo "  FAILED: $file"
+            FAILED=1
           }
+          FAILED=0
 
           # Kreiraj podfoldere (greška "već postoji" je ok)
           mkdir_remote() {
@@ -53,4 +65,5 @@ jobs:
           for file in $(find resursi -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' \) | sort); do
             upload "$file"
           done
+          [ "$FAILED" = 1 ] && { echo "Some uploads failed"; exit 1; }
           echo "Deploy complete."
