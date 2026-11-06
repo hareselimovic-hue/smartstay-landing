@@ -6,6 +6,10 @@
   <title>Automatizacija komunikacije s gostima apartmana | SmartStay</title>
   <meta name="description" content="Izdajete apartman? SmartStay automatizuje komunikaciju s gostima: WiFi, check-in, kućna pravila, preporuke i AI asistent 24/7. Isprobajte besplatno."/>
   <link rel="canonical" href="https://smartstay.ba/"/>
+  <link rel="icon" href="/favicon.ico" sizes="any"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+  <meta name="theme-color" content="#0F2F61"/>
   <meta property="og:type" content="website"/>
   <meta property="og:site_name" content="SmartStay"/>
   <meta property="og:locale" content="bs_BA"/>
@@ -29,7 +33,9 @@
         "@id": "https://smartstay.ba/#org",
         "name": "SmartStay",
         "url": "https://smartstay.ba/",
-        "email": "info@smartstay.ba"
+        "logo": "https://smartstay.ba/logo.png",
+        "email": "info@smartstay.ba",
+        "areaServed": "BA"
       },
       {
         "@type": "SoftwareApplication",
@@ -39,6 +45,15 @@
         "url": "https://smartstay.ba/",
         "inLanguage": "bs",
         "description": "Aplikacija za iznajmljivače apartmana: digitalni vodič za goste, QR kod, registracija gostiju i AI asistent koji odgovara gostima 24/7.",
+        "image": "https://smartstay.ba/og-image.jpg",
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "BAM",
+          "lowPrice": "5.99",
+          "highPrice": "9.99",
+          "offerCount": "3",
+          "description": "Cijena po nekretnini mjesečno, 30 dana besplatno"
+        },
         "publisher": { "@id": "https://smartstay.ba/#org" }
       },
       {
@@ -571,7 +586,7 @@
       </div>
       <div class="hero-visual sr sr-d2">
         <div class="hero-img-wrap">
-          <img src="hero-photo.jpg" alt="Domaćin koristi SmartStay" />
+          <img src="hero-photo.webp" alt="Domaćin koristi SmartStay" width="1200" height="1200" fetchpriority="high" />
         </div>
         <div class="hero-float">
           <div class="hf-icon">📵</div>
@@ -626,7 +641,7 @@
       </div>
       <div class="what-phone sr sr-d2">
         <div class="phone-frame-light">
-          <img src="app-screen.jpeg" alt="SmartStay app prikaz" />
+          <img src="app-screen.jpeg" alt="SmartStay app prikaz" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>
@@ -728,14 +743,14 @@
     <div class="demo-layout">
       <div class="demo-phone-wrap sr">
         <div class="demo-phone-frame-light">
-          <video id="demoVideo" src="demo.mp4" controls muted playsinline style="display:block;width:100%;height:auto;border-radius:33px;"></video>
+          <video id="demoVideo" src="demo.mp4" controls muted playsinline preload="metadata" style="display:block;width:100%;height:auto;border-radius:33px;"></video>
         </div>
       </div>
       <div class="sr sr-d2" style="display:flex;align-items:center;justify-content:center">
         <div class="demo-try-card-light">
           <div class="dtc-label">Provjerite i sami</div>
           <p class="dtc-desc">Skenirajte QR kod ili kliknite ispod — otvorite demo vodič direktno na telefonu.</p>
-          <div class="dtc-qr"><img src="qr-code.png" alt="SmartStay QR" /></div>
+          <div class="dtc-qr"><img src="qr-code.png" alt="QR kod za demo vodič SmartStay" width="132" height="132" loading="lazy" decoding="async" /></div>
           <a href="https://app.smartstay.ba/g/modern-apartment-in-center-of-sarajevo/preview" target="_blank" class="btn-demo-try">Otvori demo apartman →</a>
           <p class="dtc-note">Modern apartment in Center of Sarajevo</p>
         </div>
