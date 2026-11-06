@@ -12,15 +12,45 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Deploy via cPanel API
+        env:
+          AUTH: "cpanel smartsta:${{ secrets.LEFTOR_API_TOKEN }}"
+          CPANEL: https://cpanel.smartstay.ba
+          ROOT: /home/smartsta/public_html
         run: |
+          upload() {
+            local file="$1"
+            local sub
+            sub=$(dirname "$file")
+            local dir="$ROOT"
+            [ "$sub" != "." ] && dir="$ROOT/$sub"
+            echo "Uploading $file -> $dir"
+            curl -s -X POST "$CPANEL/execute/Fileman/upload_files" \
+              -H "Authorization: $AUTH" \
+              -F "dir=$dir" \
+              -F "overwrite=1" \
+              -F "file-1=@$file"
+            echo
+          }
+
+          # Kreiraj podfoldere (greška "već postoji" je ok)
+          mkdir_remote() {
+            local parent="$1" name="$2"
+            curl -s -G "$CPANEL/json-api/cpanel" \
+              -H "Authorization: $AUTH" \
+              --data-urlencode "cpanel_jsonapi_apiversion=2" \
+              --data-urlencode "cpanel_jsonapi_module=Fileman" \
+              --data-urlencode "cpanel_jsonapi_func=mkdir" \
+              --data-urlencode "path=$parent" \
+              --data-urlencode "name=$name" > /dev/null
+          }
+          for d in $(find resursi -type d | sort); do
+            mkdir_remote "$ROOT/$(dirname "$d" | sed 's#^\.$##')" "$(basename "$d")"
+          done
+
           for file in index.html hero-photo.jpg hero-photo.webp og-image.jpg demo.mp4 favicon.ico favicon-32.png apple-touch-icon.png logo.png robots.txt sitemap.xml; do
-            if [ -f "$file" ]; then
-              echo "Uploading $file..."
-              curl -s -X POST "https://cpanel.smartstay.ba/execute/Fileman/upload_files" \
-                -H "Authorization: cpanel smartsta:${{ secrets.LEFTOR_API_TOKEN }}" \
-                -F "dir=/home/smartsta/public_html" \
-                -F "overwrite=1" \
-                -F "file-1=@$file"
-            fi
+            [ -f "$file" ] && upload "$file"
+          done
+          for file in $(find resursi -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' \) | sort); do
+            upload "$file"
           done
           echo "Deploy complete."
