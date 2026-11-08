@@ -55,14 +55,14 @@ jobs:
               --data-urlencode "path=$parent" \
               --data-urlencode "name=$name" > /dev/null
           }
-          for d in $(find resursi -type d | sort); do
+          for d in $(find resursi hoteli apartmani -type d | sort); do
             mkdir_remote "$ROOT/$(dirname "$d" | sed 's#^\.$##')" "$(basename "$d")"
           done
 
           for file in index.html hero-photo.jpg hero-photo.webp og-image.jpg demo.mp4 favicon.ico favicon-32.png apple-touch-icon.png logo.png robots.txt sitemap.xml; do
             [ -f "$file" ] && upload "$file"
           done
-          for file in $(find resursi -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' \) | sort); do
+          for file in $(find resursi hoteli apartmani -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.webp' -o -name '*.svg' \) | sort); do
             upload "$file"
           done
           [ "$FAILED" = 1 ] && { echo "Some uploads failed"; exit 1; }

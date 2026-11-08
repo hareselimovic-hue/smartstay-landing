@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Automatizacija komunikacije s gostima apartmana | SmartStay</title>
-  <meta name="description" content="Izdajete apartman? SmartStay automatizuje komunikaciju s gostima: WiFi, check-in, kućna pravila, preporuke i AI asistent 24/7. Isprobajte besplatno."/>
+  <title>Digitalni vodič za goste apartmana i hotela | SmartStay</title>
+  <meta name="description" content="SmartStay gostima daje sve informacije o smještaju na mobitelu i na njihovom jeziku — za iznajmljivače apartmana i za hotele. Manje poruka i poziva, zadovoljniji gosti."/>
   <link rel="canonical" href="https://smartstay.ba/"/>
   <link rel="icon" href="/favicon.ico" sizes="any"/>
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
@@ -14,15 +14,14 @@
   <meta property="og:site_name" content="SmartStay"/>
   <meta property="og:locale" content="bs_BA"/>
   <meta property="og:url" content="https://smartstay.ba/"/>
-  <meta property="og:title" content="SmartStay — Automatizacija komunikacije s gostima apartmana"/>
-  <meta property="og:description" content="Digitalni vodič i AI asistent za goste: WiFi, check-in, kućna pravila i preporuke na jednom linku. Manje poruka, zadovoljniji gosti."/>
+  <meta property="og:title" content="SmartStay — digitalni vodič i komunikacija s gostima"/>
+  <meta property="og:description" content="Za apartmane i hotele: sve informacije za goste na mobitelu, na njihovom jeziku. Manje poruka i poziva, zadovoljniji gosti."/>
   <meta property="og:image" content="https://smartstay.ba/og-image.jpg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
-  <meta property="og:image:alt" content="SmartStay digitalni vodič za goste apartmana"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="SmartStay — Automatizacija komunikacije s gostima apartmana"/>
-  <meta name="twitter:description" content="Digitalni vodič i AI asistent za goste: WiFi, check-in, kućna pravila i preporuke na jednom linku."/>
+  <meta name="twitter:title" content="SmartStay — digitalni vodič i komunikacija s gostima"/>
+  <meta name="twitter:description" content="Za apartmane i hotele: sve informacije za goste na mobitelu, na njihovom jeziku."/>
   <meta name="twitter:image" content="https://smartstay.ba/og-image.jpg"/>
   <script type="application/ld+json">
   {
@@ -38,36 +37,22 @@
         "areaServed": "BA"
       },
       {
-        "@type": "SoftwareApplication",
-        "name": "SmartStay",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web",
+        "@type": "WebSite",
+        "@id": "https://smartstay.ba/#website",
         "url": "https://smartstay.ba/",
+        "name": "SmartStay",
         "inLanguage": "bs",
-        "description": "Aplikacija za iznajmljivače apartmana: digitalni vodič za goste, QR kod, registracija gostiju i AI asistent koji odgovara gostima 24/7.",
-        "image": "https://smartstay.ba/og-image.jpg",
-        "offers": {
-          "@type": "AggregateOffer",
-          "priceCurrency": "BAM",
-          "lowPrice": "5.99",
-          "highPrice": "9.99",
-          "offerCount": "3",
-          "description": "Cijena po nekretnini mjesečno, 30 dana besplatno"
-        },
         "publisher": { "@id": "https://smartstay.ba/#org" }
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          { "@type": "Question", "name": "Treba li gost instalirati neku aplikaciju?", "acceptedAnswer": { "@type": "Answer", "text": "Ne. Vodič se otvara direktno u browser — gost dobija link ili skenira QR kod i odmah vidi sve informacije. Nema registracije, nema preuzimanja." } },
-          { "@type": "Question", "name": "Koliko apartmana mogu dodati?", "acceptedAnswer": { "@type": "Answer", "text": "Neograničeno. Svaki apartman ima vlastiti vodič, QR kod i link koji možete dijeliti gostima." } },
-          { "@type": "Question", "name": "Mogu li imati više članova tima?", "acceptedAnswer": { "@type": "Answer", "text": "Da. Možete pozvati članove tima koji zajedno upravljaju nekretninama. Svako vidi iste vodiče i može ih uređivati." } },
-          { "@type": "Question", "name": "Mogu li dodati slike i video u vodič?", "acceptedAnswer": { "@type": "Answer", "text": "Da. Uz tekst možete uploadovati slike i videe — korisno za vizualne upute poput \"kako otključati bravu\" ili \"gdje je parking\"." } },
-          { "@type": "Question", "name": "Kako gost dobija link do vodiča?", "acceptedAnswer": { "@type": "Answer", "text": "Pošaljete link direktno — WhatsApp, Viber, Airbnb poruka, email. Ili odštampate QR kod i zalijepite ga u apartman." } }
-        ]
       }
     ]
   }
+  </script>
+  <script>
+    // Old links like smartstay.ba/#pricing pointed at the apartments content, which now lives on /apartmani/
+    (function () {
+      var old = ["#features", "#how", "#pricing", "#faq", "#kontakt", "#demo-section", "#sto-je"];
+      if (old.indexOf(location.hash) !== -1) location.replace("/apartmani/" + location.hash);
+    })();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -145,25 +130,25 @@
       position: relative; overflow: hidden;
     }
     .hero::before {
-      content: ''; position: absolute; top: 0; right: 0; width: 55%; height: 100%;
+      content: ''; position: absolute; top: 0; right: 0; width: 46%; height: 100%;
       background: var(--off);
       clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
       z-index: 0;
     }
     .hero-layout {
       position: relative; z-index: 1;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 60px; align-items: center;
+      display: grid; grid-template-columns: 1.3fr 0.7fr;
+      gap: 48px; align-items: center;
     }
     .hero-eyebrow { margin-bottom: 20px; }
     .hero-h1 {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(32px, 3.8vw, 50px); font-weight: 900;
+      font-size: clamp(32px, 4.2vw, 58px); font-weight: 900;
       line-height: 1.06; letter-spacing: -0.03em;
       color: var(--navy); margin-bottom: 20px;
     }
     .hero-h1 em { font-style: normal; color: var(--orange); }
-    .hero-sub { font-size: 17px; color: var(--gray); line-height: 1.75; margin-bottom: 32px; max-width: 440px; }
+    .hero-sub { font-size: 17px; color: var(--gray); line-height: 1.75; margin-bottom: 32px; max-width: 580px; }
     .hero-form {
       display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;
       max-width: 460px;
@@ -254,7 +239,7 @@
       border: 8px solid #222;
       box-shadow: 0 32px 80px rgba(15,47,97,0.2), 0 0 0 1px rgba(0,0,0,0.06);
     }
-    .phone-frame-light img { display: block; width: 100%; }
+    .phone-frame-light img { display: block; width: 100%; height: auto; }
     .what-h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(28px,4vw,44px); font-weight: 900; letter-spacing: -0.025em; line-height: 1.12; color: var(--navy); margin: 14px 0 16px; }
     .what-h2 em { font-style: normal; color: var(--orange); }
     .what-body { font-size: 16px; color: var(--gray); line-height: 1.8; margin-bottom: 28px; }
@@ -515,6 +500,71 @@
     @media (max-width: 400px) {
       .btn-nav { font-size:13px; padding:8px 14px; }
     }
+  
+    /* ── New homepage sections (hp-) ── */
+    .hp-sec { padding:96px 0; }
+    .hp-head { text-align:center; max-width:720px; margin:0 auto 48px; }
+    .hp-head h2 { font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(28px,4vw,42px); font-weight:800; letter-spacing:-0.02em; line-height:1.15; color:var(--navy); margin-top:14px; }
+    .hp-head p { color:var(--gray); font-size:17px; margin-top:12px; line-height:1.6; }
+    .hp-btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 26px; border-radius:100px; font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:15px; text-decoration:none; transition:transform .15s, background .2s; }
+    .hp-btn:hover { transform:translateY(-2px); }
+    .hp-btn-orange { background:var(--orange); color:#fff; box-shadow:0 6px 24px rgba(255,103,0,.3); }
+    .hp-btn-navy { background:var(--navy); color:#fff; }
+    .hp-btn-white { background:#fff; color:var(--navy); }
+    .hp-ticks { list-style:none; display:grid; gap:9px; margin:0 0 22px; padding:0; }
+    .hp-ticks li { padding-left:28px; position:relative; font-size:15px; color:var(--text-2); line-height:1.5; }
+    .hp-ticks li::before { content:"✓"; position:absolute; left:0; top:1px; width:20px; height:20px; border-radius:50%; background:rgba(34,197,94,.12); color:#16a34a; font-weight:800; font-size:12px; display:flex; align-items:center; justify-content:center; }
+
+    .hp-paths { padding:72px 0 96px; background:var(--off); }
+    .hp-paths-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .hp-path { background:#fff; border:1px solid var(--border); border-radius:28px; overflow:hidden; display:flex; flex-direction:column; text-decoration:none; color:inherit; transition:box-shadow .2s, transform .2s; }
+    .hp-path:hover { box-shadow:0 20px 50px rgba(15,47,97,.12); transform:translateY(-3px); }
+    .hp-path-media { height:220px; overflow:hidden; background:var(--navy); }
+    .hp-path-media img { width:100%; height:100%; object-fit:cover; object-position:center 30%; }
+    .hp-path-body { padding:28px; display:flex; flex-direction:column; flex:1; }
+    .hp-path-body .chip { align-self:flex-start; }
+    .hp-path h3 { font-family:'Plus Jakarta Sans',sans-serif; font-size:28px; font-weight:800; letter-spacing:-0.02em; color:var(--navy); margin:12px 0 8px; }
+    .hp-path p { color:var(--text-2); margin:0 0 16px; line-height:1.6; }
+    .hp-path-foot { margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .hp-path-price { font-size:14px; color:var(--gray); }
+    .hp-path-price strong { color:var(--navy); }
+
+    .hp-grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .hp-card { border:1px solid var(--border); border-radius:20px; padding:26px; background:#fff; }
+    .hp-card .ic { font-size:28px; margin-bottom:12px; }
+    .hp-card h3 { font-family:'Plus Jakarta Sans',sans-serif; font-size:18px; font-weight:700; color:var(--navy); margin:0 0 6px; }
+    .hp-card p { color:var(--gray); font-size:15px; line-height:1.6; margin:0; }
+
+    .hp-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; counter-reset:hpstep; }
+    .hp-step { background:#fff; border:1px solid var(--border); border-radius:20px; padding:28px; }
+    .hp-step::before { counter-increment:hpstep; content:counter(hpstep); width:38px; height:38px; border-radius:50%; background:var(--orange); color:#fff; font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+    .hp-step h3 { font-family:'Plus Jakarta Sans',sans-serif; font-size:18px; font-weight:700; color:var(--navy); margin:0 0 6px; }
+    .hp-step p { color:var(--gray); font-size:15px; line-height:1.6; margin:0; }
+
+    .hp-res-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+    .hp-res { border:1px solid var(--border); border-radius:18px; padding:20px; text-decoration:none; color:inherit; background:#fff; transition:border-color .2s; }
+    .hp-res:hover { border-color:var(--navy); }
+    .hp-res h3 { font-family:'Plus Jakarta Sans',sans-serif; font-size:16px; font-weight:700; color:var(--navy); margin:0 0 4px; }
+    .hp-res p { font-size:13px; color:var(--gray); margin:0; }
+
+    .hp-final { padding:96px 0; background:linear-gradient(135deg, var(--navy) 0%, #1a3d73 100%); color:#fff; text-align:center; }
+    .hp-final .chip { background:rgba(255,255,255,.12); color:#fff; }
+    .hp-final h2 { font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(30px,4.4vw,46px); font-weight:800; letter-spacing:-0.02em; margin:16px 0 12px; color:#fff; }
+    .hp-final p { color:rgba(255,255,255,.75); font-size:17px; margin:0 0 30px; }
+    .hp-final-ctas { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; }
+
+    @media (max-width:900px) {
+      .hp-paths-grid { grid-template-columns:1fr; }
+      .hp-path-media { height:190px; }
+      .hp-grid3 { grid-template-columns:1fr 1fr; }
+      .hp-steps { grid-template-columns:1fr; }
+      .hp-res-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:600px) {
+      .hp-sec, .hp-final { padding:64px 0; }
+      .hp-paths { padding:48px 0 64px; }
+      .hp-grid3, .hp-res-grid { grid-template-columns:1fr; }
+    }
   </style>
 </head>
 <body>
@@ -523,16 +573,13 @@
 <nav id="nav">
   <div class="container">
     <div class="nav-inner">
-      <span class="nav-logo">Smart<span>Stay</span></span>
+      <a href="/" class="nav-logo" style="text-decoration:none">Smart<span>Stay</span></a>
       <ul class="nav-links">
-        <li><a href="#features">Funkcionalnosti</a></li>
-        <li><a href="#ai">AI Asistent</a></li>
-        <li><a href="#how">Kako radi</a></li>
-        <li><a href="#pricing">Cijene</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li><a href="/apartmani/">Apartmani</a></li>
+        <li><a href="/hoteli/">Hoteli</a></li>
         <li><a href="/resursi/">Resursi</a></li>
       </ul>
-      <a href="#kontakt" class="btn-nav">Zatraži pristup →</a>
+      <a href="#pocnite" class="btn-nav">Počnite besplatno →</a>
     </div>
   </div>
 </nav>
@@ -553,7 +600,7 @@
           Aplikacija za iznajmljivače apartmana: informacije o smještaju, check-in upute, WiFi i lokalne preporuke na jednom mjestu. Pametni digitalni vodič koji gostima olakšava boravak, a vama štedi vrijeme.
         </p>
         <div style="display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
-          <a href="#kontakt"
+          <a href="#pocnite"
              style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:100px;
                     background:linear-gradient(135deg,#4F6EF7 0%,#7B5CF5 100%);color:#fff;
                     font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:800;
@@ -563,7 +610,7 @@
              onmouseout="this.style.transform='';this.style.boxShadow='0 4px 28px rgba(79,110,247,0.45)'">
             Počni besplatno →
           </a>
-          <a href="#demo-section"
+          <a href="/apartmani/#demo-section"
              style="display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:100px;
                     border:1.5px solid rgba(15,47,97,0.2);background:rgba(15,47,97,0.04);
                     color:var(--text-2);font-size:15px;font-weight:500;text-decoration:none;
@@ -587,7 +634,7 @@
       </div>
       <div class="hero-visual sr sr-d2">
         <div class="hero-img-wrap">
-          <img src="hero-photo.webp" alt="Domaćin koristi SmartStay" width="1200" height="1200" fetchpriority="high" />
+          <img src="/hero-photo.webp" alt="Domaćin koristi SmartStay" width="1200" height="1200" fetchpriority="high" />
         </div>
         <div class="hero-float">
           <div class="hf-icon">📵</div>
@@ -602,170 +649,99 @@
   </div>
 </section>
 
-<!-- STATS BAR -->
-<div class="stats-bar">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-num">8–12</div>
-        <div class="stat-lbl">poruka po rezervaciji prosječno</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">2h</div>
-        <div class="stat-lbl">ušteđeno sedmično</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">0</div>
-        <div class="stat-lbl">WiFi pitanja nakon SmartStay-a</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">150+</div>
-        <div class="stat-lbl">domaćina u BiH</div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- WHAT IS -->
 <section class="what-section" id="sto-je">
   <div class="container">
     <div class="what-layout">
       <div class="what-text sr">
         <span class="chip chip-navy">Šta je SmartStay?</span>
-        <h2 class="what-h2">Vaš apartman dobija<br><em>vlastitu web stranicu.</em></h2>
-        <p class="what-body">Digitalni vodič je personalizovana stranica za vaš apartman — gost je otvori odmah po dolasku i pronađe sve informacije koje mu trebaju. Bez PDF-ova. Bez printanih papira. Bez vaše intervencije.</p>
+        <h2 class="what-h2">Vaš smještaj dobija<br><em>vlastitu web stranicu.</em></h2>
+        <p class="what-body">Digitalni vodič je personalizovana stranica za vaš apartman ili hotel — gost je otvori odmah po dolasku i pronađe sve informacije koje mu trebaju. Bez PDF-ova. Bez printanih papira. Bez vaše intervencije.</p>
         <div class="what-pts">
-          <div class="wp"><div class="wp-icon">📲</div><div><h4>Radi na svakom uređaju</h4><p>Gost otvori link na telefonu, tabletu ili laptopu — bez instalacije ikakve aplikacije.</p></div></div>
-          <div class="wp"><div class="wp-icon">🌍</div><div><h4>Automatski na jeziku gosta</h4><p>Bosanski, engleski, njemački, turski — vodič se prilagođava bez vašeg truda.</p></div></div>
+          <div class="wp"><div class="wp-icon">📲</div><div><h4>Radi na svakom uređaju</h4><p>Gost otvori link ili skenira QR kod na telefonu, tabletu ili laptopu — bez instalacije ikakve aplikacije.</p></div></div>
+          <div class="wp"><div class="wp-icon">🌍</div><div><h4>Automatski na jeziku gosta</h4><p>Engleski, njemački, turski i italijanski — vodič se prilagođava bez vašeg truda.</p></div></div>
           <div class="wp"><div class="wp-icon">⚡</div><div><h4>Postavite za 10 minuta</h4><p>Unesite informacije jednom — gosti ih koriste zauvijek. Nema ponovnog kucanja.</p></div></div>
         </div>
       </div>
       <div class="what-phone sr sr-d2">
         <div class="phone-frame-light">
-          <img src="app-screen.jpeg" alt="SmartStay app prikaz" loading="lazy" decoding="async" />
+          <img src="/apartmani/screen-checkin.webp" alt="Check-in upute u SmartStay digitalnom vodiču" width="600" height="1298" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PAIN -->
-<section class="pain-section">
+<!-- TWO PATHS -->
+<section class="hp-paths" id="pocnite">
   <div class="container">
-    <div class="pain-inner sr">
-      <span class="chip" style="background:rgba(255,103,0,0.15);color:var(--orange);border:1px solid rgba(255,103,0,0.25);">Problem koji poznaješ</span>
-      <h2 class="pain-h2" style="margin-top:16px">Noć puna <em>istih poruka.</em></h2>
-      <p class="pain-sub">Svaki domaćin zna kako to izgleda. SmartStay ih eliminiše jednom zauvijek.</p>
+    <div class="hp-head sr">
+      <span class="chip chip-orange">Za koga je SmartStay</span>
+      <h2>Izaberite svoj tip smještaja</h2>
+      <p>Ista platforma, prilagođena onome što vam stvarno treba.</p>
     </div>
-    <div class="pain-msgs">
-      <div class="pain-msg sr sr-d1"><span class="pain-time">02:14</span><div class="pain-text">Koji je WiFi password?<span>— Gost · noćni dolazak</span></div></div>
-      <div class="pain-msg sr sr-d2"><span class="pain-time">23:51</span><div class="pain-text">Gdje se parkira? Nisam vidio u opisu.<span>— Gost · dolazi sutra</span></div></div>
-      <div class="pain-msg sr sr-d3"><span class="pain-time">07:02</span><div class="pain-text">Do kada check-out?<span>— Gost · odlazi danas</span></div></div>
-      <div class="pain-msg sr sr-d4" style="border-style:dashed;opacity:0.5;"><span class="pain-time">—</span><div class="pain-text">Nakon SmartStay-a ove poruke ne postoje.<span>— Gosti nađu sve sami</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section class="features-section" id="features">
-  <div class="container">
-    <div style="text-align:center" class="sr">
-      <span class="chip chip-navy">Funkcionalnosti</span>
-      <h2 class="sec-headline" style="margin-top:14px">Digitalni vodič za apartman: sve što gost treba na jednom linku</h2>
-      <p class="sec-sub">9 sekcija vodiča. Vaš brend. Vaše informacije.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feat-card sr"><div class="feat-icon">📶</div><h3>WiFi & pristup</h3><p>Password, mreža, upute za router — uvijek pri ruci, bez čekanja.</p></div>
-      <div class="feat-card sr sr-d1"><div class="feat-icon">🔑</div><h3>Check-in upute</h3><p>Korak-po-korak upute za ulaz. Lokacija ključa, sefa, ili smart lock koda.</p></div>
-      <div class="feat-card sr sr-d2"><div class="feat-icon">📋</div><h3>Kućni red</h3><p>Jasna pravila bez nedoumica. Gosti čitaju dobrovoljno.</p></div>
-      <div class="feat-card sr"><div class="feat-icon">📍</div><h3>Lokacija & parking</h3><p>Google Maps link, opis parkinga, ulaz, zgrada — sve na jednom mjestu.</p></div>
-      <div class="feat-card sr sr-d1"><div class="feat-icon">⭐</div><h3>Preporuke domaćina</h3><p>Vaši omiljeni restorani, atrakcije, dostava — personalizovani za svaki apartman.</p></div>
-      <div class="feat-card sr sr-d2"><div class="feat-icon">💰</div><h3>Upsell usluge</h3><p>Transferi, ture, welcome paket — zarađujte 15–30% više po rezervaciji.</p></div>
-      <div class="feat-card sr"><div class="feat-icon">🌍</div><h3>4 jezika automatski</h3><p>Engleski, njemački, turski, bosanski — AI se prilagođava gostu.</p></div>
-      <div class="feat-card sr sr-d1"><div class="feat-icon">📱</div><h3>QR kod</h3><p>Odštampajte i postavite u apartman. Gost skenira, odmah ima sve.</p></div>
-      <div class="feat-card sr sr-d2"><div class="feat-icon">👥</div><h3>Tim pristup</h3><p>Dodajte kolege. Svako ima svoja prava pristupa po nekretnini.</p></div>
-      <div class="feat-card feat-wide sr"><div class="feat-icon">🛂</div><div><h3>Registracija gostiju <span class="feat-new">Novo</span></h3><p>Gosti prije dolaska sami unesu podatke iz pasoša ili lične karte — ime, datum rođenja, državljanstvo, broj dokumenta. Podaci su šifrovani i stižu vam na email, spremni za prijavu boravka. Bez slikanja dokumenata i prepisivanja.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="how-section" id="how">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:64px" class="sr">
-      <span class="chip chip-navy">Kako radi</span>
-      <h2 class="sec-headline" style="margin-top:14px">Spremno za izdavanje apartmana za 10 minuta</h2>
-      <p class="sec-sub" style="margin-bottom:0">Bez tehničkog znanja. Bez aplikacije za goste.</p>
-    </div>
-    <div class="how-layout">
-      <div class="how-steps sr">
-        <div class="how-step active" onclick="setStep(this)">
-          <div class="hs-num">1</div>
-          <div><div class="hs-title">Kreirajte profil apartmana</div><div class="hs-desc">Unesite informacije — WiFi, check-in, pravila, preporuke. Naš editor je jednostavan kao Google Docs.</div></div>
-        </div>
-        <div class="how-step" onclick="setStep(this)">
-          <div class="hs-num">2</div>
-          <div><div class="hs-title">Podijelite link ili QR kod</div><div class="hs-desc">Ubacite SmartStay link u automatsku poruku dobrodošlice na Airbnb ili Booking.com.</div></div>
-        </div>
-        <div class="how-step" onclick="setStep(this)">
-          <div class="hs-num">3</div>
-          <div><div class="hs-title">Gosti sami nađu sve</div><div class="hs-desc">Svaki gost otvori personalizovani vodič na svom jeziku. AI asistent odgovara 24/7.</div></div>
-        </div>
-      </div>
-      <div class="sr sr-d2">
-        <div class="how-screen">
-          <div class="hs-topbar"><div class="hs-dot"></div><div class="hs-dot"></div><div class="hs-dot"></div><span class="hs-url">smartstay.ba/g/modern-centar</span></div>
-          <div class="guide-list">
-            <div class="guide-row"><span class="gr-check">✓</span> 📶 WiFi & pristup internetu</div>
-            <div class="guide-row"><span class="gr-check">✓</span> 🔑 Check-in upute korak po korak</div>
-            <div class="guide-row"><span class="gr-check">✓</span> 📋 Kućni red</div>
-            <div class="guide-row"><span class="gr-check">✓</span> 📍 Lokacija & parking mapa</div>
-            <div class="guide-row"><span class="gr-check">✓</span> ⭐ Preporuke domaćina</div>
-            <div class="guide-row hl"><span class="gr-ai">🤖</span> AI Asistent — odmah odgovara</div>
-          </div>
-          <div style="margin-top:14px;display:flex;gap:8px">
-            <div style="flex:1;background:var(--orange);border-radius:8px;padding:10px;text-align:center;font-size:12px;font-weight:700;color:#fff">Transfer → 40 KM</div>
-            <div style="flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:10px;text-align:center;font-size:12px;color:rgba(255,255,255,0.5)">Tour → 80 KM</div>
+    <div class="hp-paths-grid">
+      <a class="hp-path sr" href="/apartmani/">
+        <div class="hp-path-media"><img src="/hero-photo.webp" alt="Domaćin apartmana koristi SmartStay" width="1200" height="1200" loading="lazy"/></div>
+        <div class="hp-path-body">
+          <span class="chip chip-navy">Apartmani</span>
+          <h3>Za iznajmljivače apartmana</h3>
+          <p>Svaki apartman dobija svoj digitalni vodič — jedan link koji šaljete kroz Airbnb, Booking ili WhatsApp poruke.</p>
+          <ul class="hp-ticks">
+            <li>WiFi, check-in upute sa slikama i videom, kućni red</li>
+            <li>AI asistent odgovara gostima umjesto vas</li>
+            <li>Gosti sami šalju podatke za prijavu</li>
+            <li>Tim i više apartmana na jednom nalogu</li>
+          </ul>
+          <div class="hp-path-foot">
+            <span class="hp-path-price">od <strong>5,99 KM</strong> po apartmanu mjesečno</span>
+            <span class="hp-btn hp-btn-navy">Za apartmane →</span>
           </div>
         </div>
-      </div>
+      </a>
+      <a class="hp-path sr sr-d1" href="/hoteli/">
+        <div class="hp-path-media" style="position:relative;">
+          <img src="/hoteli/hotel-room.webp" alt="Hotelska soba — gosti otvaraju vodič preko QR koda u sobi" width="1200" height="800" loading="lazy" style="object-position:center 55%;"/>
+          <span style="position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--navy);font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;padding:8px 14px;border-radius:100px;box-shadow:0 6px 20px rgba(0,0,0,.18);">🔳 QR kod u svakoj sobi</span>
+        </div>
+        <div class="hp-path-body">
+          <span class="chip chip-orange">Hoteli</span>
+          <h3>Za hotele i pansione</h3>
+          <p>QR kod u svakoj sobi — gost sve pronađe na telefonu, a zahtjeve i narudžbe šalje direktno recepciji.</p>
+          <ul class="hp-ticks">
+            <li>Zahtjevi recepciji sa statusom za gosta</li>
+            <li>Room service, dodatne usluge i rezervacije</li>
+            <li>Obavijesti svim gostima jednim klikom</li>
+            <li>Posebne informacije po sobi (npr. WiFi depandanse)</li>
+          </ul>
+          <div class="hp-path-foot">
+            <span class="hp-path-price">cijena <strong>po dogovoru</strong>, prema broju soba</span>
+            <span class="hp-btn hp-btn-orange">Za hotele →</span>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- DEMO -->
-<section class="demo-section" id="demo-section">
+<!-- TRENDS -->
+<section class="hp-sec" id="trendovi">
   <div class="container">
-    <div class="demo-header sr">
-      <span class="chip chip-navy">Demo</span>
-      <h2 class="sec-headline" style="margin-top:14px">Pogledajte SmartStay u 2 minute</h2>
-      <p style="font-size:16px;color:var(--gray);margin-top:8px">Kako izgleda vodič iz perspektive gosta.</p>
+    <div class="hp-head sr">
+      <span class="chip chip-navy">Trendovi</span>
+      <h2>Kako se mijenja boravak gostiju</h2>
+      <p>Gosti danas očekuju da sve pronađu sami, odmah i na svom telefonu. Smještaj koji to omogući dobija bolje ocjene — i mirnije domaćine.</p>
     </div>
-    <div class="demo-layout">
-      <div class="demo-phone-wrap sr">
-        <div class="demo-phone-frame-light">
-          <video id="demoVideo" src="demo.mp4" controls muted playsinline preload="metadata" style="display:block;width:100%;height:auto;border-radius:33px;"></video>
-        </div>
-      </div>
-      <div class="sr sr-d2" style="display:flex;align-items:center;justify-content:center">
-        <div class="demo-try-card-light">
-          <div class="dtc-label">Provjerite i sami</div>
-          <p class="dtc-desc">Skenirajte QR kod ili kliknite ispod — otvorite demo vodič direktno na telefonu.</p>
-          <div class="dtc-qr"><img src="qr-code.png" alt="QR kod za demo vodič SmartStay" width="132" height="132" loading="lazy" decoding="async" /></div>
-          <a href="https://app.smartstay.ba/g/modern-apartment-in-center-of-sarajevo/preview" target="_blank" class="btn-demo-try">Otvori demo apartman →</a>
-          <p class="dtc-note">Modern apartment in Center of Sarajevo</p>
-        </div>
-      </div>
+    <div class="hp-grid3">
+      <div class="hp-card sr"><div class="ic">📱</div><h3>Sve na mobitelu</h3><p>Gost više ne traži papirni folder ni PDF u mailu. Očekuje jedan link ili QR kod koji radi odmah, bez aplikacije.</p></div>
+      <div class="hp-card sr sr-d1"><div class="ic">🌍</div><h3>Na svom jeziku</h3><p>Gosti dolaze iz cijelog svijeta. Informacije na njihovom jeziku znače manje nesporazuma i manje pitanja.</p></div>
+      <div class="hp-card sr sr-d2"><div class="ic">⏱️</div><h3>Odgovor odmah, ne sutra</h3><p>Gost radije sam pronađe odgovor u 10 sekundi nego da čeka poruku domaćina ili zove recepciju.</p></div>
+      <div class="hp-card sr"><div class="ic">🔑</div><h3>Samostalni dolazak</h3><p>Kasni letovi i fleksibilni dolasci traže jasne upute za check-in — sa slikama, videom i lokacijom.</p></div>
+      <div class="hp-card sr sr-d1"><div class="ic">🎁</div><h3>Doživljaj, ne samo smještaj</h3><p>Preporuke za restorane, ture, transfer, doručak — gost rado plati dodatno ako zna da postoji.</p></div>
+      <div class="hp-card sr sr-d2"><div class="ic">🤖</div><h3>AI pomoć 24/7</h3><p>Pitanja u 2 ujutro više ne moraju buditi domaćina — AI asistent odgovara iz vašeg vodiča.</p></div>
     </div>
   </div>
 </section>
-
-<!-- ALI IMA JOS -->
-<div class="ali-bar">
-  <div class="container">
-    <p>Ali ima još<em>…</em></p>
-  </div>
-</div>
 
 <!-- AI SECTION -->
 <section class="ai-section" id="ai">
@@ -829,100 +805,47 @@
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="pricing-section" id="pricing">
+<!-- HOW -->
+<section class="hp-sec" id="kako-radi" style="background:var(--off)">
   <div class="container">
-    <div style="text-align:center" class="sr">
-      <span class="chip chip-navy">Cijene</span>
-      <h2 class="sec-headline" style="margin-top:14px">Bez skrivenih troškova</h2>
-      <p style="font-size:16px;color:var(--gray);margin-top:8px">Počnite besplatno 30 dana. Otkazujete kad god hoćete.</p>
+    <div class="hp-head sr">
+      <span class="chip chip-navy">Kako radi</span>
+      <h2>Od registracije do prvog gosta za jedan dan</h2>
     </div>
-    <div class="pricing-grid-light">
-      <div class="pc-light sr">
-        <div class="pc-plan">Starter</div>
-        <div class="pc-amount"><span class="pc-curr">KM</span> 9.99</div>
-        <div class="pc-period">/nekretnina/mj</div>
-        <p class="pc-desc">Za domaćine sa 1–3 apartmana koji žele uštedjeti vrijeme.</p>
-        <div class="pc-div"></div>
-        <div class="pc-feats">
-          <div class="pf">Digitalni vodič (9 sekcija)</div>
-          <div class="pf">QR kod & link za dijeljenje</div>
-          <div class="pf">WhatsApp & Viber dijeljenje</div>
-          <div class="pf">AI Asistent (4 jezika, 24/7)</div>
-          <div class="pf">Tim pristup</div>
-          <div class="pf">Analitika posjeta</div>
-        </div>
-        <button class="btn-pc btn-outline" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">Počni besplatno</button>
-      </div>
-      <div class="pc-light hot sr sr-d1">
-        <div class="hot-badge">Najpopularniji</div>
-        <div class="pc-plan">Standard</div>
-        <div class="pc-amount"><span class="pc-curr">KM</span> 7.99</div>
-        <div class="pc-period">/nekretnina/mj</div>
-        <p class="pc-desc">Za domaćine sa 4–10 nekretnina koji žele rasti.</p>
-        <div class="pc-div"></div>
-        <div class="pc-feats">
-          <div class="pf">Digitalni vodič (9 sekcija)</div>
-          <div class="pf">QR kod & link za dijeljenje</div>
-          <div class="pf">WhatsApp & Viber dijeljenje</div>
-          <div class="pf">AI Asistent (4 jezika, 24/7)</div>
-          <div class="pf">Tim pristup</div>
-          <div class="pf">Analitika posjeta</div>
-        </div>
-        <button class="btn-pc btn-solid" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">Počni besplatno →</button>
-      </div>
-      <div class="pc-light sr sr-d2">
-        <div class="pc-plan">Pro</div>
-        <div class="pc-amount"><span class="pc-curr">KM</span> 5.99</div>
-        <div class="pc-period">/nekretnina/mj</div>
-        <p class="pc-desc">Za property menadžere s 10+ nekretnina koji trebaju sve.</p>
-        <div class="pc-div"></div>
-        <div class="pc-feats">
-          <div class="pf">Digitalni vodič (9 sekcija)</div>
-          <div class="pf">QR kod & link za dijeljenje</div>
-          <div class="pf">WhatsApp & Viber dijeljenje</div>
-          <div class="pf">AI Asistent (4 jezika, 24/7)</div>
-          <div class="pf">Tim pristup</div>
-          <div class="pf">Analitika posjeta</div>
-          <div class="pf">Upsell usluge (transferi, ture)</div>
-        </div>
-        <button class="btn-pc btn-outline" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">Kontaktirajte nas</button>
-      </div>
-    </div>
-    <p style="text-align:center;margin-top:20px;font-size:13px;color:var(--gray-2)">✓ 30 dana besplatno &nbsp;·&nbsp; ✓ Bez kreditne kartice &nbsp;·&nbsp; ✓ Otkazujete u bilo kom momentu</p>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="faq-section-light" id="faq">
-  <div class="container">
-    <div style="text-align:center" class="sr">
-      <span class="chip chip-navy">FAQ</span>
-      <h2 class="sec-headline" style="margin-top:14px">Česta pitanja</h2>
-    </div>
-    <div class="faq-list-light">
-      <div class="fq sr"><button class="fq-btn" onclick="toggleFaqLight(this)"><span class="fq-q">Treba li gost instalirati neku aplikaciju?</span><span class="fq-arr">▾</span></button><div class="fq-ans"><p>Ne. Vodič se otvara direktno u browser — gost dobija link ili skenira QR kod i odmah vidi sve informacije. Nema registracije, nema preuzimanja.</p></div></div>
-      <div class="fq sr sr-d1"><button class="fq-btn" onclick="toggleFaqLight(this)"><span class="fq-q">Koliko apartmana mogu dodati?</span><span class="fq-arr">▾</span></button><div class="fq-ans"><p>Neograničeno. Svaki apartman ima vlastiti vodič, QR kod i link koji možete dijeliti gostima.</p></div></div>
-      <div class="fq sr sr-d2"><button class="fq-btn" onclick="toggleFaqLight(this)"><span class="fq-q">Mogu li imati više članova tima?</span><span class="fq-arr">▾</span></button><div class="fq-ans"><p>Da. Možete pozvati članove tima koji zajedno upravljaju nekretninama. Svako vidi iste vodiče i može ih uređivati.</p></div></div>
-      <div class="fq sr sr-d3"><button class="fq-btn" onclick="toggleFaqLight(this)"><span class="fq-q">Mogu li dodati slike i video u vodič?</span><span class="fq-arr">▾</span></button><div class="fq-ans"><p>Da. Uz tekst možete uploadovati slike i videe — korisno za vizualne upute poput "kako otključati bravu" ili "gdje je parking".</p></div></div>
-      <div class="fq sr sr-d4"><button class="fq-btn" onclick="toggleFaqLight(this)"><span class="fq-q">Kako gost dobija link do vodiča?</span><span class="fq-arr">▾</span></button><div class="fq-ans"><p>Pošaljete link direktno — WhatsApp, Viber, Airbnb poruka, email. Ili odštampate QR kod i zalijepite ga u apartman.</p></div></div>
+    <div class="hp-steps">
+      <div class="hp-step sr"><h3>Napravite nalog</h3><p>Ostavite email na stranici za apartmane ili hotele i odmah dobijate pristup — 30 dana besplatno.</p></div>
+      <div class="hp-step sr sr-d1"><h3>Popunite vodič</h3><p>WiFi, dolazak, pravila, preporuke. Prevod na strane jezike radi automatski.</p></div>
+      <div class="hp-step sr sr-d2"><h3>Podijelite gostima</h3><p>Link u porukama za rezervacije ili QR kod u apartmanu i hotelskoj sobi.</p></div>
     </div>
   </div>
 </section>
 
-<!-- CTA / EMAIL -->
-<section class="cta-section-light" id="kontakt">
+<!-- RESOURCES -->
+<section class="hp-sec">
   <div class="container">
-    <div class="cta-box-light sr">
-      <span class="chip chip-orange" style="position:relative;z-index:1;margin-bottom:14px;display:inline-flex;">Počnite danas</span>
-      <h2 class="cta-h2">Manje poruka.<br>Zadovoljniji gosti.<br><em>Veći prihod.</em></h2>
-      <p class="cta-sub-txt">Ostavite email i odmah kreirajte nalog — 30 dana besplatno.</p>
-      <form class="cta-form" id="ctaForm" onsubmit="handleCtaSubmit(event)">
-        <input class="cta-input" type="email" placeholder="vas@email.com" required />
-        <button class="btn-cta" type="submit">Počni besplatno →</button>
-      </form>
-      <div id="ctaSuccess"></div>
-      <p class="cta-note">✓ 1 mjesec besplatno &nbsp;·&nbsp; ✓ Bez kreditne kartice &nbsp;·&nbsp; ✓ Otkaz kad god</p>
+    <div class="hp-head sr">
+      <span class="chip chip-orange">Resursi</span>
+      <h2>Besplatni vodiči i šabloni</h2>
+      <p>Praktični savjeti za domaćine — koristite ih i bez SmartStay naloga.</p>
+    </div>
+    <div class="hp-res-grid">
+      <a class="hp-res sr" href="/resursi/kucni-red-za-apartmane/"><h3>Kućni red za apartmane</h3><p>Šablon koji možete kopirati ili odštampati.</p></a>
+      <a class="hp-res sr sr-d1" href="/resursi/upute-za-goste/"><h3>Upute za goste</h3><p>Šta gost treba znati prije i tokom boravka.</p></a>
+      <a class="hp-res sr sr-d2" href="/resursi/self-check-in/"><h3>Self check-in</h3><p>Kako organizovati dolazak bez ključa u ruci.</p></a>
+      <a class="hp-res sr sr-d3" href="/resursi/checklista-za-pripremu-apartmana/"><h3>Checklista za pripremu</h3><p>Sve što treba provjeriti prije dolaska gosta.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA (navy) -->
+<section class="hp-final">
+  <div class="container">
+    <span class="chip">Počnite danas</span>
+    <h2>Izaberite svoj tip smještaja</h2>
+    <p>30 dana besplatno, bez kreditne kartice. Otkazujete kad god.</p>
+    <div class="hp-final-ctas">
+      <a class="hp-btn hp-btn-white" href="/apartmani/#kontakt">Počnite — Apartmani →</a>
+      <a class="hp-btn hp-btn-orange" href="/hoteli/#kontakt">Počnite — Hotel →</a>
     </div>
   </div>
 </section>
@@ -932,167 +855,43 @@
   <div class="container">
     <div class="footer-grid-light">
       <div class="f-brand-light">
-        <span class="f-logo">Smart<span>Stay</span></span>
-        <p class="f-tagline">Digitalni vodiči za goste koji uštede domaćinima sate sedmično. Prilagođen tržištu Bosne i Hercegovine.</p>
+        <a href="/" class="f-logo" style="text-decoration:none">Smart<span>Stay</span></a>
+        <p class="f-tagline">Digitalni vodiči i komunikacija s gostima za apartmane i hotele. Prilagođen tržištu Bosne i Hercegovine.</p>
         <p class="f-email-txt">info@smartstay.ba</p>
       </div>
       <div class="f-col-light">
         <h5>Proizvod</h5>
         <ul class="f-links-light">
-          <li><a href="#features">Funkcionalnosti</a></li>
+          <li><a href="/apartmani/">Za apartmane</a></li>
+          <li><a href="/hoteli/">Za hotele</a></li>
+          <li><a href="/apartmani/#pricing">Cijene za apartmane</a></li>
           <li><a href="#ai">AI Asistent</a></li>
-          <li><a href="#pricing">Cijene</a></li>
-          <li><a href="#how">Kako radi</a></li>
           <li><a href="/resursi/">Resursi</a></li>
         </ul>
       </div>
     </div>
     <div class="f-bottom-light">
-      <span>© 2025 SmartStay. Sva prava zadržana.</span>
+      <span>© 2026 SmartStay. Sva prava zadržana.</span>
       <div style="display:flex;gap:20px"><a href="#">Privatnost</a><a href="#">Uvjeti korištenja</a></div>
     </div>
   </div>
 </footer>
 
-<!-- TRIAL POPUP -->
-<div id="trialPopup" style="display:none;position:fixed;inset:0;z-index:200;align-items:flex-end;justify-content:center;padding:16px;">
-  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);" onclick="dismissPopup()"></div>
-  <div style="position:relative;width:100%;max-width:420px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 24px 80px rgba(15,47,97,0.3);margin-bottom:16px;">
-    <div style="background:var(--orange);padding:20px 24px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
-      <div>
-        <div style="color:rgba(255,255,255,0.8);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;">🎁 Ograničena ponuda</div>
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:800;color:#fff;">30 dana besplatno</div>
-        <div style="color:rgba(255,255,255,0.75);font-size:13px;margin-top:2px;">Bez kreditne kartice</div>
-      </div>
-      <button onclick="dismissPopup()" style="background:transparent;border:none;color:rgba(255,255,255,0.7);cursor:pointer;font-size:20px;padding:4px;line-height:1;">✕</button>
-    </div>
-    <div style="padding:20px 24px;">
-      <p style="color:#444;font-size:14px;line-height:1.65;margin-bottom:14px;">Isprobajte SmartStay potpuno besplatno — digitalni vodič za vaše goste, AI chatbot 24/7.</p>
-      <ul style="margin-bottom:18px;list-style:none;display:flex;flex-direction:column;gap:8px;">
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:#262626;"><span style="color:#22c55e;font-weight:700;">✓</span> Neograničen broj gostiju</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:#262626;"><span style="color:#22c55e;font-weight:700;">✓</span> AI chatbot uključen</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:#262626;"><span style="color:#22c55e;font-weight:700;">✓</span> Otkaz kad god, bez obaveze</li>
-      </ul>
-      <form id="popupForm" onsubmit="handlePopupSubmit(event)" style="display:flex;flex-direction:column;gap:10px;">
-        <input type="email" placeholder="vas@email.com" required style="height:46px;padding:0 16px;border-radius:10px;border:1.5px solid var(--border);font-size:14px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='var(--border)'"/>
-        <button type="submit" style="height:46px;background:var(--navy);color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;border:none;border-radius:10px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--navy-2)'" onmouseout="this.style.background='var(--navy)'">Počnite besplatni trial →</button>
-      </form>
-      <div id="popupSuccess" style="display:none;"></div>
-    </div>
-  </div>
-</div>
-
 <script>
   // Nav scroll
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
-
   // Scroll reveal
   const srObs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); srObs.unobserve(e.target); } });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.sr').forEach(el => srObs.observe(el));
-
-  // Video on scroll
-  const demoVideo = document.getElementById('demoVideo');
-  if (demoVideo) {
-    new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) demoVideo.play(); else demoVideo.pause(); });
-    }, { threshold: 0.4 }).observe(demoVideo);
-  }
-
-  // How steps
-  function setStep(el) {
-    document.querySelectorAll('.how-step').forEach(s => s.classList.remove('active'));
-    el.classList.add('active');
-  }
-
-  // FAQ
-  function toggleFaqLight(btn) {
-    var item = btn.closest('.fq');
-    var ans = item.querySelector('.fq-ans');
-    var isOpen = item.classList.contains('open');
-    document.querySelectorAll('.fq.open').forEach(function(el) { el.classList.remove('open'); el.querySelector('.fq-ans').style.display = 'none'; });
-    if (!isOpen) { item.classList.add('open'); ans.style.display = 'block'; }
-  }
-
-  // Smooth scroll
+  // Smooth scroll for in-page links
   document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', function(e) {
-      e.preventDefault();
+    a.addEventListener('click', function (e) {
       const t = document.querySelector(this.getAttribute('href'));
-      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
-  });
-
-  // Form submissions — after a successful signup show "Kreiraj nalog" right away,
-  // so the visitor goes straight to the app instead of waiting for the email.
-  const APP_REGISTER = 'https://app.smartstay.ba/register';
-  async function submitEmail(email, source) {
-    try {
-      const res = await fetch('https://app.smartstay.ba/api/contact-form', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source }),
-      });
-      return res.ok;
-    } catch (_) { return false; }
-  }
-
-  function showOpenApp(boxId, email) {
-    const box = document.getElementById(boxId);
-    if (!box) return;
-    const url = APP_REGISTER + '?email=' + encodeURIComponent(email);
-    box.innerHTML =
-      '<div class="signup-ok">' +
-        '<div class="signup-ok-title">✓ Vaš pristup je spreman!</div>' +
-        '<div class="signup-ok-sub">Kreirajte nalog i počnite odmah — 30 dana besplatno, bez kartice.</div>' +
-        '<a class="btn-open-app" href="' + url + '">Kreiraj nalog i otvori aplikaciju →</a>' +
-      '</div>';
-    box.style.display = 'block';
-  }
-
-  async function handleSignup(e, source, successId) {
-    e.preventDefault();
-    const form = e.target;
-    const input = form.querySelector('input[type="email"]');
-    const btn = form.querySelector('button[type="submit"]');
-    const email = input.value.trim();
-    const old = form.parentNode.querySelector('.signup-err'); if (old) old.remove();
-    if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Šaljem…'; }
-    const ok = await submitEmail(email, source);
-    if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label; }
-    if (!ok) {
-      const err = document.createElement('div');
-      err.className = 'signup-err';
-      err.textContent = 'Nešto nije u redu — provjerite email i pokušajte ponovo.';
-      form.insertAdjacentElement('afterend', err);
-      return false;
-    }
-    form.style.display = 'none';
-    showOpenApp(successId, email);
-    return true;
-  }
-
-  async function handleHeroSubmit(e) { await handleSignup(e, 'hero_form', 'heroSuccess'); }
-  async function handleCtaSubmit(e) { await handleSignup(e, 'cta_form', 'ctaSuccess'); }
-
-  // Popup
-  function dismissPopup() {
-    localStorage.setItem('smartstay_trial_popup_v1', '1');
-    document.getElementById('trialPopup').style.display = 'none';
-    document.body.style.overflow = '';
-  }
-  async function handlePopupSubmit(e) {
-    if (await handleSignup(e, 'trial_popup', 'popupSuccess')) {
-      localStorage.setItem('smartstay_trial_popup_v1', '1'); // don't show the popup again
-    }
-  }
-  window.addEventListener('load', () => {
-    if (localStorage.getItem('smartstay_trial_popup_v1')) return;
-    setTimeout(() => {
-      document.getElementById('trialPopup').style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }, 4000);
   });
 </script>
 </body>
