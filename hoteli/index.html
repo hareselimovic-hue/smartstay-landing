@@ -36,7 +36,7 @@
         "inLanguage": "bs",
         "description": "Digitalni vodič i recepcija za hotele: QR kod za svaku sobu, zahtjevi recepciji sa statusom, room service, dodatne usluge, rezervacije i obavijesti gostima na četiri jezika.",
         "image": "https://smartstay.ba/og-image.jpg",
-        "offers": { "@type": "Offer", "priceCurrency": "BAM", "description": "Cijena po dogovoru, prema broju soba. 30 dana besplatno." },
+        "offers": { "@type": "AggregateOffer", "priceCurrency": "BAM", "lowPrice": "59", "highPrice": "169", "offerCount": "4", "description": "Mjesečno prema broju soba: do 7 soba 59 KM, 8–15 soba 79 KM, 16–40 soba 119 KM, 41–80 soba 169 KM. 30 dana besplatno." },
         "publisher": { "@id": "https://smartstay.ba/#org" }
       },
       {
@@ -54,7 +54,7 @@
           { "@type": "Question", "name": "Mogu li pojedine sobe imati drugačije informacije, npr. drugi WiFi?", "acceptedAnswer": { "@type": "Answer", "text": "Da. Sve sobe prate opći vodič hotela, a za pojedine sobe ili depandansu možete promijeniti samo ono što se razlikuje — npr. WiFi ili parking." } },
           { "@type": "Question", "name": "Na kojim jezicima radi?", "acceptedAnswer": { "@type": "Answer", "text": "Gosti biraju engleski, njemački, turski ili italijanski. Vi pišete na bosanskom ili engleskom, a obavijesti i odgovori recepcije prevode se automatski." } },
           { "@type": "Question", "name": "Zamjenjuje li SmartStay naš sistem za rezervacije?", "acceptedAnswer": { "@type": "Answer", "text": "Ne. SmartStay radi uz vaš postojeći sistem i služi za komunikaciju s gostima tokom boravka." } },
-          { "@type": "Question", "name": "Koliko košta?", "acceptedAnswer": { "@type": "Answer", "text": "Cijena je po dogovoru i zavisi od broja soba. Prvih 30 dana je besplatno, bez kreditne kartice." } }
+          { "@type": "Question", "name": "Koliko košta?", "acceptedAnswer": { "@type": "Answer", "text": "Cijena zavisi samo od broja soba: do 7 soba 59 KM, 8–15 soba 79 KM, 16–40 soba 119 KM i 41–80 soba 169 KM mjesečno. Sve funkcije su uključene u svaki paket. Hoteli s više od 80 soba — po dogovoru. Prvih 30 dana je besplatno, bez kreditne kartice." } }
         ]
       }
     ]
@@ -220,6 +220,15 @@
     .cta-price { margin: 26px auto 0; max-width: 560px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.12); font-size: 15px; color: rgba(255,255,255,.75); }
     .cta-price strong { display: block; color: #fff; margin-bottom: 4px; }
     .cta-price a { color: var(--orange); font-weight: 700; text-decoration: none; }
+    .cta-price { max-width: 720px; }
+    .tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0 12px; }
+    .tier { display: flex; flex-direction: column; gap: 2px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 16px; padding: 14px 10px; }
+    .t-name { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #fff; font-size: 15px; }
+    .t-rooms { font-size: 12.5px; color: rgba(255,255,255,.6); }
+    .t-amt { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--orange); font-size: 26px; margin-top: 4px; }
+    .t-amt small { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.6); }
+    .tiers-note { font-size: 13.5px; color: rgba(255,255,255,.65); }
+    @media (max-width: 600px) { .tiers { grid-template-columns: repeat(2, 1fr); } }
     .signup-ok { background: rgba(255,255,255,.08); border: 1px solid rgba(34,197,94,.45); border-radius: 18px; padding: 20px; margin: 0 auto 14px; max-width: 520px; }
     .signup-ok-title { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #4ade80; font-size: 18px; }
     .signup-ok-sub { color: rgba(255,255,255,.8); font-size: 14px; margin: 4px 0 14px; }
@@ -405,7 +414,7 @@
           <tr><td>Promjena informacija</td><td class="no">novo štampanje</td><td>da</td><td class="us yes">odmah, za sve sobe</td></tr>
           <tr><td>Zahtjevi i narudžbe</td><td class="no">ne</td><td>da</td><td class="us yes">da, sa statusom za gosta</td></tr>
           <tr><td>Na bosanskom, lokalna podrška</td><td>—</td><td class="no">rijetko</td><td class="us yes">da</td></tr>
-          <tr><td>Cijena</td><td>štampa</td><td class="no">često 100–500 € mjesečno</td><td class="us yes">po dogovoru, prema broju soba</td></tr>
+          <tr><td>Cijena</td><td>štampa</td><td class="no">često 100–500 € mjesečno</td><td class="us yes">od 59 KM mjesečno, prema broju soba</td></tr>
         </tbody>
       </table>
     </div>
@@ -425,7 +434,7 @@
       <details><summary>Mogu li pojedine sobe imati drugačije informacije, npr. drugi WiFi?</summary><p>Da. Sve sobe prate opći vodič hotela, a za pojedine sobe ili depandansu promijenite samo ono što se razlikuje — npr. WiFi ili parking.</p></details>
       <details><summary>Na kojim jezicima radi?</summary><p>Gosti biraju engleski, njemački, turski ili italijanski. Vi pišete na bosanskom ili engleskom, a obavijesti i odgovori recepcije prevode se automatski.</p></details>
       <details><summary>Zamjenjuje li SmartStay naš sistem za rezervacije?</summary><p>Ne. SmartStay radi uz vaš postojeći sistem i služi za komunikaciju s gostima tokom boravka.</p></details>
-      <details><summary>Koliko košta?</summary><p>Cijena je po dogovoru i zavisi od broja soba. Prvih 30 dana je besplatno, bez kreditne kartice.</p></details>
+      <details><summary>Koliko košta?</summary><p>Cijena zavisi samo od broja soba: do 7 soba 59 KM, 8–15 soba 79 KM, 16–40 soba 119 KM i 41–80 soba 169 KM mjesečno. Sve funkcije su uključene u svaki paket. Godišnje plaćanje: 2 mjeseca gratis. Hoteli s više od 80 soba — po dogovoru. Prvih 30 dana je besplatno, bez kreditne kartice.</p></details>
     </div>
   </div>
 </section>
@@ -444,8 +453,14 @@
       <div id="ctaSuccess" style="display:none"></div>
       <p class="cta-note">✓ 30 dana besplatno &nbsp;·&nbsp; ✓ Bez kreditne kartice &nbsp;·&nbsp; ✓ Sve funkcije uključene</p>
       <div class="cta-price">
-        <strong>Cijena po dogovoru, prema broju soba.</strong>
-        Radije želite ponudu odmah? <a href="mailto:info@smartstay.ba?subject=Ponuda%20za%20hotel&amp;body=Naziv%20hotela%3A%0ABroj%20soba%3A%0AGrad%3A%0ATelefon%3A">Pišite nam broj soba →</a>
+        <strong>Cijena prema broju soba — sve funkcije u svakom paketu</strong>
+        <div class="tiers">
+          <div class="tier"><span class="t-name">Mini</span><span class="t-rooms">do 7 soba</span><span class="t-amt">59 <small>KM/mj</small></span></div>
+          <div class="tier"><span class="t-name">Mali</span><span class="t-rooms">8–15 soba</span><span class="t-amt">79 <small>KM/mj</small></span></div>
+          <div class="tier"><span class="t-name">Srednji</span><span class="t-rooms">16–40 soba</span><span class="t-amt">119 <small>KM/mj</small></span></div>
+          <div class="tier"><span class="t-name">Veliki</span><span class="t-rooms">41–80 soba</span><span class="t-amt">169 <small>KM/mj</small></span></div>
+        </div>
+        <p class="tiers-note">Godišnje plaćanje: 2 mjeseca gratis. Više od 80 soba? <a href="mailto:info@smartstay.ba?subject=Ponuda%20za%20hotel&amp;body=Naziv%20hotela%3A%0ABroj%20soba%3A%0AGrad%3A%0ATelefon%3A">Pišite nam za ponudu →</a></p>
       </div>
     </div>
   </div>
