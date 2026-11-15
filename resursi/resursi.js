@@ -1,4 +1,9 @@
 // SmartStay — Resursi: kopiranje/printanje šablona, opcije, checkliste
+// Messages follow the page language (bs pages and /en/ pages share this file)
+const PAGE_EN = (document.documentElement.lang || '').toLowerCase().startsWith('en');
+const MSG = PAGE_EN
+  ? { copied: 'Copied ✓', failed: 'Copying failed, please select the text manually.' }
+  : { copied: 'Kopirano ✓', failed: 'Kopiranje nije uspjelo, označite tekst ručno.' };
 
 function tplText(lang) {
   const tpl = document.getElementById('tpl');
@@ -35,7 +40,7 @@ function toast(msg) {
 
 function copyTpl(lang) {
   const text = tplText(lang || 'both');
-  const done = () => toast('Kopirano ✓');
+  const done = () => toast(MSG.copied);
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(text).then(done, () => fallbackCopy(text, done));
   } else {
@@ -47,7 +52,7 @@ function fallbackCopy(text, done) {
   const ta = document.createElement('textarea');
   ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
   document.body.appendChild(ta); ta.select();
-  try { document.execCommand('copy'); done(); } catch (e) { toast('Kopiranje nije uspjelo, označite tekst ručno.'); }
+  try { document.execCommand('copy'); done(); } catch (e) { toast(MSG.failed); }
   ta.remove();
 }
 

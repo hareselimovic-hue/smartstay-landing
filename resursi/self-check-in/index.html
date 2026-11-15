@@ -70,6 +70,15 @@
     .btn-nav { padding:8px 14px; font-size:13px; margin-left:auto; }
   }
 </style>
+<!-- i18n --><link rel="alternate" hreflang="bs" href="https://smartstay.ba/resursi/self-check-in/"/>
+  <link rel="alternate" hreflang="en" href="https://smartstay.ba/en/resources/self-check-in/"/>
+  <link rel="alternate" hreflang="x-default" href="https://smartstay.ba/resursi/self-check-in/"/>
+  <!-- i18n --><style>
+  .nav-lang { font-size:13px; font-weight:700; color:var(--navy); border:1px solid var(--border); border-radius:999px; padding:6px 11px; text-decoration:none; flex-shrink:0; letter-spacing:.03em; transition:background .2s; }
+  .nav-lang:hover { background:#F7F7F5; }
+  .nav-links .nav-lang-li { display:none; }
+  @media (max-width: 600px) { .nav-lang { display:none; } .nav-links .nav-lang-li { display:block; border-top:1px solid var(--border); margin-top:6px; padding-top:6px; } }
+</style>
 </head>
 <body>
 
@@ -82,8 +91,10 @@
         <li><a href="/apartmani/#ai">AI Asistent</a></li>
         <li><a href="/apartmani/#pricing">Cijene</a></li>
         <li><a href="/resursi/" class="active">Resursi</a></li>
+        <li class="nav-lang-li"><a href="/en/resources/self-check-in/">🇬🇧 English version</a></li>
       </ul>
       <a href="/apartmani/#kontakt" class="btn-nav">Isprobaj besplatno →</a>
+      <a class="nav-lang" href="/en/resources/self-check-in/" title="English">EN</a>
       <button class="nav-burger" type="button" aria-label="Meni" aria-expanded="false" aria-controls="nav-links"><span class="bar"></span></button>
     </div>
   </div>
