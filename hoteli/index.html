@@ -15,13 +15,13 @@
   <meta property="og:locale" content="bs_BA"/>
   <meta property="og:url" content="https://smartstay.ba/hoteli/"/>
   <meta property="og:title" content="SmartStay za hotele — digitalna recepcija i vodič za goste"/>
-  <meta property="og:description" content="QR kod u svakoj sobi: zahtjevi recepciji, room service, dodatne usluge i obavijesti gostima na 4 jezika. Bez aplikacije."/>
+  <meta property="og:description" content="QR kod u svakoj sobi: zahtjevi recepciji, room service, dodatne usluge i obavijesti gostima na 5 jezika. Bez aplikacije."/>
   <meta property="og:image" content="https://smartstay.ba/og-image.jpg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:title" content="SmartStay za hotele — digitalna recepcija i vodič za goste"/>
-  <meta name="twitter:description" content="QR kod u svakoj sobi: zahtjevi recepciji, room service, dodatne usluge i obavijesti gostima na 4 jezika."/>
+  <meta name="twitter:description" content="QR kod u svakoj sobi: zahtjevi recepciji, room service, dodatne usluge i obavijesti gostima na 5 jezika."/>
   <meta name="twitter:image" content="https://smartstay.ba/og-image.jpg"/>
   <script type="application/ld+json">
   {
@@ -52,7 +52,7 @@
           { "@type": "Question", "name": "Moraju li gosti instalirati aplikaciju?", "acceptedAnswer": { "@type": "Answer", "text": "Ne. Gost skenira QR kod kamerom telefona i vodič se odmah otvori u browseru. Nema preuzimanja ni registracije." } },
           { "@type": "Question", "name": "Kako recepcija dobija zahtjeve gostiju?", "acceptedAnswer": { "@type": "Answer", "text": "Zahtjevi stižu na ekran recepcije u SmartStay aplikaciji, sa brojem sobe, i na email recepcije. Recepcija klikne Preuzmi ili Završeno, a gost vidi status u vodiču." } },
           { "@type": "Question", "name": "Mogu li pojedine sobe imati drugačije informacije, npr. drugi WiFi?", "acceptedAnswer": { "@type": "Answer", "text": "Da. Sve sobe prate opći vodič hotela, a za pojedine sobe ili depandansu možete promijeniti samo ono što se razlikuje — npr. WiFi ili parking." } },
-          { "@type": "Question", "name": "Na kojim jezicima radi?", "acceptedAnswer": { "@type": "Answer", "text": "Gosti biraju engleski, njemački, turski ili italijanski. Vi pišete na bosanskom ili engleskom, a obavijesti i odgovori recepcije prevode se automatski." } },
+          { "@type": "Question", "name": "Na kojim jezicima radi?", "acceptedAnswer": { "@type": "Answer", "text": "Gosti biraju bosanski, engleski, njemački, turski ili italijanski. Vi pišete na bosanskom ili engleskom, a obavijesti i odgovori recepcije prevode se automatski." } },
           { "@type": "Question", "name": "Zamjenjuje li SmartStay naš sistem za rezervacije?", "acceptedAnswer": { "@type": "Answer", "text": "Ne. SmartStay radi uz vaš postojeći sistem i služi za komunikaciju s gostima tokom boravka." } },
           { "@type": "Question", "name": "Koliko košta?", "acceptedAnswer": { "@type": "Answer", "text": "Cijena zavisi samo od broja soba: do 7 soba 59 KM, 8–15 soba 79 KM, 16–40 soba 119 KM i 41–80 soba 169 KM mjesečno. Sve funkcije su uključene u svaki paket. Hoteli s više od 80 soba — po dogovoru. Prvih 30 dana je besplatno, bez kreditne kartice." } }
         ]
@@ -250,6 +250,25 @@
 
     @media (max-width: 600px) { section { padding: 64px 0; } .hero { padding: 40px 0 56px; } }
   </style>
+<style>
+  /* Mobile menu (hamburger) */
+  .nav-burger { display:none; width:40px; height:40px; border:1px solid var(--border); border-radius:10px; background:#fff; cursor:pointer; padding:0; align-items:center; justify-content:center; flex-shrink:0; }
+  .nav-burger .bar { display:block; width:18px; height:2px; background:var(--navy); border-radius:2px; position:relative; transition:background .2s; }
+  .nav-burger .bar::before, .nav-burger .bar::after { content:""; position:absolute; left:0; width:18px; height:2px; background:var(--navy); border-radius:2px; transition:transform .2s, top .2s; }
+  .nav-burger .bar::before { top:-6px; } .nav-burger .bar::after { top:6px; }
+  nav.menu-open .nav-burger .bar { background:transparent; }
+  nav.menu-open .nav-burger .bar::before { top:0; transform:rotate(45deg); }
+  nav.menu-open .nav-burger .bar::after { top:0; transform:rotate(-45deg); }
+  @media (max-width: 960px) {
+    .nav-inner { gap:10px; }
+    .nav-burger { display:inline-flex; }
+    .nav-links { display:none; position:absolute; left:0; right:0; top:100%; flex-direction:column; align-items:stretch; gap:2px; margin:0; padding:8px 16px 16px; background:#fff; border-bottom:1px solid var(--border); box-shadow:0 16px 32px rgba(15,47,97,.10); }
+    nav.menu-open .nav-links { display:flex; }
+    .nav-links li { list-style:none; }
+    .nav-links a { display:block; padding:13px 14px; font-size:16px; font-weight:600; color:var(--navy); border-radius:10px; }
+    .btn-nav { padding:8px 14px; font-size:13px; margin-left:auto; }
+  }
+</style>
 </head>
 <body>
 
@@ -257,7 +276,7 @@
   <div class="container">
     <div class="nav-inner">
       <a href="/" class="nav-logo">Smart<span>Stay</span></a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links">
         <li><a href="#funkcije">Funkcije</a></li>
         <li><a href="#kako-radi">Kako radi</a></li>
         <li><a href="#demo">Demo</a></li>
@@ -266,6 +285,7 @@
         <li><a href="/apartmani/">Za apartmane</a></li>
       </ul>
       <a href="#kontakt" class="btn btn-orange btn-nav">Zatraži pristup →</a>
+      <button class="nav-burger" type="button" aria-label="Meni" aria-expanded="false" aria-controls="nav-links"><span class="bar"></span></button>
     </div>
   </div>
 </nav>
@@ -327,7 +347,7 @@
       <div class="feat"><div class="ic">🎁</div><h3>Dodatne usluge</h3><p>Transfer, kasni check-out, izleti, vino u sobi — po kategorijama, kao mala prodavnica vašeg hotela.</p></div>
       <div class="feat"><div class="ic">📅</div><h3>Rezervacije</h3><p>Spa, sauna, sto u restoranu ili sala za sastanke — gost bira termin i broj osoba.</p></div>
       <div class="feat"><div class="ic">📢</div><h3>Obavijesti svim gostima</h3><p>„Večeras live muzika u lobby baru“ — napišete jednom, svi gosti vide traku na vrhu vodiča.</p></div>
-      <div class="feat"><div class="ic">🌍</div><h3>4 jezika automatski</h3><p>Engleski, njemački, turski, italijanski. Vi pišete na bosanskom, prevod radi sam.</p></div>
+      <div class="feat"><div class="ic">🌍</div><h3>5 jezika automatski</h3><p>Bosanski, engleski, njemački, turski, italijanski. Vi pišete na bosanskom, prevod radi sam.</p></div>
       <div class="feat"><div class="ic">🏢</div><h3>Posebne info po sobi</h3><p>Depandansa ima drugi WiFi? Promijenite samo to — sve ostalo i dalje prati vodič hotela.</p></div>
       <div class="feat"><div class="ic">⭐</div><h3>Google recenzije</h3><p>Kartica „Ocijenite nas na Googleu“ na kraju vodiča — kao one na pultu recepcije, samo uvijek pri ruci.</p></div>
     </div>
@@ -432,7 +452,7 @@
       <details><summary>Moraju li gosti instalirati aplikaciju?</summary><p>Ne. Gost skenira QR kod kamerom telefona i vodič se odmah otvori u browseru. Nema preuzimanja ni registracije.</p></details>
       <details><summary>Kako recepcija dobija zahtjeve gostiju?</summary><p>Zahtjevi stižu na ekran recepcije u SmartStay aplikaciji, sa brojem sobe, i na email recepcije. Recepcija klikne „Preuzmi“ ili „Završeno“, a gost vidi status u vodiču.</p></details>
       <details><summary>Mogu li pojedine sobe imati drugačije informacije, npr. drugi WiFi?</summary><p>Da. Sve sobe prate opći vodič hotela, a za pojedine sobe ili depandansu promijenite samo ono što se razlikuje — npr. WiFi ili parking.</p></details>
-      <details><summary>Na kojim jezicima radi?</summary><p>Gosti biraju engleski, njemački, turski ili italijanski. Vi pišete na bosanskom ili engleskom, a obavijesti i odgovori recepcije prevode se automatski.</p></details>
+      <details><summary>Na kojim jezicima radi?</summary><p>Gosti biraju bosanski, engleski, njemački, turski ili italijanski. Vi pišete na bosanskom ili engleskom, a obavijesti i odgovori recepcije prevode se automatski.</p></details>
       <details><summary>Zamjenjuje li SmartStay naš sistem za rezervacije?</summary><p>Ne. SmartStay radi uz vaš postojeći sistem i služi za komunikaciju s gostima tokom boravka.</p></details>
       <details><summary>Koliko košta?</summary><p>Cijena zavisi samo od broja soba: do 7 soba 59 KM, 8–15 soba 79 KM, 16–40 soba 119 KM i 41–80 soba 169 KM mjesečno. Sve funkcije su uključene u svaki paket. Hoteli s više od 80 soba — po dogovoru. Prvih 30 dana je besplatno, bez kreditne kartice.</p></details>
     </div>
@@ -533,6 +553,16 @@
       '</div>';
     box.style.display = 'block';
   }
+</script>
+<script>
+(function(){
+  var nav=document.querySelector('nav'); var btn=nav&&nav.querySelector('.nav-burger'); if(!btn) return;
+  function close(){ nav.classList.remove('menu-open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click',function(e){ e.stopPropagation(); var open=nav.classList.toggle('menu-open'); btn.setAttribute('aria-expanded',open?'true':'false'); });
+  nav.querySelectorAll('.nav-links a').forEach(function(a){ a.addEventListener('click',close); });
+  document.addEventListener('click',function(e){ if(!nav.contains(e.target)) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
 </script>
 </body>
 </html>

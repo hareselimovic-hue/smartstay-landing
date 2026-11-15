@@ -45,6 +45,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="/resursi/resursi.css"/>
+<style>
+  /* Mobile menu (hamburger) */
+  .nav-burger { display:none; width:40px; height:40px; border:1px solid var(--border); border-radius:10px; background:#fff; cursor:pointer; padding:0; align-items:center; justify-content:center; flex-shrink:0; }
+  .nav-burger .bar { display:block; width:18px; height:2px; background:var(--navy); border-radius:2px; position:relative; transition:background .2s; }
+  .nav-burger .bar::before, .nav-burger .bar::after { content:""; position:absolute; left:0; width:18px; height:2px; background:var(--navy); border-radius:2px; transition:transform .2s, top .2s; }
+  .nav-burger .bar::before { top:-6px; } .nav-burger .bar::after { top:6px; }
+  nav.menu-open .nav-burger .bar { background:transparent; }
+  nav.menu-open .nav-burger .bar::before { top:0; transform:rotate(45deg); }
+  nav.menu-open .nav-burger .bar::after { top:0; transform:rotate(-45deg); }
+  @media (max-width: 960px) {
+    .nav-inner { gap:10px; }
+    .nav-burger { display:inline-flex; }
+    .nav-links { display:none; position:absolute; left:0; right:0; top:100%; flex-direction:column; align-items:stretch; gap:2px; margin:0; padding:8px 16px 16px; background:#fff; border-bottom:1px solid var(--border); box-shadow:0 16px 32px rgba(15,47,97,.10); }
+    nav.menu-open .nav-links { display:flex; }
+    .nav-links li { list-style:none; }
+    .nav-links a { display:block; padding:13px 14px; font-size:16px; font-weight:600; color:var(--navy); border-radius:10px; }
+    .btn-nav { padding:8px 14px; font-size:13px; margin-left:auto; }
+  }
+</style>
 </head>
 <body>
 
@@ -52,13 +71,14 @@
   <div class="container">
     <div class="nav-inner">
       <a href="/" class="nav-logo">Smart<span>Stay</span></a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links">
         <li><a href="/apartmani/#features">Funkcionalnosti</a></li>
         <li><a href="/apartmani/#ai">AI Asistent</a></li>
         <li><a href="/apartmani/#pricing">Cijene</a></li>
         <li><a href="/resursi/" class="active">Resursi</a></li>
       </ul>
       <a href="/apartmani/#kontakt" class="btn-nav">Isprobaj besplatno →</a>
+      <button class="nav-burger" type="button" aria-label="Meni" aria-expanded="false" aria-controls="nav-links"><span class="bar"></span></button>
     </div>
   </div>
 </nav>
@@ -143,5 +163,15 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  var nav=document.querySelector('nav'); var btn=nav&&nav.querySelector('.nav-burger'); if(!btn) return;
+  function close(){ nav.classList.remove('menu-open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click',function(e){ e.stopPropagation(); var open=nav.classList.toggle('menu-open'); btn.setAttribute('aria-expanded',open?'true':'false'); });
+  nav.querySelectorAll('.nav-links a').forEach(function(a){ a.addEventListener('click',close); });
+  document.addEventListener('click',function(e){ if(!nav.contains(e.target)) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
+</script>
 </body>
 </html>

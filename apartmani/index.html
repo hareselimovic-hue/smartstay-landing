@@ -529,6 +529,25 @@
       .btn-nav { font-size:13px; padding:8px 14px; }
     }
   </style>
+<style>
+  /* Mobile menu (hamburger) */
+  .nav-burger { display:none; width:40px; height:40px; border:1px solid var(--border); border-radius:10px; background:#fff; cursor:pointer; padding:0; align-items:center; justify-content:center; flex-shrink:0; }
+  .nav-burger .bar { display:block; width:18px; height:2px; background:var(--navy); border-radius:2px; position:relative; transition:background .2s; }
+  .nav-burger .bar::before, .nav-burger .bar::after { content:""; position:absolute; left:0; width:18px; height:2px; background:var(--navy); border-radius:2px; transition:transform .2s, top .2s; }
+  .nav-burger .bar::before { top:-6px; } .nav-burger .bar::after { top:6px; }
+  nav.menu-open .nav-burger .bar { background:transparent; }
+  nav.menu-open .nav-burger .bar::before { top:0; transform:rotate(45deg); }
+  nav.menu-open .nav-burger .bar::after { top:0; transform:rotate(-45deg); }
+  @media (max-width: 960px) {
+    .nav-inner { gap:10px; }
+    .nav-burger { display:inline-flex; }
+    .nav-links { display:none; position:absolute; left:0; right:0; top:100%; flex-direction:column; align-items:stretch; gap:2px; margin:0; padding:8px 16px 16px; background:#fff; border-bottom:1px solid var(--border); box-shadow:0 16px 32px rgba(15,47,97,.10); }
+    nav.menu-open .nav-links { display:flex; }
+    .nav-links li { list-style:none; }
+    .nav-links a { display:block; padding:13px 14px; font-size:16px; font-weight:600; color:var(--navy); border-radius:10px; }
+    .btn-nav { padding:8px 14px; font-size:13px; margin-left:auto; }
+  }
+</style>
 </head>
 <body>
 
@@ -537,7 +556,7 @@
   <div class="container">
     <div class="nav-inner">
       <a href="/" class="nav-logo" style="text-decoration:none">Smart<span>Stay</span></a>
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links">
         <li><a href="#features">Funkcionalnosti</a></li>
         <li><a href="#ai">AI Asistent</a></li>
         <li><a href="#how">Kako radi</a></li>
@@ -547,6 +566,7 @@
         <li><a href="/hoteli/">Za hotele</a></li>
       </ul>
       <a href="#kontakt" class="btn-nav">Zatraži pristup →</a>
+      <button class="nav-burger" type="button" aria-label="Meni" aria-expanded="false" aria-controls="nav-links"><span class="bar"></span></button>
     </div>
   </div>
 </nav>
@@ -651,7 +671,7 @@
         <p class="what-body">Digitalni vodič je personalizovana stranica za vaš apartman — gost je otvori odmah po dolasku i pronađe sve informacije koje mu trebaju. Bez PDF-ova. Bez printanih papira. Bez vaše intervencije.</p>
         <div class="what-pts">
           <div class="wp"><div class="wp-icon">📲</div><div><h4>Radi na svakom uređaju</h4><p>Gost otvori link na telefonu, tabletu ili laptopu — bez instalacije ikakve aplikacije.</p></div></div>
-          <div class="wp"><div class="wp-icon">🌍</div><div><h4>Automatski na jeziku gosta</h4><p>Bosanski, engleski, njemački, turski — vodič se prilagođava bez vašeg truda.</p></div></div>
+          <div class="wp"><div class="wp-icon">🌍</div><div><h4>Automatski na jeziku gosta</h4><p>Bosanski, engleski, njemački, turski i italijanski — vodič se prilagođava bez vašeg truda.</p></div></div>
           <div class="wp"><div class="wp-icon">⚡</div><div><h4>Postavite za 10 minuta</h4><p>Unesite informacije jednom — gosti ih koriste zauvijek. Nema ponovnog kucanja.</p></div></div>
         </div>
       </div>
@@ -696,7 +716,7 @@
       <div class="feat-card sr"><div class="feat-icon">📍</div><h3>Lokacija & parking</h3><p>Google Maps link, opis parkinga, ulaz, zgrada — sve na jednom mjestu.</p></div>
       <div class="feat-card sr sr-d1"><div class="feat-icon">⭐</div><h3>Preporuke domaćina</h3><p>Vaši omiljeni restorani, atrakcije, dostava — personalizovani za svaki apartman.</p></div>
       <div class="feat-card sr sr-d2"><div class="feat-icon">💰</div><h3>Upsell usluge</h3><p>Transferi, ture, welcome paket — zarađujte 15–30% više po rezervaciji.</p></div>
-      <div class="feat-card sr"><div class="feat-icon">🌍</div><h3>4 jezika automatski</h3><p>Engleski, njemački, turski, bosanski — AI se prilagođava gostu.</p></div>
+      <div class="feat-card sr"><div class="feat-icon">🌍</div><h3>5 jezika automatski</h3><p>Bosanski, engleski, njemački, turski, italijanski — vodič se prilagođava gostu.</p></div>
       <div class="feat-card sr sr-d1"><div class="feat-icon">📱</div><h3>QR kod</h3><p>Odštampajte i postavite u apartman. Gost skenira, odmah ima sve.</p></div>
       <div class="feat-card sr sr-d2"><div class="feat-icon">👥</div><h3>Tim pristup</h3><p>Dodajte kolege. Svako ima svoja prava pristupa po nekretnini.</p></div>
       <div class="feat-card feat-wide sr"><div class="feat-icon">🛂</div><div><h3>Registracija gostiju <span class="feat-new">Novo</span></h3><p>Gosti prije dolaska sami unesu podatke iz pasoša ili lične karte — ime, datum rođenja, državljanstvo, broj dokumenta. Podaci su šifrovani i stižu vam na email, spremni za prijavu boravka. Bez slikanja dokumenata i prepisivanja.</p></div></div>
@@ -810,7 +830,7 @@
       </div>
       <div class="ai-feats-row sr sr-d2">
         <div class="af"><div class="af-icon">⚡</div><h4>Trenutni odgovori</h4><p>Gost dobije odgovor u sekundi, čak i u 3 ujutro.</p></div>
-        <div class="af"><div class="af-icon">🌍</div><h4>4 jezika automatski</h4><p>AI prepoznaje jezik gosta i odgovara na istom.</p></div>
+        <div class="af"><div class="af-icon">🌍</div><h4>5 jezika automatski</h4><p>AI prepoznaje jezik gosta i odgovara na istom.</p></div>
         <div class="af"><div class="af-icon">🔒</div><h4>Vi kontrolišete sadržaj</h4><p>AI odgovara samo na osnovu vaših informacija.</p></div>
       </div>
     </div>
@@ -863,7 +883,7 @@
           <div class="pf">Digitalni vodič (9 sekcija)</div>
           <div class="pf">QR kod & link za dijeljenje</div>
           <div class="pf">WhatsApp & Viber dijeljenje</div>
-          <div class="pf">AI Asistent (4 jezika, 24/7)</div>
+          <div class="pf">AI Asistent (5 jezika, 24/7)</div>
           <div class="pf">Tim pristup</div>
           <div class="pf">Analitika posjeta</div>
         </div>
@@ -880,7 +900,7 @@
           <div class="pf">Digitalni vodič (9 sekcija)</div>
           <div class="pf">QR kod & link za dijeljenje</div>
           <div class="pf">WhatsApp & Viber dijeljenje</div>
-          <div class="pf">AI Asistent (4 jezika, 24/7)</div>
+          <div class="pf">AI Asistent (5 jezika, 24/7)</div>
           <div class="pf">Tim pristup</div>
           <div class="pf">Analitika posjeta</div>
         </div>
@@ -896,7 +916,7 @@
           <div class="pf">Digitalni vodič (9 sekcija)</div>
           <div class="pf">QR kod & link za dijeljenje</div>
           <div class="pf">WhatsApp & Viber dijeljenje</div>
-          <div class="pf">AI Asistent (4 jezika, 24/7)</div>
+          <div class="pf">AI Asistent (5 jezika, 24/7)</div>
           <div class="pf">Tim pristup</div>
           <div class="pf">Analitika posjeta</div>
           <div class="pf">Upsell usluge (transferi, ture)</div>
@@ -981,7 +1001,7 @@
       </div>
     </div>
     <div class="f-bottom-light">
-      <span>© 2025 SmartStay. Sva prava zadržana.</span>
+      <span>© 2026 SmartStay. Sva prava zadržana.</span>
       <div style="display:flex;gap:20px"><a href="#">Privatnost</a><a href="#">Uvjeti korištenja</a></div>
     </div>
   </div>
@@ -1127,6 +1147,16 @@
       document.body.style.overflow = 'hidden';
     }, 4000);
   });
+</script>
+<script>
+(function(){
+  var nav=document.querySelector('nav'); var btn=nav&&nav.querySelector('.nav-burger'); if(!btn) return;
+  function close(){ nav.classList.remove('menu-open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click',function(e){ e.stopPropagation(); var open=nav.classList.toggle('menu-open'); btn.setAttribute('aria-expanded',open?'true':'false'); });
+  nav.querySelectorAll('.nav-links a').forEach(function(a){ a.addEventListener('click',close); });
+  document.addEventListener('click',function(e){ if(!nav.contains(e.target)) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+})();
 </script>
 </body>
 </html>
