@@ -27,5 +27,8 @@
  "Zahtjevi recepciji, room service, dodatne usluge i obavijesti gostima na 5 jezika. Na telefonu gosta, bez aplikacije.": "Reception requests, room service, extra services and announcements to guests in 5 languages. On the guest's phone, no app.",
  "Zahtjevi recepciji, room service, dodatne usluge i obavijesti gostima na 5 jezika.": "Reception requests, room service, extra services and announcements to guests in 5 languages.",
  "Platforma za komunikaciju s gostima hotela: zahtjevi recepciji sa statusom, room service, dodatne usluge, rezervacije, AI asistent i obavijesti gostima na pet jezika.": "A guest communication platform for hotels: reception requests with a status, room service, extra services, bookings, an AI assistant and announcements to guests in five languages.",
- "WiFi pitanja ove sedmice": "Wi-Fi questions this week"
+ "WiFi pitanja ove sedmice": "Wi-Fi questions this week",
+ "{svg} Isprobaj demo apartman": "{svg} Try the demo apartment",
+ "{svg} Isprobaj demo hotel": "{svg} Try the demo hotel",
+ "Demo: gost u hotelskom vodiču šalje zahtjev recepciji i naručuje room service": "Demo: a guest in the hotel guide sends a request to the reception and orders room service"
 }

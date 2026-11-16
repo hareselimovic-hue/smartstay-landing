@@ -577,12 +577,13 @@
     .ico-inline{width:15px;height:15px;vertical-align:-2px;margin-right:4px;display:inline-block}
     .btn-hero{display:inline-flex;align-items:center;gap:8px;text-decoration:none}
   
-    /* Hero demo: the real guide, playing in a phone frame */
-    .hero-demo { position: relative; width: 100%; max-width: 300px; margin: 0 auto; }
-    .hero-demo-phone { border-radius: 42px; overflow: hidden; border: 9px solid #111827; background: #111827; box-shadow: 0 32px 80px rgba(15,47,97,0.22); }
-    .hero-demo-phone video { display: block; width: 100%; height: auto; aspect-ratio: 390 / 846; object-fit: cover; }
-    .hero-demo .hero-float { left: -96px; bottom: 64px; }
-    @media (max-width: 960px) { .hero-demo { max-width: 250px; } .hero-demo .hero-float { display: none; } }
+  
+    /* Demo link on the audience cards */
+    .hp-path-wrap { position: relative; display: flex; }
+    .hp-path-wrap > .hp-path { flex: 1; }
+    .hp-demo { position: absolute; top: 16px; right: 16px; z-index: 2; display: inline-flex; align-items: center; gap: 6px; background: var(--orange); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 13px; padding: 8px 14px; border-radius: 100px; text-decoration: none; box-shadow: 0 6px 20px rgba(255,103,0,.35); transition: transform .15s, background .2s; }
+    .hp-demo:hover { background: var(--orange-2); transform: translateY(-1px); }
+    .hp-demo svg { width: 14px; height: 14px; }
   </style>
 <style>
   /* Mobile menu (hamburger) */
@@ -652,16 +653,6 @@
           <a href="#pocnite" class="btn-hero">
             Start for free →
           </a>
-          <a href="https://app.smartstay.ba/g/modern-apartment-in-center-of-sarajevo/preview" target="_blank" rel="noopener"
-             style="display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:100px;
-                    border:1.5px solid rgba(15,47,97,0.2);background:rgba(15,47,97,0.04);
-                    color:var(--text-2);font-size:15px;font-weight:500;text-decoration:none;
-                    transition:all 0.2s;"
-             onmouseover="this.style.borderColor='rgba(15,47,97,0.35)';this.style.background='rgba(15,47,97,0.07)'"
-             onmouseout="this.style.borderColor='rgba(15,47,97,0.2)';this.style.background='rgba(15,47,97,0.04)'">
-            <span style="width:28px;height:28px;border-radius:50%;background:rgba(15,47,97,0.1);display:flex;align-items:center;justify-content:center;font-size:10px;padding-left:2px;">▶</span>
-            Open the demo guide
-          </a>
         </div>
         <p class="hero-note">✓ 30 days free &nbsp;·&nbsp; ✓ No credit card &nbsp;·&nbsp; ✓ Cancel anytime</p>
         <div class="hero-trust" style="margin-top:20px">
@@ -674,18 +665,16 @@
           <span><strong>150+ hosts</strong> in Bosnia use SmartStay</span>
         </div>
       </div>
-      <div class="hero-visual sr sr-d2" id="demo">
-        <div class="hero-demo">
-          <div class="hero-demo-phone">
-            <video src="/demo.mp4" autoplay muted loop playsinline preload="metadata" poster="/apartmani/screen-guide.webp" aria-label="Demo: an apartment's digital guide on a guest's phone"></video>
-          </div>
-          <div class="hero-float">
+      <div class="hero-visual sr sr-d2">
+        <div class="hero-img-wrap">
+          <img src="/hero-photo.webp" alt="A host using SmartStay" width="1200" height="1200" fetchpriority="high" />
+        </div>
+        <div class="hero-float">
           <div class="hf-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wifi-off" aria-hidden="true"><path d="M12 20h.01"></path><path d="M8.5 16.429a5 5 0 0 1 7 0"></path><path d="M5 12.859a10 10 0 0 1 5.17-2.69"></path><path d="M19 12.859a10 10 0 0 0-2.007-1.523"></path><path d="M2 8.82a15 15 0 0 1 4.177-2.643"></path><path d="M22 8.82a15 15 0 0 0-11.288-3.764"></path><path d="m2 2 20 20"></path></svg></div>
           <div>
             <div class="hf-num">0</div>
             <div class="hf-lbl">Wi-Fi questions this week</div>
           </div>
-        </div>
         </div>
 
       </div>
@@ -702,7 +691,8 @@
       <p>One platform, tailored to what you actually need.</p>
     </div>
     <div class="hp-paths-grid">
-      <a class="hp-path sr" href="/en/apartments/">
+      <div class="hp-path-wrap">
+        <a class="hp-path sr" href="/en/apartments/">
         <div class="hp-path-media" style="position:relative;">
           <img src="/apartmani/apartment-room.webp" alt="Apartment — guests get one link with all the information" width="1200" height="800" loading="lazy" style="object-position:center 80%;"/>
           <span style="position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--navy);font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;padding:8px 14px;border-radius:100px;box-shadow:0 6px 20px rgba(0,0,0,.18);"><svg class="ico-inline" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg> One link for every guest</span>
@@ -723,7 +713,10 @@
           </div>
         </div>
       </a>
-      <a class="hp-path sr sr-d1" href="/en/hotels/">
+        <a class="hp-demo" href="https://app.smartstay.ba/g/modern-apartment-in-center-of-sarajevo/preview" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg> Try the demo apartment</a>
+      </div>
+      <div class="hp-path-wrap">
+        <a class="hp-path sr sr-d1" href="/en/hotels/">
         <div class="hp-path-media" style="position:relative;">
           <img src="/hoteli/hotel-room.webp" alt="Hotelska soba — gost komunicira s recepcijom preko telefona" width="1200" height="800" loading="lazy" style="object-position:center 55%;"/>
           <span style="position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--navy);font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:13px;padding:8px 14px;border-radius:100px;box-shadow:0 6px 20px rgba(0,0,0,.18);"><svg class="ico-inline" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-concierge-bell" aria-hidden="true"><path d="M3 20a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1Z"></path><path d="M20 16a8 8 0 1 0-16 0"></path><path d="M12 4v4"></path><path d="M10 4h4"></path></svg> Requests and orders from the room</span>
@@ -744,6 +737,8 @@
           </div>
         </div>
       </a>
+        <a class="hp-demo" href="https://app.smartstay.ba/g/hotel-demo-sarajevo/101-thiq" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg> Try the demo hotel</a>
+      </div>
     </div>
   </div>
 </section>
