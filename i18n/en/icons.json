@@ -1,0 +1,15 @@
+{
+ "{svg} Jedan link za svakog gosta": "{svg} One link for every guest",
+ "{svg} QR kod u svakoj sobi": "{svg} A QR code in every room",
+ "{svg} Ograničena ponuda": "{svg} Limited offer",
+ "{svg} Isprobaj kao gost": "{svg} Try it as a guest",
+ "<span class=\"gr-check\">✓</span> {svg} WiFi & pristup internetu": "<span class=\"gr-check\">✓</span> {svg} Wi-Fi & internet access",
+ "<span class=\"gr-check\">✓</span> {svg} Check-in upute korak po korak": "<span class=\"gr-check\">✓</span> {svg} Step-by-step check-in instructions",
+ "<span class=\"gr-check\">✓</span> {svg} Kućni red": "<span class=\"gr-check\">✓</span> {svg} House rules",
+ "<span class=\"gr-check\">✓</span> {svg} Lokacija & parking mapa": "<span class=\"gr-check\">✓</span> {svg} Location & parking map",
+ "<span class=\"gr-check\">✓</span> {svg} Preporuke domaćina": "<span class=\"gr-check\">✓</span> {svg} Host recommendations",
+ "<span class=\"gr-ai\">{svg}</span> AI Asistent — odmah odgovara": "<span class=\"gr-ai\">{svg}</span> AI Assistant — answers instantly",
+ "Da! Parking je <strong>50m od apartmana</strong> odmah iza zgrade. Cijene 2 KM/sat ili 10 KM/dan. Ulična mjesta dostupna od 21h besplatno. 🚗": "Yes! Parking is <strong>50 m from the apartment</strong>, right behind the building. 2 KM/hour or 10 KM/day. Street spots are free after 9 pm. 🚗",
+ "<strong>Tačna adresa i pin na mapi.</strong> Ulica i broj nisu uvijek dovoljni. U mnogim gradovima navigacija zna odvesti na pogrešan ulaz.": "<strong>Exact address and a pin on the map.</strong> Street and number aren't always enough. In many cities, navigation leads to the wrong entrance.",
+ "Svijetao apartman spreman za goste": "A bright apartment ready for guests"
+}

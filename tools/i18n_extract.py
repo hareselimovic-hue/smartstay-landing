@@ -11,7 +11,7 @@ PAGES = [
     "resursi/self-check-in/index.html", "resursi/checklista-za-pripremu-apartmana/index.html",
 ]
 TEXT_TAGS = "title|p|h1|h2|h3|h4|h5|h6|li|a|button|span|summary|td|th|label|em|strong|small|figcaption|option|dt|dd|blockquote|b|i|div"
-BLOCK = re.compile(r"<(p|div|ul|ol|li|section|table|h[1-6]|details|form|nav|header|footer|article|blockquote|tr|img|svg|input|select|textarea)\b", re.I)
+BLOCK = re.compile(r"<(p|div|ul|ol|li|section|table|h[1-6]|details|form|nav|header|footer|article|blockquote|tr|img|input|select|textarea)\b", re.I)
 LETTER3 = re.compile(r"[A-Za-zčćšžđČĆŠŽĐ]{2,}")
 BS_LETTER = re.compile(r"[čćšžđČĆŠŽĐ]")
 ATTRS = ["alt", "placeholder", "aria-label", "title", "content", "data-title", "value"]

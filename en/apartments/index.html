@@ -184,12 +184,12 @@
     .nav-links a:hover { color: var(--navy); background: var(--off); }
     .btn-nav {
       display: inline-flex; align-items: center; gap: 6px;
-      background: var(--navy); color: #fff;
+      background: var(--orange); color: #fff;
       font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700;
       padding: 9px 20px; border-radius: var(--r-md); border: none; cursor: pointer;
       transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
     }
-    .btn-nav:hover { background: var(--navy-2); box-shadow: 0 4px 16px rgba(15,47,97,0.25); transform: translateY(-1px); }
+    .btn-nav:hover { background: var(--orange-2); box-shadow: 0 4px 16px rgba(255,103,0,0.3); transform: translateY(-1px); }
 
     /* ─── HERO ─── */
     .hero {
@@ -575,6 +575,15 @@
     @media (max-width: 400px) {
       .btn-nav { font-size:13px; padding:8px 14px; }
     }
+  
+    /* icons: Lucide SVG instead of emoji */
+    .hf-icon svg,.wp-icon svg,.ic svg,.af-icon svg,.feat-icon svg,.res-icon svg{width:22px;height:22px;color:var(--orange);display:block}
+    .wp-icon svg{width:18px;height:18px}
+    .feat-icon svg,.res-icon svg{color:var(--navy)} .feat-wide .feat-icon svg{color:var(--orange)}
+    .ach-av svg{width:20px;height:20px;color:#fff}
+    .gr-ai svg{width:16px;height:16px;vertical-align:-3px}
+    .ico-inline{width:15px;height:15px;vertical-align:-2px;margin-right:4px;display:inline-block}
+    .btn-hero{display:inline-flex;align-items:center;gap:8px;text-decoration:none}
   </style>
 <style>
   /* Mobile menu (hamburger) */
@@ -645,17 +654,10 @@
           An app for apartment hosts: accommodation details, check-in instructions, Wi-Fi and local tips in one place. A smart digital guide that makes the stay easier for guests and saves you time.
         </p>
         <div style="display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
-          <a href="#kontakt"
-             style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:100px;
-                    background:linear-gradient(135deg,#4F6EF7 0%,#7B5CF5 100%);color:#fff;
-                    font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:800;
-                    text-decoration:none;box-shadow:0 4px 28px rgba(79,110,247,0.45);
-                    transition:transform 0.15s,box-shadow 0.2s;"
-             onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 36px rgba(79,110,247,0.55)'"
-             onmouseout="this.style.transform='';this.style.boxShadow='0 4px 28px rgba(79,110,247,0.45)'">
+          <a href="#kontakt" class="btn-hero">
             Start for free →
           </a>
-          <a href="#demo-section"
+          <a href="https://app.smartstay.ba/g/modern-apartment-in-center-of-sarajevo/preview" target="_blank" rel="noopener"
              style="display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:100px;
                     border:1.5px solid rgba(15,47,97,0.2);background:rgba(15,47,97,0.04);
                     color:var(--text-2);font-size:15px;font-weight:500;text-decoration:none;
@@ -663,7 +665,7 @@
              onmouseover="this.style.borderColor='rgba(15,47,97,0.35)';this.style.background='rgba(15,47,97,0.07)'"
              onmouseout="this.style.borderColor='rgba(15,47,97,0.2)';this.style.background='rgba(15,47,97,0.04)'">
             <span style="width:28px;height:28px;border-radius:50%;background:rgba(15,47,97,0.1);display:flex;align-items:center;justify-content:center;font-size:10px;padding-left:2px;">▶</span>
-            Watch the demo (2 min)
+            Open the demo guide
           </a>
         </div>
         <p class="hero-note">✓ 30 days free &nbsp;·&nbsp; ✓ No credit card &nbsp;·&nbsp; ✓ Cancel anytime</p>
@@ -677,13 +679,13 @@
           <span><strong>150+ hosts</strong> in Bosnia use SmartStay</span>
         </div>
       </div>
-      <div class="hero-visual sr sr-d2">
+      <div class="hero-visual sr sr-d2" id="demo-section">
         <div class="apt-phones">
           <div class="apt-phone back"><img src="/apartmani/screen-wifi.webp" alt="Wi-Fi details in the apartment's digital guide" width="600" height="1298" loading="eager" /></div>
-          <div class="apt-phone front"><img src="/apartmani/screen-guide.webp" alt="The demo apartment's digital guide on a guest's phone" width="600" height="1298" fetchpriority="high" /></div>
+          <div class="apt-phone front"><video src="/demo.mp4" autoplay muted loop playsinline preload="metadata" poster="/apartmani/screen-guide.webp" aria-label="Demo: an apartment's digital guide on a guest's phone" style="display:block;width:100%;height:auto;aspect-ratio:390/846;object-fit:cover"></video></div>
         </div>
         <div class="hero-float">
-          <div class="hf-icon">📵</div>
+          <div class="hf-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wifi-off" aria-hidden="true"><path d="M12 20h.01"></path><path d="M8.5 16.429a5 5 0 0 1 7 0"></path><path d="M5 12.859a10 10 0 0 1 5.17-2.69"></path><path d="M19 12.859a10 10 0 0 0-2.007-1.523"></path><path d="M2 8.82a15 15 0 0 1 4.177-2.643"></path><path d="M22 8.82a15 15 0 0 0-11.288-3.764"></path><path d="m2 2 20 20"></path></svg></div>
           <div>
             <div class="hf-num">0</div>
             <div class="hf-lbl">Wi-Fi questions this week</div>
@@ -728,14 +730,14 @@
         <h2 class="what-h2">Your apartment gets<br><em>its own web page.</em></h2>
         <p class="what-body">A digital guide is a personalised page for your apartment — guests open it the moment they arrive and find everything they need. No PDFs. No printed binders. No intervention from you.</p>
         <div class="what-pts">
-          <div class="wp"><div class="wp-icon">📲</div><div><h4>Works on every device</h4><p>Guests open the link on their phone, tablet or laptop — nothing to install.</p></div></div>
-          <div class="wp"><div class="wp-icon">🌍</div><div><h4>Automatically in the guest's language</h4><p>Bosnian, English, German, Turkish and Italian — the guide adapts with no effort on your side.</p></div></div>
-          <div class="wp"><div class="wp-icon">⚡</div><div><h4>Set up in 10 minutes</h4><p>Enter the information once — guests use it forever. No retyping.</p></div></div>
+          <div class="wp"><div class="wp-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg></div><div><h4>Works on every device</h4><p>Guests open the link on their phone, tablet or laptop — nothing to install.</p></div></div>
+          <div class="wp"><div class="wp-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg></div><div><h4>Automatically in the guest's language</h4><p>Bosnian, English, German, Turkish and Italian — the guide adapts with no effort on your side.</p></div></div>
+          <div class="wp"><div class="wp-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg></div><div><h4>Set up in 10 minutes</h4><p>Enter the information once — guests use it forever. No retyping.</p></div></div>
         </div>
       </div>
       <div class="what-phone sr sr-d2">
         <div class="phone-frame-light">
-          <img src="/apartmani/screen-checkin.webp" alt="Check-in instructions in the apartment's digital guide" width="600" height="1298" loading="lazy" decoding="async" />
+          <img src="/apartmani/screen-overview.webp" alt="The digital guide on a guest's phone: check-in, Wi-Fi, house rules, location and contact" width="600" height="1298" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>
@@ -768,16 +770,16 @@
       <p class="sec-sub">9 guide sections. Your brand. Your information.</p>
     </div>
     <div class="features-grid">
-      <div class="feat-card sr"><div class="feat-icon">📶</div><h3>Wi-Fi & access</h3><p>Password, network, router instructions — always at hand, no waiting.</p></div>
-      <div class="feat-card sr sr-d1"><div class="feat-icon">🔑</div><h3>Check-in instructions</h3><p>Step-by-step entry instructions. Where the key, the safe or the smart-lock code is.</p></div>
-      <div class="feat-card sr sr-d2"><div class="feat-icon">📋</div><h3>House rules</h3><p>Clear rules, no doubts. Guests actually read them.</p></div>
-      <div class="feat-card sr"><div class="feat-icon">📍</div><h3>Location & parking</h3><p>Google Maps link, parking details, entrance, building — all in one place.</p></div>
-      <div class="feat-card sr sr-d1"><div class="feat-icon">⭐</div><h3>Host recommendations</h3><p>Your favourite restaurants, attractions, delivery — personalised for every apartment.</p></div>
-      <div class="feat-card sr sr-d2"><div class="feat-icon">💰</div><h3>Upsell services</h3><p>Transfers, tours, welcome packages — earn 15–30% more per booking.</p></div>
-      <div class="feat-card sr"><div class="feat-icon">🌍</div><h3>5 languages, automatically</h3><p>Bosnian, English, German, Turkish, Italian — the guide adapts to the guest.</p></div>
-      <div class="feat-card sr sr-d1"><div class="feat-icon">📱</div><h3>QR code</h3><p>Print it and place it in the apartment. Guests scan it and instantly have everything.</p></div>
-      <div class="feat-card sr sr-d2"><div class="feat-icon">👥</div><h3>Team access</h3><p>Add colleagues. Everyone gets their own access rights per property.</p></div>
-      <div class="feat-card feat-wide sr"><div class="feat-icon">🛂</div><div><h3>Guest registration <span class="feat-new">New</span></h3><p>Before arrival, guests enter their passport or ID details themselves — name, date of birth, nationality, document number. The data is encrypted and lands in your inbox, ready for the official stay registration. No photographing documents, no retyping.</p></div></div>
+      <div class="feat-card sr"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wifi" aria-hidden="true"><path d="M12 20h.01"></path><path d="M2 8.82a15 15 0 0 1 20 0"></path><path d="M5 12.859a10 10 0 0 1 14 0"></path><path d="M8.5 16.429a5 5 0 0 1 7 0"></path></svg></div><h3>Wi-Fi & access</h3><p>Password, network, router instructions — always at hand, no waiting.</p></div>
+      <div class="feat-card sr sr-d1"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-key-round" aria-hidden="true"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle></svg></div><h3>Check-in instructions</h3><p>Step-by-step entry instructions. Where the key, the safe or the smart-lock code is.</p></div>
+      <div class="feat-card sr sr-d2"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-list" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M12 11h4"></path><path d="M12 16h4"></path><path d="M8 11h.01"></path><path d="M8 16h.01"></path></svg></div><h3>House rules</h3><p>Clear rules, no doubts. Guests actually read them.</p></div>
+      <div class="feat-card sr"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg></div><h3>Location & parking</h3><p>Google Maps link, parking details, entrance, building — all in one place.</p></div>
+      <div class="feat-card sr sr-d1"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></div><h3>Host recommendations</h3><p>Your favourite restaurants, attractions, delivery — personalised for every apartment.</p></div>
+      <div class="feat-card sr sr-d2"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-banknote" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg></div><h3>Upsell services</h3><p>Transfers, tours, welcome packages — earn 15–30% more per booking.</p></div>
+      <div class="feat-card sr"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg></div><h3>5 languages, automatically</h3><p>Bosnian, English, German, Turkish, Italian — the guide adapts to the guest.</p></div>
+      <div class="feat-card sr sr-d1"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-qr-code" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></div><h3>QR code</h3><p>Print it and place it in the apartment. Guests scan it and instantly have everything.</p></div>
+      <div class="feat-card sr sr-d2"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg></div><h3>Team access</h3><p>Add colleagues. Everyone gets their own access rights per property.</p></div>
+      <div class="feat-card feat-wide sr"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-id-card" aria-hidden="true"><path d="M16 10h2"></path><path d="M16 14h2"></path><path d="M6.17 15a3 3 0 0 1 5.66 0"></path><circle cx="9" cy="11" r="2"></circle><rect x="2" y="5" width="20" height="14" rx="2"></rect></svg></div><div><h3>Guest registration <span class="feat-new">New</span></h3><p>Before arrival, guests enter their passport or ID details themselves — name, date of birth, nationality, document number. The data is encrypted and lands in your inbox, ready for the official stay registration. No photographing documents, no retyping.</p></div></div>
     </div>
   </div>
 </section>
@@ -809,12 +811,12 @@
         <div class="how-screen">
           <div class="hs-topbar"><div class="hs-dot"></div><div class="hs-dot"></div><div class="hs-dot"></div><span class="hs-url">smartstay.ba/g/modern-centar</span></div>
           <div class="guide-list">
-            <div class="guide-row"><span class="gr-check">✓</span> 📶 Wi-Fi & internet access</div>
-            <div class="guide-row"><span class="gr-check">✓</span> 🔑 Step-by-step check-in instructions</div>
-            <div class="guide-row"><span class="gr-check">✓</span> 📋 House rules</div>
-            <div class="guide-row"><span class="gr-check">✓</span> 📍 Location & parking map</div>
+            <div class="guide-row"><span class="gr-check">✓</span> <svg class="ico-inline" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wifi" aria-hidden="true"><path d="M12 20h.01"></path><path d="M2 8.82a15 15 0 0 1 20 0"></path><path d="M5 12.859a10 10 0 0 1 14 0"></path><path d="M8.5 16.429a5 5 0 0 1 7 0"></path></svg> Wi-Fi & internet access</div>
+            <div class="guide-row"><span class="gr-check">✓</span> <svg class="ico-inline" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-key-round" aria-hidden="true"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"></path><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle></svg> Step-by-step check-in instructions</div>
+            <div class="guide-row"><span class="gr-check">✓</span> <svg class="ico-inline" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-list" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M12 11h4"></path><path d="M12 16h4"></path><path d="M8 11h.01"></path><path d="M8 16h.01"></path></svg> House rules</div>
+            <div class="guide-row"><span class="gr-check">✓</span> <svg class="ico-inline" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg> Location & parking map</div>
             <div class="guide-row"><span class="gr-check">✓</span> ⭐ Host recommendations</div>
-            <div class="guide-row hl"><span class="gr-ai">🤖</span> AI Assistant — answers instantly</div>
+            <div class="guide-row hl"><span class="gr-ai"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot" aria-hidden="true"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg></span> AI Assistant — answers instantly</div>
           </div>
           <div style="margin-top:14px;display:flex;gap:8px">
             <div style="flex:1;background:var(--orange);border-radius:8px;padding:10px;text-align:center;font-size:12px;font-weight:700;color:#fff">Transfer → 40 KM</div>
@@ -827,32 +829,6 @@
 </section>
 
 <!-- DEMO -->
-<section class="demo-section" id="demo-section">
-  <div class="container">
-    <div class="demo-header sr">
-      <span class="chip chip-navy">Demo</span>
-      <h2 class="sec-headline" style="margin-top:14px">See SmartStay in 2 minutes</h2>
-      <p style="font-size:16px;color:var(--gray);margin-top:8px">What the guide looks like from the guest's side.</p>
-    </div>
-    <div class="demo-layout">
-      <div class="demo-phone-wrap sr">
-        <div class="demo-phone-frame-light">
-          <video id="demoVideo" src="/demo.mp4" controls muted playsinline preload="metadata" style="display:block;width:100%;height:auto;border-radius:33px;"></video>
-        </div>
-      </div>
-      <div class="sr sr-d2" style="display:flex;align-items:center;justify-content:center">
-        <div class="demo-try-card-light">
-          <div class="dtc-label">Try it yourself</div>
-          <p class="dtc-desc">Scan the QR code or tap below — open the demo guide right on your phone.</p>
-          <div class="dtc-qr"><img src="/apartmani/demo-qr.svg" alt="QR code for the SmartStay demo guide" width="132" height="132" loading="lazy" decoding="async" /></div>
-          <a href="https://app.smartstay.ba/g/modern-apartment-in-center-of-sarajevo/preview" target="_blank" class="btn-demo-try">Open the demo apartment →</a>
-          <p class="dtc-note">Modern apartment in Center of Sarajevo</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ALI IMA JOS -->
 <div class="ali-bar">
   <div class="container">
@@ -871,7 +847,7 @@
       </div>
       <div class="ai-chat-light sr sr-d1">
         <div class="ach-light">
-          <div class="ach-av">🤖</div>
+          <div class="ach-av"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot" aria-hidden="true"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg></div>
           <div style="display:flex;align-items:center;gap:12px;flex:1;flex-wrap:wrap;">
             <div class="ach-status">Active 24/7</div>
             <div class="lang-row">
@@ -881,15 +857,15 @@
         </div>
         <div class="ac-msgs">
           <div class="ac-u">Is there parking nearby?</div>
-          <div class="ac-b">Yes! Parking is <strong>50 m from the apartment</strong> at Ferhadija 12. 2 KM/hour or 10 KM/day. Street spots are free after 9 pm. 🚗</div>
+          <div class="ac-b">Yes! Parking is <strong>50 m from the apartment</strong>, right behind the building. 2 KM/hour or 10 KM/day. Street spots are free after 9 pm. 🚗</div>
           <div class="ac-u" style="margin-top:8px">Wann ist der Check-out?</div>
           <div class="ac-b">Check-out ist um <strong>11:00 Uhr</strong>. Gepäck können Sie bis 13:00 Uhr lassen — kein Problem! ✅</div>
         </div>
       </div>
       <div class="ai-feats-row sr sr-d2">
-        <div class="af"><div class="af-icon">⚡</div><h4>Instant answers</h4><p>Guests get an answer within a second, even at 3 a.m.</p></div>
-        <div class="af"><div class="af-icon">🌍</div><h4>5 languages, automatically</h4><p>The AI recognises the guest's language and answers in it.</p></div>
-        <div class="af"><div class="af-icon">🔒</div><h4>You control the content</h4><p>The AI answers only from the information you provide.</p></div>
+        <div class="af"><div class="af-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg></div><h4>Instant answers</h4><p>Guests get an answer within a second, even at 3 a.m.</p></div>
+        <div class="af"><div class="af-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg></div><h4>5 languages, automatically</h4><p>The AI recognises the guest's language and answers in it.</p></div>
+        <div class="af"><div class="af-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div><h4>You control the content</h4><p>The AI answers only from the information you provide.</p></div>
       </div>
     </div>
   </div>
@@ -991,10 +967,10 @@
   <div class="container">
     <a href="/en/hotels/" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;padding:20px 26px;border-radius:20px;background:var(--navy);color:#fff;text-decoration:none;">
       <span style="display:flex;align-items:center;gap:14px;">
-        <span style="font-size:26px;">🏨</span>
+        <span style="display:flex;color:#fff;"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hotel" aria-hidden="true"><path d="M10 22v-6.57"></path><path d="M12 11h.01"></path><path d="M12 7h.01"></path><path d="M14 15.43V22"></path><path d="M15 16a5 5 0 0 0-6 0"></path><path d="M16 11h.01"></path><path d="M16 7h.01"></path><path d="M8 11h.01"></path><path d="M8 7h.01"></path><rect x="4" y="2" width="16" height="20" rx="2"></rect></svg></span>
         <span>
           <strong style="display:block;font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;">Running a hotel or guesthouse?</strong>
-          <span style="font-size:14px;color:rgba(255,255,255,.75);">A QR code in every room, reception requests, room service and extra services.</span>
+          <span style="font-size:14px;color:rgba(255,255,255,.75);">Guest communication: reception requests, room service, extra services and announcements.</span>
         </span>
       </span>
       <span style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;color:#fff;background:var(--orange);padding:10px 18px;border-radius:100px;">SmartStay for hotels →</span>
@@ -1071,7 +1047,7 @@
   <div style="position:relative;width:100%;max-width:420px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 24px 80px rgba(15,47,97,0.3);margin-bottom:16px;">
     <div style="background:var(--orange);padding:20px 24px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
       <div>
-        <div style="color:rgba(255,255,255,0.8);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;">🎁 Limited offer</div>
+        <div style="color:rgba(255,255,255,0.8);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;"><svg class="ico-inline" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gift" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13"></path><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path></svg> Limited offer</div>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:800;color:#fff;">30 days free</div>
         <div style="color:rgba(255,255,255,0.75);font-size:13px;margin-top:2px;">No credit card</div>
       </div>

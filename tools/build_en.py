@@ -44,13 +44,35 @@ def js_quote(text, q):
     return text.replace("\\", "\\\\").replace(q, "\\" + q)
 
 
+SVG_RE = re.compile(r"<svg[\s>].*?</svg>", re.S)
+
+
+def skeleton(u):
+    """inline icons become {svg} so the translation key does not carry SVG markup"""
+    return re.sub(r"\s+", " ", SVG_RE.sub("{svg}", u)).strip()
+
+
+def lookup(T, u):
+    en = T.get(h(u))
+    if en is not None:
+        return en
+    sk = skeleton(u)
+    en = T.get(h(sk))
+    if en is None:
+        return None
+    svgs = SVG_RE.findall(u)
+    for g in svgs:
+        en = en.replace("{svg}", g, 1)
+    return en
+
+
 def translate(s, T, report):
     # 1) element innerHTML, longest first so outer elements win over nested ones
     units = sorted(set(element_units(s)), key=len, reverse=True)
     for u in units:
-        en = T.get(h(u))
+        en = lookup(T, u)
         if en is None:
-            report.append(u); continue
+            report.append(skeleton(u)); continue
         s = re.sub(r"(>\s*)" + re.escape(u) + r"(\s*<)", lambda m: m.group(1) + en + m.group(2), s)
     # 2) attributes
     for u in set(attr_units(s)):

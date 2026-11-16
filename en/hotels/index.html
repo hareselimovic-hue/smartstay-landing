@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Digital reception and guest guide for hotels | SmartStay</title>
-  <meta name="description" content="A QR code in every room: guests get the Wi-Fi and hotel information in their language, send requests to the reception, order room service and book the spa — no app."/>
+  <title>Guest communication platform for hotels | SmartStay</title>
+  <meta name="description" content="A guest communication platform for hotels: reception requests, room service, extra services, bookings and announcements in the guest's language — on their phone, no app."/>
   <link rel="canonical" href="https://smartstay.ba/en/hotels/"/>
   <link rel="icon" href="/favicon.ico" sizes="any"/>
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
@@ -14,14 +14,14 @@
   <meta property="og:site_name" content="SmartStay"/>
   <meta property="og:locale" content="en_GB"/>
   <meta property="og:url" content="https://smartstay.ba/en/hotels/"/>
-  <meta property="og:title" content="SmartStay for hotels — a digital reception and guest guide"/>
-  <meta property="og:description" content="A QR code in every room: reception requests, room service, extra services and announcements to guests in 5 languages. No app."/>
+  <meta property="og:title" content="SmartStay for hotels — a guest communication platform"/>
+  <meta property="og:description" content="Reception requests, room service, extra services and announcements to guests in 5 languages. On the guest's phone, no app."/>
   <meta property="og:image" content="https://smartstay.ba/og-image.jpg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="SmartStay for hotels — a digital reception and guest guide"/>
-  <meta name="twitter:description" content="A QR code in every room: reception requests, room service, extra services and announcements to guests in 5 languages."/>
+  <meta name="twitter:title" content="SmartStay for hotels — a guest communication platform"/>
+  <meta name="twitter:description" content="Reception requests, room service, extra services and announcements to guests in 5 languages."/>
   <meta name="twitter:image" content="https://smartstay.ba/og-image.jpg"/>
   <script type="application/ld+json">
 {
@@ -34,7 +34,7 @@
       "operatingSystem": "Web",
       "url": "https://smartstay.ba/en/hotels/",
       "inLanguage": "en",
-      "description": "A digital guide and reception for hotels: a QR code for every room, reception requests with a status, room service, extra services, bookings and announcements to guests in five languages.",
+      "description": "A guest communication platform for hotels: reception requests with a status, room service, extra services, bookings, an AI assistant and announcements to guests in five languages.",
       "image": "https://smartstay.ba/og-image.jpg",
       "offers": {
         "@type": "AggregateOffer",
@@ -73,7 +73,7 @@
           "name": "Do guests need to install an app?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. Guests scan the QR code with their phone camera and the guide opens in the browser right away. No download, no sign-up."
+            "text": "No. Guests open the guide with a link from a message or a code in the room, and everything runs in the browser. No download, no sign-up."
           }
         },
         {
@@ -310,6 +310,15 @@
     @media (max-width: 760px) { .f-grid { grid-template-columns: 1fr; } }
 
     @media (max-width: 600px) { section { padding: 64px 0; } .hero { padding: 40px 0 56px; } }
+  
+    /* icons: Lucide SVG instead of emoji */
+    .hf-icon svg,.wp-icon svg,.ic svg,.af-icon svg,.feat-icon svg,.res-icon svg{width:22px;height:22px;color:var(--orange);display:block}
+    .wp-icon svg{width:18px;height:18px}
+    .feat-icon svg,.res-icon svg{color:var(--navy)} .feat-wide .feat-icon svg{color:var(--orange)}
+    .ach-av svg{width:20px;height:20px;color:#fff}
+    .gr-ai svg{width:16px;height:16px;vertical-align:-3px}
+    .ico-inline{width:15px;height:15px;vertical-align:-2px;margin-right:4px;display:inline-block}
+    .btn-hero{display:inline-flex;align-items:center;gap:8px;text-decoration:none}
   </style>
 <style>
   /* Mobile menu (hamburger) */
@@ -369,14 +378,14 @@
       <div>
         <div class="crumbs"><a href="/en/">SmartStay</a> / For hotels</div>
         <span class="chip chip-orange">For hotels and guesthouses</span>
-        <h1>A digital reception and guide for <em>your hotel</em></h1>
+        <h1>All communication with <em>your hotel's guests</em> in one place</h1>
         <p class="hero-sub">
-          Guests scan the QR code in their room and, in their own language, get the Wi-Fi and all the hotel information, send a request to the reception,
-          order room service or book the spa — no app and no calls to the front desk.
+          On their own phone and in their own language, guests find everything about the hotel, send a request to the reception, order room service or book the spa.
+          The reception sees it all on one screen and answers with one click — no app for guests and no phone calls.
         </p>
         <div class="hero-ctas">
           <a href="#kontakt" class="btn btn-orange">Get access →</a>
-          <a href="#demo" class="btn btn-ghost">📱 Try it as a guest</a>
+          <a href="#demo" class="btn btn-ghost"><svg class="ico-inline" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg> Try it as a guest</a>
         </div>
         <p class="hero-note">✓ 30 days free &nbsp;·&nbsp; ✓ No credit card &nbsp;·&nbsp; ✓ Ready in a day</p>
       </div>
@@ -397,9 +406,9 @@
       <p>And guests still don't know half of what your hotel offers.</p>
     </div>
     <div class="pain-grid">
-      <div class="pain-card"><div class="ic">📞</div><h3>The same questions, all day</h3><p>The Wi-Fi password, breakfast hours, check-out time, where to park. The reception repeats the same answers dozens of times a day.</p></div>
-      <div class="pain-card"><div class="ic">📄</div><h3>The paper binder in the room</h3><p>Outdated, in one language, and nobody reads it. Every change means reprinting for every room.</p></div>
-      <div class="pain-card"><div class="ic">💸</div><h3>Missed revenue</h3><p>Transfer, late check-out, spa, dinner — guests would pay, but don't know it exists or can't be bothered to call.</p></div>
+      <div class="pain-card"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg></div><h3>The same questions, all day</h3><p>The Wi-Fi password, breakfast hours, check-out time, where to park. The reception repeats the same answers dozens of times a day.</p></div>
+      <div class="pain-card"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg></div><h3>The paper binder in the room</h3><p>Outdated, in one language, and nobody reads it. Every change means reprinting for every room.</p></div>
+      <div class="pain-card"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-banknote" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg></div><h3>Missed revenue</h3><p>Transfer, late check-out, spa, dinner — guests would pay, but don't know it exists or can't be bothered to call.</p></div>
     </div>
   </div>
 </section>
@@ -409,19 +418,19 @@
   <div class="container">
     <div class="sec-head">
       <span class="chip chip-navy">Features</span>
-      <h2>Everything a guest needs — in the room, on their phone</h2>
-      <p>One guide for the whole hotel, and every room has its own QR code.</p>
+      <h2>Everything guests need — and everything the reception needs to know</h2>
+      <p>One platform for information, requests, orders and announcements throughout the stay.</p>
     </div>
     <div class="feat-grid">
-      <div class="feat"><div class="ic">🔳</div><h3>A QR code for every room</h3><p>Guests scan the code on the desk or door and the app instantly knows which room they're writing from. Cards ready to print.</p></div>
-      <div class="feat"><div class="ic">🛎️</div><h3>Reception requests</h3><p>Towels, cleaning, a fault, a wake-up call — with one tap. Guests see the status: received, in progress, done.</p></div>
-      <div class="feat"><div class="ic">🍽️</div><h3>Room service</h3><p>A menu with prices and a cart. The order reaches the reception with the room number and the total.</p></div>
-      <div class="feat"><div class="ic">🎁</div><h3>Extra services</h3><p>Transfer, late check-out, excursions, wine in the room — by category, like a small shop for your hotel.</p></div>
-      <div class="feat"><div class="ic">📅</div><h3>Bookings</h3><p>Spa, sauna, a table in the restaurant or a meeting room — guests pick a time and the number of people.</p></div>
-      <div class="feat"><div class="ic">📢</div><h3>Announcements to all guests</h3><p>“Live music in the lobby bar tonight” — write it once and every guest sees the bar at the top of the guide.</p></div>
-      <div class="feat"><div class="ic">🌍</div><h3>5 languages, automatically</h3><p>Bosnian, English, German, Turkish, Italian. You write in your language, the translation happens by itself.</p></div>
-      <div class="feat"><div class="ic">🏢</div><h3>Room-specific info</h3><p>The annex has a different Wi-Fi? Change only that — everything else still follows the hotel guide.</p></div>
-      <div class="feat"><div class="ic">⭐</div><h3>Google reviews</h3><p>A “Rate us on Google” card at the end of the guide — like the ones at the front desk, only always at hand.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-concierge-bell" aria-hidden="true"><path d="M3 20a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1Z"></path><path d="M20 16a8 8 0 1 0-16 0"></path><path d="M12 4v4"></path><path d="M10 4h4"></path></svg></div><h3>Reception requests</h3><p>Towels, cleaning, a fault, a wake-up call — with one tap. Guests see the status: received, in progress, done.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-utensils" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div><h3>Room service</h3><p>A menu with prices and a cart. The order reaches the reception with the room number and the total.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gift" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13"></path><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path></svg></div><h3>Extra services</h3><p>Transfer, late check-out, excursions, wine in the room — by category, like a small shop for your hotel.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg></div><h3>Bookings</h3><p>Spa, sauna, a table in the restaurant or a meeting room — guests pick a time and the number of people.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-megaphone" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path></svg></div><h3>Announcements to all guests</h3><p>“Live music in the lobby bar tonight” — write it once and every guest sees the bar at the top of the guide.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot" aria-hidden="true"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg></div><h3>AI assistant 24/7</h3><p>Answers guests' questions about the hotel at any hour, in their language — only from the information you entered.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg></div><h3>5 languages, automatically</h3><p>Bosnian, English, German, Turkish, Italian. You write in your language, the translation happens by itself.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2 lucide-building-2" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg></div><h3>Room-specific info</h3><p>The annex has a different Wi-Fi? Change only that — everything else still follows the hotel guide.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></div><h3>Google reviews</h3><p>A “Rate us on Google” card at the end of the guide — like the ones at the front desk, only always at hand.</p></div>
     </div>
   </div>
 </section>
@@ -436,7 +445,7 @@
         <h3>Guests ask without calling — and know when it's coming</h3>
         <p>Instead of calling the reception, the guest taps “Fresh towels” and that's it. In the guide they see the status of their request and the reception's reply in their own language.</p>
         <ul class="ticks">
-          <li>No app and no sign-up — just the phone camera</li>
+          <li>No app and no sign-up — it opens in the browser</li>
           <li>Request status: received → in progress → done</li>
           <li>Optional email notification when the request is resolved</li>
           <li>An AI assistant answers questions about the hotel 24/7</li>
@@ -470,8 +479,8 @@
     </div>
     <div class="steps">
       <div class="step"><h3>Create your hotel</h3><p>Enter the Wi-Fi, check-in, breakfast, parking and recommendations. Add services and a menu with prices.</p></div>
-      <div class="step"><h3>Print the QR cards</h3><p>Enter the rooms (e.g. 101–120) and print ready-made cards for the desk or door — two per A4 sheet.</p></div>
-      <div class="step"><h3>Guests scan</h3><p>Requests and orders reach the reception. Guests get everything in their language, you get fewer calls.</p></div>
+      <div class="step"><h3>Add your rooms</h3><p>Enter the rooms (e.g. 101–120). Every room gets its own link, so the reception knows which room a request comes from.</p></div>
+      <div class="step"><h3>Guests open the guide</h3><p>Send the link in a pre-arrival message or let guests open it in the room. Requests and orders reach the reception, guests get everything in their language.</p></div>
     </div>
   </div>
 </section>
@@ -480,11 +489,11 @@
 <section id="demo" style="padding-top:0">
   <div class="container">
     <div class="demo-box">
-      <div class="demo-qr"><img src="/hoteli/demo-qr.svg" alt="QR code of the demo hotel" width="220" height="220"/></div>
+      <div class="demo-qr"><img src="/hoteli/demo-qr.svg" alt="Code to open the demo hotel on your phone" width="220" height="220"/></div>
       <div>
         <span class="chip">Try it as a guest</span>
-        <h2>Scan and open the demo hotel</h2>
-        <p>This is the real guide of the fictional “Hotel Demo Sarajevo”. Switch the language, look at room service and the extra services — exactly what your guests would see.</p>
+        <h2>Open the demo hotel on your phone</h2>
+        <p>This is the real guide of a fictional demo hotel. Switch the language, send a request to the reception, look at room service and the extra services — exactly what your guests would see.</p>
         <a href="https://app.smartstay.ba/g/hotel-demo-sarajevo/101-thiq" target="_blank" rel="noopener" class="btn btn-orange">Open the demo hotel →</a>
       </div>
     </div>
@@ -521,7 +530,7 @@
       <h2>Frequently asked questions</h2>
     </div>
     <div class="faq-list">
-      <details><summary>Do guests need to install an app?</summary><p>No. Guests scan the QR code with their phone camera and the guide opens in the browser right away. No download, no sign-up.</p></details>
+      <details><summary>Do guests need to install an app?</summary><p>No. Guests open the guide with a link from a message or a code in the room, and everything runs in the browser. No download, no sign-up.</p></details>
       <details><summary>How does the reception receive guest requests?</summary><p>Requests arrive on the reception screen in the SmartStay app, with the room number, and in the reception's inbox. The reception clicks “Take” or “Done” and the guest sees the status in the guide.</p></details>
       <details><summary>Can individual rooms have different information, e.g. a different Wi-Fi?</summary><p>Yes. All rooms follow the general hotel guide; for individual rooms or an annex you change only what differs — e.g. Wi-Fi or parking.</p></details>
       <details><summary>Which languages does it work in?</summary><p>Guests choose Bosnian, English, German, Turkish or Italian. You write in Bosnian or English, and announcements and reception replies are translated automatically.</p></details>

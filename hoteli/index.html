@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Digitalna recepcija i vodič za hotele | SmartStay</title>
-  <meta name="description" content="QR kod u svakoj sobi: gosti na svom jeziku dobiju WiFi i informacije o hotelu, šalju zahtjeve recepciji, naručuju room service i rezervišu spa — bez aplikacije."/>
+  <title>Platforma za komunikaciju s gostima hotela | SmartStay</title>
+  <meta name="description" content="Platforma za komunikaciju s gostima hotela: zahtjevi recepciji, room service, dodatne usluge, rezervacije i obavijesti na jeziku gosta — na telefonu, bez aplikacije."/>
   <link rel="canonical" href="https://smartstay.ba/hoteli/"/>
   <link rel="icon" href="/favicon.ico" sizes="any"/>
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
@@ -14,14 +14,14 @@
   <meta property="og:site_name" content="SmartStay"/>
   <meta property="og:locale" content="bs_BA"/>
   <meta property="og:url" content="https://smartstay.ba/hoteli/"/>
-  <meta property="og:title" content="SmartStay za hotele — digitalna recepcija i vodič za goste"/>
-  <meta property="og:description" content="QR kod u svakoj sobi: zahtjevi recepciji, room service, dodatne usluge i obavijesti gostima na 5 jezika. Bez aplikacije."/>
+  <meta property="og:title" content="SmartStay za hotele — platforma za komunikaciju s gostima"/>
+  <meta property="og:description" content="Zahtjevi recepciji, room service, dodatne usluge i obavijesti gostima na 5 jezika. Na telefonu gosta, bez aplikacije."/>
   <meta property="og:image" content="https://smartstay.ba/og-image.jpg"/>
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="SmartStay za hotele — digitalna recepcija i vodič za goste"/>
-  <meta name="twitter:description" content="QR kod u svakoj sobi: zahtjevi recepciji, room service, dodatne usluge i obavijesti gostima na 5 jezika."/>
+  <meta name="twitter:title" content="SmartStay za hotele — platforma za komunikaciju s gostima"/>
+  <meta name="twitter:description" content="Zahtjevi recepciji, room service, dodatne usluge i obavijesti gostima na 5 jezika."/>
   <meta name="twitter:image" content="https://smartstay.ba/og-image.jpg"/>
   <script type="application/ld+json">
   {
@@ -34,7 +34,7 @@
         "operatingSystem": "Web",
         "url": "https://smartstay.ba/hoteli/",
         "inLanguage": "bs",
-        "description": "Digitalni vodič i recepcija za hotele: QR kod za svaku sobu, zahtjevi recepciji sa statusom, room service, dodatne usluge, rezervacije i obavijesti gostima na pet jezika.",
+        "description": "Platforma za komunikaciju s gostima hotela: zahtjevi recepciji sa statusom, room service, dodatne usluge, rezervacije, AI asistent i obavijesti gostima na pet jezika.",
         "image": "https://smartstay.ba/og-image.jpg",
         "offers": { "@type": "AggregateOffer", "priceCurrency": "BAM", "lowPrice": "59", "highPrice": "169", "offerCount": "4", "description": "Mjesečno prema broju soba: do 7 soba 59 KM, 8–15 soba 79 KM, 16–40 soba 119 KM, 41–80 soba 169 KM. 30 dana besplatno." },
         "publisher": { "@id": "https://smartstay.ba/#org" }
@@ -49,7 +49,7 @@
       {
         "@type": "FAQPage",
         "mainEntity": [
-          { "@type": "Question", "name": "Moraju li gosti instalirati aplikaciju?", "acceptedAnswer": { "@type": "Answer", "text": "Ne. Gost skenira QR kod kamerom telefona i vodič se odmah otvori u browseru. Nema preuzimanja ni registracije." } },
+          { "@type": "Question", "name": "Moraju li gosti instalirati aplikaciju?", "acceptedAnswer": { "@type": "Answer", "text": "Ne. Gost otvori vodič linkom iz poruke ili kodom u sobi i sve radi u browseru. Nema preuzimanja ni registracije." } },
           { "@type": "Question", "name": "Kako recepcija dobija zahtjeve gostiju?", "acceptedAnswer": { "@type": "Answer", "text": "Zahtjevi stižu na ekran recepcije u SmartStay aplikaciji, sa brojem sobe, i na email recepcije. Recepcija klikne Preuzmi ili Završeno, a gost vidi status u vodiču." } },
           { "@type": "Question", "name": "Mogu li pojedine sobe imati drugačije informacije, npr. drugi WiFi?", "acceptedAnswer": { "@type": "Answer", "text": "Da. Sve sobe prate opći vodič hotela, a za pojedine sobe ili depandansu možete promijeniti samo ono što se razlikuje — npr. WiFi ili parking." } },
           { "@type": "Question", "name": "Na kojim jezicima radi?", "acceptedAnswer": { "@type": "Answer", "text": "Gosti biraju bosanski, engleski, njemački, turski ili italijanski. Vi pišete na bosanskom ili engleskom, a obavijesti i odgovori recepcije prevode se automatski." } },
@@ -249,6 +249,15 @@
     @media (max-width: 760px) { .f-grid { grid-template-columns: 1fr; } }
 
     @media (max-width: 600px) { section { padding: 64px 0; } .hero { padding: 40px 0 56px; } }
+  
+    /* icons: Lucide SVG instead of emoji */
+    .hf-icon svg,.wp-icon svg,.ic svg,.af-icon svg,.feat-icon svg,.res-icon svg{width:22px;height:22px;color:var(--orange);display:block}
+    .wp-icon svg{width:18px;height:18px}
+    .feat-icon svg,.res-icon svg{color:var(--navy)} .feat-wide .feat-icon svg{color:var(--orange)}
+    .ach-av svg{width:20px;height:20px;color:#fff}
+    .gr-ai svg{width:16px;height:16px;vertical-align:-3px}
+    .ico-inline{width:15px;height:15px;vertical-align:-2px;margin-right:4px;display:inline-block}
+    .btn-hero{display:inline-flex;align-items:center;gap:8px;text-decoration:none}
   </style>
 <style>
   /* Mobile menu (hamburger) */
@@ -308,14 +317,14 @@
       <div>
         <div class="crumbs"><a href="/">SmartStay</a> / Za hotele</div>
         <span class="chip chip-orange">Za hotele i pansione</span>
-        <h1>Digitalna recepcija i vodič za <em>vaš hotel</em></h1>
+        <h1>Komunikacija s gostima <em>vašeg hotela</em> na jednom mjestu</h1>
         <p class="hero-sub">
-          Gost skenira QR kod u sobi i na svom jeziku dobije WiFi i sve informacije o hotelu, pošalje zahtjev recepciji,
-          naruči room service ili rezerviše spa — bez aplikacije i bez poziva na recepciju.
+          Gosti na svom telefonu i na svom jeziku pronađu sve o hotelu, pošalju zahtjev recepciji, naruče room service ili rezervišu spa.
+          Recepcija sve vidi na jednom ekranu i odgovara jednim klikom — bez aplikacije za goste i bez poziva.
         </p>
         <div class="hero-ctas">
           <a href="#kontakt" class="btn btn-orange">Zatraži pristup →</a>
-          <a href="#demo" class="btn btn-ghost">📱 Isprobaj kao gost</a>
+          <a href="#demo" class="btn btn-ghost"><svg class="ico-inline" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg> Isprobaj kao gost</a>
         </div>
         <p class="hero-note">✓ 30 dana besplatno &nbsp;·&nbsp; ✓ Bez kreditne kartice &nbsp;·&nbsp; ✓ Spremno za jedan dan</p>
       </div>
@@ -336,9 +345,9 @@
       <p>A gosti i dalje ne znaju pola onoga što vaš hotel nudi.</p>
     </div>
     <div class="pain-grid">
-      <div class="pain-card"><div class="ic">📞</div><h3>Stalno ista pitanja</h3><p>Lozinka za WiFi, do kada je doručak, kad je check-out, gdje je parking. Recepcija ponavlja isto desetine puta dnevno.</p></div>
-      <div class="pain-card"><div class="ic">📄</div><h3>Papirni folder u sobi</h3><p>Zastario, na jednom jeziku i niko ga ne čita. Svaka promjena znači novo štampanje za sve sobe.</p></div>
-      <div class="pain-card"><div class="ic">💸</div><h3>Propuštena zarada</h3><p>Transfer, kasni check-out, spa, večera — gost bi platio, ali ne zna da postoji ili mu se ne da zvati.</p></div>
+      <div class="pain-card"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg></div><h3>Stalno ista pitanja</h3><p>Lozinka za WiFi, do kada je doručak, kad je check-out, gdje je parking. Recepcija ponavlja isto desetine puta dnevno.</p></div>
+      <div class="pain-card"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg></div><h3>Papirni folder u sobi</h3><p>Zastario, na jednom jeziku i niko ga ne čita. Svaka promjena znači novo štampanje za sve sobe.</p></div>
+      <div class="pain-card"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-banknote" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg></div><h3>Propuštena zarada</h3><p>Transfer, kasni check-out, spa, večera — gost bi platio, ali ne zna da postoji ili mu se ne da zvati.</p></div>
     </div>
   </div>
 </section>
@@ -348,19 +357,19 @@
   <div class="container">
     <div class="sec-head">
       <span class="chip chip-navy">Funkcije</span>
-      <h2>Sve što gost treba — u sobi, na telefonu</h2>
-      <p>Jedan vodič za cijeli hotel, a svaka soba ima svoj QR kod.</p>
+      <h2>Sve što gost treba — i sve što recepcija treba znati</h2>
+      <p>Jedna platforma za informacije, zahtjeve, narudžbe i obavijesti tokom cijelog boravka.</p>
     </div>
     <div class="feat-grid">
-      <div class="feat"><div class="ic">🔳</div><h3>QR kod za svaku sobu</h3><p>Gost skenira kod na stolu ili vratima i aplikacija odmah zna iz koje sobe piše. Kartice spremne za štampu.</p></div>
-      <div class="feat"><div class="ic">🛎️</div><h3>Zahtjevi recepciji</h3><p>Peškiri, čišćenje, kvar, buđenje — jednim dodirom. Gost vidi status: primljeno, u toku, završeno.</p></div>
-      <div class="feat"><div class="ic">🍽️</div><h3>Room service</h3><p>Meni sa cijenama i korpom. Narudžba stiže recepciji sa brojem sobe i ukupnim iznosom.</p></div>
-      <div class="feat"><div class="ic">🎁</div><h3>Dodatne usluge</h3><p>Transfer, kasni check-out, izleti, vino u sobi — po kategorijama, kao mala prodavnica vašeg hotela.</p></div>
-      <div class="feat"><div class="ic">📅</div><h3>Rezervacije</h3><p>Spa, sauna, sto u restoranu ili sala za sastanke — gost bira termin i broj osoba.</p></div>
-      <div class="feat"><div class="ic">📢</div><h3>Obavijesti svim gostima</h3><p>„Večeras live muzika u lobby baru“ — napišete jednom, svi gosti vide traku na vrhu vodiča.</p></div>
-      <div class="feat"><div class="ic">🌍</div><h3>5 jezika automatski</h3><p>Bosanski, engleski, njemački, turski, italijanski. Vi pišete na bosanskom, prevod radi sam.</p></div>
-      <div class="feat"><div class="ic">🏢</div><h3>Posebne info po sobi</h3><p>Depandansa ima drugi WiFi? Promijenite samo to — sve ostalo i dalje prati vodič hotela.</p></div>
-      <div class="feat"><div class="ic">⭐</div><h3>Google recenzije</h3><p>Kartica „Ocijenite nas na Googleu“ na kraju vodiča — kao one na pultu recepcije, samo uvijek pri ruci.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-concierge-bell" aria-hidden="true"><path d="M3 20a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1Z"></path><path d="M20 16a8 8 0 1 0-16 0"></path><path d="M12 4v4"></path><path d="M10 4h4"></path></svg></div><h3>Zahtjevi recepciji</h3><p>Peškiri, čišćenje, kvar, buđenje — jednim dodirom. Gost vidi status: primljeno, u toku, završeno.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-utensils" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></div><h3>Room service</h3><p>Meni sa cijenama i korpom. Narudžba stiže recepciji sa brojem sobe i ukupnim iznosom.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gift" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"></rect><path d="M12 8v13"></path><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path></svg></div><h3>Dodatne usluge</h3><p>Transfer, kasni check-out, izleti, vino u sobi — po kategorijama, kao mala prodavnica vašeg hotela.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar" aria-hidden="true"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg></div><h3>Rezervacije</h3><p>Spa, sauna, sto u restoranu ili sala za sastanke — gost bira termin i broj osoba.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-megaphone" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"></path><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path></svg></div><h3>Obavijesti svim gostima</h3><p>„Večeras live muzika u lobby baru“ — napišete jednom, svi gosti vide traku na vrhu vodiča.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot" aria-hidden="true"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg></div><h3>AI asistent 24/7</h3><p>Odgovara gostima na pitanja o hotelu u bilo koje doba, na njihovom jeziku — samo iz informacija koje ste vi unijeli.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg></div><h3>5 jezika automatski</h3><p>Bosanski, engleski, njemački, turski, italijanski. Vi pišete na bosanskom, prevod radi sam.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2 lucide-building-2" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg></div><h3>Posebne info po sobi</h3><p>Depandansa ima drugi WiFi? Promijenite samo to — sve ostalo i dalje prati vodič hotela.</p></div>
+      <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></div><h3>Google recenzije</h3><p>Kartica „Ocijenite nas na Googleu“ na kraju vodiča — kao one na pultu recepcije, samo uvijek pri ruci.</p></div>
     </div>
   </div>
 </section>
@@ -375,7 +384,7 @@
         <h3>Gost traži bez telefoniranja — i zna kad stiže</h3>
         <p>Umjesto poziva na recepciju, gost dodirne „Svježi peškiri“ i gotovo. U vodiču vidi status svog zahtjeva i odgovor recepcije na svom jeziku.</p>
         <ul class="ticks">
-          <li>Bez aplikacije i registracije — samo kamera telefona</li>
+          <li>Bez aplikacije i registracije — otvara se u browseru</li>
           <li>Status zahtjeva: primljeno → u toku → završeno</li>
           <li>Po želji obavijest na email kad je zahtjev riješen</li>
           <li>AI asistent odgovara na pitanja o hotelu 24/7</li>
@@ -409,8 +418,8 @@
     </div>
     <div class="steps">
       <div class="step"><h3>Napravite hotel</h3><p>Upišete WiFi, check-in, doručak, parking i preporuke. Dodate usluge i meni sa cijenama.</p></div>
-      <div class="step"><h3>Odštampajte QR kartice</h3><p>Upišete sobe (npr. 101–120) i odštampate gotove kartice za stol ili vrata — po dvije na A4.</p></div>
-      <div class="step"><h3>Gosti skeniraju</h3><p>Zahtjevi i narudžbe stižu recepciji. Gosti dobijaju sve na svom jeziku, vi manje poziva.</p></div>
+      <div class="step"><h3>Dodajte sobe</h3><p>Upišete sobe (npr. 101–120). Svaka soba dobije svoj link, pa recepcija zna iz koje sobe stiže zahtjev.</p></div>
+      <div class="step"><h3>Gosti otvore vodič</h3><p>Link pošaljete u poruci prije dolaska ili ga gost otvori u sobi. Zahtjevi i narudžbe stižu recepciji, gosti dobijaju sve na svom jeziku.</p></div>
     </div>
   </div>
 </section>
@@ -419,11 +428,11 @@
 <section id="demo" style="padding-top:0">
   <div class="container">
     <div class="demo-box">
-      <div class="demo-qr"><img src="/hoteli/demo-qr.svg" alt="QR kod demo hotela" width="220" height="220"/></div>
+      <div class="demo-qr"><img src="/hoteli/demo-qr.svg" alt="Kod za otvaranje demo hotela na telefonu" width="220" height="220"/></div>
       <div>
         <span class="chip">Isprobajte kao gost</span>
-        <h2>Skenirajte i otvorite demo hotel</h2>
-        <p>Ovo je pravi vodič izmišljenog „Hotel Demo Sarajevo“. Promijenite jezik, pogledajte room service i dodatne usluge — tačno ono što bi vidjeli vaši gosti.</p>
+        <h2>Otvorite demo hotel na svom telefonu</h2>
+        <p>Ovo je pravi vodič izmišljenog demo hotela. Promijenite jezik, pošaljite zahtjev recepciji, pogledajte room service i dodatne usluge — tačno ono što bi vidjeli vaši gosti.</p>
         <a href="https://app.smartstay.ba/g/hotel-demo-sarajevo/101-thiq" target="_blank" rel="noopener" class="btn btn-orange">Otvori demo hotel →</a>
       </div>
     </div>
@@ -460,7 +469,7 @@
       <h2>Česta pitanja</h2>
     </div>
     <div class="faq-list">
-      <details><summary>Moraju li gosti instalirati aplikaciju?</summary><p>Ne. Gost skenira QR kod kamerom telefona i vodič se odmah otvori u browseru. Nema preuzimanja ni registracije.</p></details>
+      <details><summary>Moraju li gosti instalirati aplikaciju?</summary><p>Ne. Gost otvori vodič linkom iz poruke ili kodom u sobi i sve radi u browseru. Nema preuzimanja ni registracije.</p></details>
       <details><summary>Kako recepcija dobija zahtjeve gostiju?</summary><p>Zahtjevi stižu na ekran recepcije u SmartStay aplikaciji, sa brojem sobe, i na email recepcije. Recepcija klikne „Preuzmi“ ili „Završeno“, a gost vidi status u vodiču.</p></details>
       <details><summary>Mogu li pojedine sobe imati drugačije informacije, npr. drugi WiFi?</summary><p>Da. Sve sobe prate opći vodič hotela, a za pojedine sobe ili depandansu promijenite samo ono što se razlikuje — npr. WiFi ili parking.</p></details>
       <details><summary>Na kojim jezicima radi?</summary><p>Gosti biraju bosanski, engleski, njemački, turski ili italijanski. Vi pišete na bosanskom ili engleskom, a obavijesti i odgovori recepcije prevode se automatski.</p></details>
