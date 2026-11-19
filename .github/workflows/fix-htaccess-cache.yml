@@ -1,0 +1,46 @@
+name: Fix .htaccess cache header (one-off)
+
+# Mijenja samo Cache-Control za HTML: "no-cache, no-store, must-revalidate" -> "no-cache".
+# no-store isključuje back/forward cache u browseru; no-cache i dalje garantuje svjež HTML nakon deploya.
+# Prije izmjene sprema backup na serveru (.htaccess.bak-<datum>). Idempotentno.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Patch .htaccess via cPanel API
+        env:
+          AUTH: "cpanel smartsta:${{ secrets.LEFTOR_API_TOKEN }}"
+          CPANEL: https://cpanel.smartstay.ba
+          ROOT: /home/smartsta/public_html
+        run: |
+          set -e
+          curl -s -G "$CPANEL/execute/Fileman/get_file_content" -H "Authorization: $AUTH" \
+            --data-urlencode "dir=$ROOT" --data-urlencode "file=.htaccess" > get.json
+          python3 - <<'EOF'
+          import json, sys
+          d = json.load(open('get.json'))
+          if not d.get('status'):
+              print('GET failed:', d.get('errors')); sys.exit(1)
+          c = d['data']['content']
+          print('---- current .htaccess ----'); print(c); print('---------------------------')
+          old = 'no-cache, no-store, must-revalidate'
+          if old not in c:
+              print('Nothing to change (already patched or different header).'); open('skip', 'w').close(); sys.exit(0)
+          open('orig.txt', 'w').write(c)
+          open('new.txt', 'w').write(c.replace(old, 'no-cache'))
+          EOF
+          [ -f skip ] && exit 0
+          save() {
+            curl -s -X POST "$CPANEL/execute/Fileman/save_file_content" -H "Authorization: $AUTH" \
+              --data-urlencode "dir=$ROOT" --data-urlencode "file=$1" --data-urlencode "content@$2" \
+              | python3 -c "import json,sys; d=json.load(sys.stdin); print('$1', 'OK' if d.get('status') else d.get('errors')); sys.exit(0 if d.get('status') else 1)"
+          }
+          save ".htaccess.bak-$(date +%Y%m%d)" orig.txt
+          save ".htaccess" new.txt
+          sleep 3
+          echo "---- live headers ----"
+          curl -sI https://smartstay.ba/ | grep -iE "^(HTTP|cache-control|location)"

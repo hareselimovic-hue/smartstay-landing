@@ -59,7 +59,7 @@ jobs:
             mkdir_remote "$ROOT/$(dirname "$d" | sed 's#^\.$##')" "$(basename "$d")"
           done
 
-          for file in index.html hero-photo.jpg hero-photo.webp og-image.jpg demo.mp4 favicon.ico favicon-32.png apple-touch-icon.png logo.png robots.txt sitemap.xml; do
+          for file in index.html hero-photo.jpg hero-photo.webp og-image.jpg demo.mp4 favicon.ico favicon-32.png apple-touch-icon.png logo.png robots.txt sitemap.xml llms.txt; do
             [ -f "$file" ] && upload "$file"
           done
           for file in $(find resursi hoteli apartmani en -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.webp' -o -name '*.svg' -o -name '*.mp4' \) | sort); do

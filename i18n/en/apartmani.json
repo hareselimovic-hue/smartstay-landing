@@ -140,5 +140,7 @@
  "e24b8419": "Something went wrong — check the email address and try again.",
  "<div class=\"signup-ok-title\">✓ Vaš pristup je spreman!</div>": "<div class=\"signup-ok-title\">✓ Your access is ready!</div>",
  "<div class=\"signup-ok-sub\">Kreirajte nalog i počnite odmah — 30 dana besplatno, bez kartice.</div>": "<div class=\"signup-ok-sub\">Create your account and start right away — 30 days free, no card.</div>",
- "<div class=\"signup-ok-sub\">Napravite nalog za svoj hotel — 30 dana besplatno, bez kartice.</div>": "<div class=\"signup-ok-sub\">Create the account for your hotel — 30 days free, no card.</div>"
+ "<div class=\"signup-ok-sub\">Napravite nalog za svoj hotel — 30 dana besplatno, bez kartice.</div>": "<div class=\"signup-ok-sub\">Create the account for your hotel — 30 days free, no card.</div>",
+ "Digitalni vodič za apartman: gosti sve nađu sami | SmartStay": "Digital apartment guide: guests find it all | SmartStay",
+ "SmartStay — Digitalni vodič za apartman": "SmartStay — Digital guide for your apartment"
 }

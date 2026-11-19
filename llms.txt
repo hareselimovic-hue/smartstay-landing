@@ -1,0 +1,20 @@
+# SmartStay
+
+> SmartStay is a digital guest guide and guest communication platform for apartment hosts and hotels. Guests open one link or QR code on their phone (no app install) and find Wi-Fi, check-in instructions, house rules, local recommendations and an AI assistant that answers in their language, 24/7. Available in Bosnian and English; guides support 5 languages.
+
+## Product
+- [Apartments (BS)](https://smartstay.ba/apartmani/): digital guide for apartment hosts — Wi-Fi, check-in, house rules, recommendations, upsells, AI assistant, guest registration. From 5.99 KM per property per month, free trial.
+- [Hotels (BS)](https://smartstay.ba/hoteli/): guest communication platform for hotels — reception requests, room service, extra services, bookings, announcements to all guests, reception dashboard by room. Packages from 59 KM per month.
+- [Apartments (EN)](https://smartstay.ba/en/apartments/)
+- [Hotels (EN)](https://smartstay.ba/en/hotels/)
+
+## Resources for hosts (free templates)
+- [Kućni red za apartmane / House rules template](https://smartstay.ba/resursi/kucni-red-za-apartmane/)
+- [Upute za goste / Guest welcome message template](https://smartstay.ba/resursi/upute-za-goste/)
+- [Self check-in za apartmane / Self check-in guide](https://smartstay.ba/resursi/self-check-in/)
+- [Checklista za čišćenje apartmana / Turnover checklist](https://smartstay.ba/resursi/checklista-za-pripremu-apartmana/)
+- [English resources](https://smartstay.ba/en/resources/)
+
+## Contact
+- Website: https://smartstay.ba/
+- Email: info@smartstay.ba
