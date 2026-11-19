@@ -18,7 +18,7 @@ jobs:
           ROOT: /home/smartsta/public_html
         run: |
           set -e
-          curl -s -G "$CPANEL/execute/Fileman/get_file_content" -H "Authorization: $AUTH" \
+          curl -s -X POST "$CPANEL/execute/Fileman/get_file_content" -H "Authorization: $AUTH" \
             --data-urlencode "dir=$ROOT" --data-urlencode "file=.htaccess" -w "\nHTTP %{http_code}" > raw.txt
           tail -1 raw.txt; head -c 300 raw.txt; echo
           sed '$d' raw.txt > get.json
