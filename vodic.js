@@ -134,12 +134,13 @@
 
   // ── Price calculators ──────────────────────────────────────────────────────────────────────
   function aptPrice(n) { var p = n <= 3 ? 9.99 : n <= 10 ? 7.99 : 5.99; return { per: p, total: Math.round(p * n * 100) / 100 }; }
+  // Same as guestio/src/lib/pricing.ts hotelPackage(): above 80 rooms 169 KM + 1,50 KM per extra room
   function hotelPkg(rooms) {
     if (rooms <= 7) return { name: 'Mini', price: 59 };
     if (rooms <= 15) return { name: EN ? 'Small' : 'Mali', price: 79 };
     if (rooms <= 40) return { name: EN ? 'Medium' : 'Srednji', price: 119 };
     if (rooms <= 80) return { name: EN ? 'Large' : 'Veliki', price: 169 };
-    return null;
+    return { name: EN ? 'Large' : 'Veliki', price: Math.round((169 + (rooms - 80) * 1.5) * 100) / 100, extra: rooms - 80 };
   }
   function plural(n, w) { return n === 1 ? w[0] : w[1]; }
 
@@ -168,8 +169,8 @@
       if (hotel) {
         var pk = hotelPkg(n);
         if (!pk) { total.innerHTML = esc(T.custom); per.textContent = T.customSub; anchor.style.display = 'none'; return; }
-        total.innerHTML = fmt(pk.price, 0) + ' KM <small>' + esc(T.month) + '</small>';
-        per.textContent = T.pkg.replace('{n}', pk.name) + ' · ' + n + ' ' + plural(n, T.room);
+        total.innerHTML = fmt(pk.price, pk.price % 1 ? 2 : 0) + ' KM <small>' + esc(T.month) + '</small>';
+        per.textContent = T.pkg.replace('{n}', pk.name) + ' · ' + n + ' ' + plural(n, T.room) + (pk.extra ? (EN ? ' (169 KM + ' + pk.extra + ' × 1.50 KM)' : ' (169 KM + ' + pk.extra + ' × 1,50 KM)') : '');
         anchor.style.display = '';
         anchor.textContent = EN ? 'That is ' + fmt(pk.price / n / 30, 2) + ' KM a day per room.' : 'To je ' + fmt(pk.price / n / 30, 2) + ' KM dnevno po sobi.';
       } else {
@@ -200,7 +201,7 @@
       var stays = rooms * occ * 30 / 2, rev = stays * take * avg;
       var pk = hotelPkg(Math.max(rooms, 1));
       box.querySelector('#ssr-rev').textContent = fmt(rev, 0) + ' KM';
-      box.querySelector('#ssr-price').textContent = pk ? fmt(pk.price, 0) + ' KM' : T.custom;
+      box.querySelector('#ssr-price').textContent = fmt(pk.price, pk.price % 1 ? 2 : 0) + ' KM';
       var x = pk && pk.price ? rev / pk.price : 0;
       box.querySelector('#ssr-x').textContent = !pk ? '—' : x >= 1 ? fmt(x, 1) + '×' : fmt(x * 100, 0) + '%';
       box.querySelector('#ssr-xl').textContent = x >= 1 ? T.rX : T.rXcover;
