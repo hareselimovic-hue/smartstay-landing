@@ -78,3 +78,12 @@
 .ssr-fine { margin-top: 12px; font-size: 12px; color: #9CA3AF; line-height: 1.5; }
 @media (max-width: 760px) { .ssr-grid { grid-template-columns: 1fr 1fr; } .ssr-out { grid-template-columns: 1fr; } .ssr { padding: 20px; } }
 .ssr-grid > div { display: flex; flex-direction: column; justify-content: flex-end; }
+
+/* Mobile: a long card grid becomes one swipeable row (next card peeks out). Set --gutter to the page's container padding. */
+@media (max-width: 600px) {
+  .m-scroll.m-scroll { display: flex !important; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px;
+    margin: 0 calc(-1 * var(--gutter, 24px)); padding: 0 var(--gutter, 24px) 10px; scroll-padding: 0 var(--gutter, 24px);
+    scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .m-scroll::-webkit-scrollbar { display: none; }
+  .m-scroll.m-scroll > * { flex: 0 0 80%; scroll-snap-align: start; }
+}
