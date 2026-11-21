@@ -62,6 +62,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="/vodic.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -258,6 +259,13 @@
     .gr-ai svg{width:16px;height:16px;vertical-align:-3px}
     .ico-inline{width:15px;height:15px;vertical-align:-2px;margin-right:4px;display:inline-block}
     .btn-hero{display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+  
+    .hero-lead { font-size: 15px; font-weight: 600; color: var(--navy); margin: 4px 0 12px; }
+    .roi-head { text-align: center; max-width: 640px; margin: 64px auto 0; }
+    .roi-head h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 800; color: var(--navy); letter-spacing: -.01em; }
+    .roi-head p { color: var(--gray); margin-top: 8px; line-height: 1.6; }
+    .cta .tiers-note { color: rgba(255,255,255,.7); font-size: 14px; }
+    .cta .tiers-note a { color: #fff; font-weight: 700; }
   </style>
 <style>
   /* Mobile menu (hamburger) */
@@ -298,12 +306,12 @@
         <li><a href="#funkcije">Funkcije</a></li>
         <li><a href="#kako-radi">Kako radi</a></li>
         <li><a href="#demo">Demo</a></li>
-        <li><a href="#kontakt">Cijena</a></li>
+        <li><a href="#cijena">Cijena</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="/apartmani/">Za apartmane</a></li>
         <li class="nav-lang-li"><a href="/en/hotels/">🇬🇧 English version</a></li>
       </ul>
-      <a href="#kontakt" class="btn btn-orange btn-nav">Zatraži pristup →</a>
+      <a href="#vodic" class="btn btn-orange btn-nav">Napravite vodič →</a>
       <a class="nav-lang" href="/en/hotels/" title="English">EN</a>
       <button class="nav-burger" type="button" aria-label="Meni" aria-expanded="false" aria-controls="nav-links"><span class="bar"></span></button>
     </div>
@@ -322,11 +330,9 @@
           Gosti na svom telefonu i na svom jeziku pronađu sve o hotelu, pošalju zahtjev recepciji, naruče room service ili rezervišu spa.
           Recepcija sve vidi na jednom ekranu i odgovara jednim klikom — bez aplikacije za goste i bez poziva.
         </p>
-        <div class="hero-ctas">
-          <a href="#kontakt" class="btn btn-orange">Zatraži pristup →</a>
-          <a href="#demo" class="btn btn-ghost"><svg class="ico-inline" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg> Isprobaj kao gost</a>
-        </div>
-        <p class="hero-note">✓ 30 dana besplatno &nbsp;·&nbsp; ✓ Bez kreditne kartice &nbsp;·&nbsp; ✓ Spremno za jedan dan</p>
+        <p class="hero-lead">Zalijepite link vašeg hotela na Bookingu ili vaš sajt. Pripremimo vodič za vaš hotel i pošaljemo ga na mail.</p>
+        <div class="ssv" data-kind="HOTEL" style="margin-bottom:16px"></div>
+        <div class="hero-ctas"><a href="#demo" class="btn btn-ghost"><svg class="ico-inline" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg> Isprobaj kao gost</a></div>
       </div>
       <div class="phones">
         <div class="phone back"><img src="/hoteli/screen-extras-2.webp" alt="Room service i dodatne usluge u hotelskom vodiču" width="390" height="846" loading="eager"/></div>
@@ -371,6 +377,23 @@
       <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2 lucide-building-2" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg></div><h3>Posebne info po sobi</h3><p>Depandansa ima drugi WiFi? Promijenite samo to — sve ostalo i dalje prati vodič hotela.</p></div>
       <div class="feat"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></div><h3>Google recenzije</h3><p>Kartica „Ocijenite nas na Googleu“ na kraju vodiča — kao one na pultu recepcije, samo uvijek pri ruci.</p></div>
     </div>
+  </div>
+</section>
+
+<!-- PRICE + ROI -->
+<section id="cijena">
+  <div class="container">
+    <div class="sec-head">
+      <span class="chip chip-navy">Cijena</span>
+      <h2>Jedna cijena prema broju soba. Sve funkcije uključene.</h2>
+      <p>Upišite broj soba i vidite cijenu. Ispod izračunajte koliko hotel može zaraditi na uslugama koje gosti naruče kroz vodič.</p>
+    </div>
+    <div class="ssc" data-calc="hotels"></div>
+    <div class="roi-head">
+      <h3>Koliko može zaraditi vaš hotel?</h3>
+      <p>Doručak u sobu, transfer, kasni check-out, spa: gost lakše naruči kad vidi ponudu na svom telefonu i na svom jeziku.</p>
+    </div>
+    <div class="ssr"></div>
   </div>
 </section>
 
@@ -454,7 +477,6 @@
           <tr><td>Promjena informacija</td><td class="no">novo štampanje</td><td>da</td><td class="us yes">odmah, za sve sobe</td></tr>
           <tr><td>Zahtjevi i narudžbe</td><td class="no">ne</td><td>da</td><td class="us yes">da, sa statusom za gosta</td></tr>
           <tr><td>Na bosanskom, lokalna podrška</td><td>—</td><td class="no">rijetko</td><td class="us yes">da</td></tr>
-          <tr><td>Cijena</td><td>štampa</td><td class="no">često 100–500 € mjesečno</td><td class="us yes">od 59 KM mjesečno, prema broju soba</td></tr>
         </tbody>
       </table>
     </div>
@@ -480,28 +502,14 @@
 </section>
 
 <!-- CTA -->
-<section class="cta" id="kontakt">
+<section class="cta" id="vodic">
   <div class="container">
     <div class="cta-box">
       <span class="chip chip-orange-dark">Počnite danas</span>
       <h2>Manje poziva na recepciju.<br>Zadovoljniji gosti.<br><em>Više prodanih usluga.</em></h2>
-      <p class="cta-lead">Ostavite email i odmah napravite nalog za svoj hotel — 30 dana besplatno.</p>
-      <form class="cta-form" id="ctaForm" onsubmit="handleSignup(event)">
-        <input class="cta-input" type="email" placeholder="recepcija@vashotel.ba" required aria-label="Email"/>
-        <button class="btn btn-orange" type="submit">Počni besplatno →</button>
-      </form>
-      <div id="ctaSuccess" style="display:none"></div>
-      <p class="cta-note">✓ 30 dana besplatno &nbsp;·&nbsp; ✓ Bez kreditne kartice &nbsp;·&nbsp; ✓ Sve funkcije uključene</p>
-      <div class="cta-price">
-        <strong>Cijena prema broju soba — sve funkcije u svakom paketu</strong>
-        <div class="tiers">
-          <div class="tier"><span class="t-name">Mini</span><span class="t-rooms">do 7 soba</span><span class="t-amt">59 <small>KM/mj</small></span></div>
-          <div class="tier"><span class="t-name">Mali</span><span class="t-rooms">8–15 soba</span><span class="t-amt">79 <small>KM/mj</small></span></div>
-          <div class="tier"><span class="t-name">Srednji</span><span class="t-rooms">16–40 soba</span><span class="t-amt">119 <small>KM/mj</small></span></div>
-          <div class="tier"><span class="t-name">Veliki</span><span class="t-rooms">41–80 soba</span><span class="t-amt">169 <small>KM/mj</small></span></div>
-        </div>
-        <p class="tiers-note">Više od 80 soba? <a href="mailto:info@smartstay.ba?subject=Ponuda%20za%20hotel&amp;body=Naziv%20hotela%3A%0ABroj%20soba%3A%0AGrad%3A%0ATelefon%3A">Pišite nam za ponudu →</a></p>
-      </div>
+      <p class="cta-lead">Zalijepite link vašeg hotela na Bookingu ili vaš sajt. Šaljemo vam spreman vodič na mail.</p>
+      <div class="ssv" data-kind="HOTEL" data-dark data-center></div>
+      <p class="tiers-note" style="margin-top:18px">Cijena od 59 KM mjesečno, prema broju soba. <a href="#cijena">Izračunajte cijenu →</a> · Više od 80 soba? <a href="mailto:info@smartstay.ba?subject=Ponuda%20za%20hotel">Pišite nam →</a></p>
     </div>
   </div>
 </section>
@@ -511,7 +519,7 @@
     <div class="f-grid">
       <div>
         <a href="/" class="f-logo">Smart<span>Stay</span></a>
-        <p>Digitalni vodiči i recepcija za goste apartmana i hotela. Prilagođeno tržištu Bosne i Hercegovine.</p>
+        <p>Digitalni vodiči i komunikacija s gostima za apartmane i hotele. Na vašem jeziku, s lokalnom podrškom.</p>
         <p>info@smartstay.ba</p>
       </div>
       <div>
@@ -584,5 +592,6 @@
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
 })();
 </script>
+<script src="/vodic.js" defer></script>
 </body>
 </html>

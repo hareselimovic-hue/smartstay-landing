@@ -143,5 +143,19 @@
  "652279ad": "Requests arrive on the reception screen in the SmartStay app, with the room number, and in the reception's inbox. The reception clicks Take or Done and the guest sees the status in the guide.",
  "5d7bb2de": "Yes. All rooms follow the general hotel guide; for individual rooms or an annex you can change only what differs — e.g. Wi-Fi or parking.",
  "0de2cd4d": "\">Create your hotel account →</a>",
- "Platforma za komunikaciju s gostima hotela: zahtjevi recepciji, room service, dodatne usluge i obavijesti na jeziku gosta — na telefonu, bez aplikacije.": "A guest communication platform for hotels: reception requests, room service, extra services and announcements in the guest's language — no app needed."
+ "Platforma za komunikaciju s gostima hotela: zahtjevi recepciji, room service, dodatne usluge i obavijesti na jeziku gosta — na telefonu, bez aplikacije.": "A guest communication platform for hotels: reception requests, room service, extra services and announcements in the guest's language — no app needed.",
+ "6e4690ba": "Make your guide →",
+ "0d1b82a7": "Make your guide for free →",
+ "39677bf0": "Digital guides and guest communication for apartments and hotels. In your language, with local support.",
+ "c7e06c4b": "<a href=\"#cijena\">Pricing</a>",
+ "4d79c7b3": "Paste your hotel's Booking.com link or your website. We prepare a guide for your hotel and email it to you.",
+ "869fd04b": "<a href=\"#demo\" class=\"btn btn-ghost\"><svg class=\"ico-inline\" xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-smartphone\" aria-hidden=\"true\"><rect width=\"14\" height=\"20\" x=\"5\" y=\"2\" rx=\"2\" ry=\"2\"></rect><path d=\"M12 18h.01\"></path></svg> Try it as a guest</a>",
+ "4ae759ce": "One price by number of rooms. All features included.",
+ "9242118e": "Enter your number of rooms to see the price. Below, estimate what your hotel can earn from services guests order through the guide.",
+ "7a1091ff": "How much can your hotel earn?",
+ "e3c094bf": "Breakfast in the room, airport transfer, late check-out, spa: guests order more easily when they see the offer on their phone, in their language.",
+ "3df1043f": "Paste your hotel's Booking.com link or your website. We send you a ready guide by email.",
+ "4877b04b": "From 59 KM a month, by number of rooms. <a href=\"#cijena\">Calculate your price →</a> · More than 80 rooms? <a href=\"mailto:info@smartstay.ba?subject=Hotel%20offer\">Write to us →</a>",
+ "670bd952": "Calculate your price →",
+ "3e08cec3": "Write to us →"
 }

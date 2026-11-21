@@ -78,6 +78,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="/vodic.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
     /* ─── TOKENS ─── */
@@ -537,6 +538,22 @@
     .gr-ai svg{width:16px;height:16px;vertical-align:-3px}
     .ico-inline{width:15px;height:15px;vertical-align:-2px;margin-right:4px;display:inline-block}
     .btn-hero{display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+  
+    .hero-founder { margin-top: 18px; font-size: 14px; color: var(--gray); }
+    .hero-founder strong { color: var(--navy); }
+    .reg-section { padding: 72px 0 8px; }
+    .reg-box { display: flex; gap: 28px; align-items: flex-start; background: linear-gradient(135deg, #FFF7F0, #FFFFFF); border: 1.5px solid rgba(255,103,0,.22); border-radius: 28px; padding: 40px; }
+    .reg-icon { flex: none; width: 64px; height: 64px; border-radius: 18px; background: var(--orange); color: #fff; display: flex; align-items: center; justify-content: center; }
+    .reg-icon svg { width: 32px; height: 32px; }
+    .reg-sub { font-size: 17px; color: var(--text-2); line-height: 1.65; margin-top: 10px; max-width: 640px; }
+    .reg-list { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; list-style: none; padding: 0; }
+    .reg-list li { padding-left: 26px; position: relative; font-size: 15px; color: var(--text-2); }
+    .reg-list li::before { content: "✓"; position: absolute; left: 0; color: #16A34A; font-weight: 800; }
+    .story-section { padding: 88px 0; }
+    .story-box { max-width: 760px; margin: 0 auto; text-align: center; }
+    .story-text { font-size: 18px; line-height: 1.75; color: var(--text-2); margin-top: 16px; }
+    .story-sign { margin-top: 22px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--navy); }
+    @media (max-width: 640px) { .reg-box { flex-direction: column; padding: 26px 20px; gap: 16px; } .story-text { font-size: 16px; } }
   </style>
 <style>
   /* Mobile menu (hamburger) */
@@ -584,7 +601,7 @@
         <li><a href="/hoteli/">Za hotele</a></li>
         <li class="nav-lang-li"><a href="/en/apartments/">🇬🇧 English version</a></li>
       </ul>
-      <a href="#kontakt" class="btn-nav">Zatraži pristup →</a>
+      <a href="#vodic" class="btn-nav">Napravite vodič →</a>
       <a class="nav-lang" href="/en/apartments/" title="English">EN</a>
       <button class="nav-burger" type="button" aria-label="Meni" aria-expanded="false" aria-controls="nav-links"><span class="bar"></span></button>
     </div>
@@ -604,12 +621,10 @@
           <em>gosti sve pronađu sami.</em>
         </h1>
         <p class="hero-sub">
-          Aplikacija za iznajmljivače apartmana: informacije o smještaju, check-in upute, WiFi i lokalne preporuke na jednom mjestu. Pametni digitalni vodič koji gostima olakšava boravak, a vama štedi vrijeme.
+          Zalijepite link vašeg Airbnb ili Booking oglasa i vodič za goste se pravi sam: dobrodošlica, check-in, kućni red, lokalne preporuke i AI asistent koji gostima odgovara na njihovom jeziku.
         </p>
-        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
-          <a href="#kontakt" class="btn-hero">
-            Počni besplatno →
-          </a>
+        <div class="ssv" data-kind="APARTMENT" style="margin-bottom:18px"></div>
+        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:12px;">
           <a href="https://app.smartstay.ba/g/modern-apartment-in-center-of-sarajevo/preview" target="_blank" rel="noopener"
              style="display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:100px;
                     border:1.5px solid rgba(15,47,97,0.2);background:rgba(15,47,97,0.04);
@@ -621,16 +636,7 @@
             Otvori demo vodič
           </a>
         </div>
-        <p class="hero-note">✓ 30 dana besplatno &nbsp;·&nbsp; ✓ Bez kreditne kartice &nbsp;·&nbsp; ✓ Otkazujete kad god</p>
-        <div class="hero-trust" style="margin-top:20px">
-          <div style="display:flex">
-            <div class="trust-av" style="background:linear-gradient(135deg,#FF6700,#e05d00)">A</div>
-            <div class="trust-av" style="background:linear-gradient(135deg,#0F2F61,#1a3d73)">M</div>
-            <div class="trust-av" style="background:linear-gradient(135deg,#34D399,#0EA5E9)">E</div>
-            <div class="trust-av" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)">S</div>
-          </div>
-          <span><strong>150+ domaćina</strong> u BiH koristi SmartStay</span>
-        </div>
+        <p class="hero-founder">Napravili su ga domaćini koji sami upravljaju s <strong>50+ apartmana</strong>.</p>
       </div>
       <div class="hero-visual sr sr-d2" id="demo-section">
         <div class="apt-phones">
@@ -640,8 +646,8 @@
         <div class="hero-float">
           <div class="hf-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wifi-off" aria-hidden="true"><path d="M12 20h.01"></path><path d="M8.5 16.429a5 5 0 0 1 7 0"></path><path d="M5 12.859a10 10 0 0 1 5.17-2.69"></path><path d="M19 12.859a10 10 0 0 0-2.007-1.523"></path><path d="M2 8.82a15 15 0 0 1 4.177-2.643"></path><path d="M22 8.82a15 15 0 0 0-11.288-3.764"></path><path d="m2 2 20 20"></path></svg></div>
           <div>
-            <div class="hf-num">0</div>
-            <div class="hf-lbl">WiFi pitanja ove sedmice</div>
+            <div class="hf-num">24/7</div>
+            <div class="hf-lbl">AI odgovara gostima</div>
           </div>
         </div>
 
@@ -655,20 +661,20 @@
   <div class="container">
     <div class="stats-grid">
       <div class="stat-item">
-        <div class="stat-num">8–12</div>
-        <div class="stat-lbl">poruka po rezervaciji prosječno</div>
+        <div class="stat-num">1 link</div>
+        <div class="stat-lbl">za sve informacije gostu</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num">2h</div>
-        <div class="stat-lbl">ušteđeno sedmično</div>
+        <div class="stat-num">5</div>
+        <div class="stat-lbl">jezika, prevod automatski</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24/7</div>
+        <div class="stat-lbl">AI asistent za goste</div>
       </div>
       <div class="stat-item">
         <div class="stat-num">0</div>
-        <div class="stat-lbl">WiFi pitanja nakon SmartStay-a</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">150+</div>
-        <div class="stat-lbl">domaćina u BiH</div>
+        <div class="stat-lbl">aplikacija za instalirati</div>
       </div>
     </div>
   </div>
@@ -714,6 +720,25 @@
   </div>
 </section>
 
+<!-- GUEST REGISTRATION -->
+<section class="reg-section" id="prijava-gostiju">
+  <div class="container">
+    <div class="reg-box sr">
+      <div class="reg-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-id-card" aria-hidden="true"><path d="M16 10h2"></path><path d="M16 14h2"></path><path d="M6.17 15a3 3 0 0 1 5.66 0"></path><circle cx="9" cy="11" r="2"></circle><rect x="2" y="5" width="20" height="14" rx="2"></rect></svg></div>
+      <div>
+        <span class="chip chip-orange">Prijava gostiju</span>
+        <h2 class="sec-headline" style="margin-top:12px">Gosti se sami prijave prije dolaska.</h2>
+        <p class="reg-sub">Bez slikanja pasoša, bez prepisivanja. Gost u vodiču unese podatke iz pasoša ili lične karte, a vi ih dobijete na email, šifrovane i spremne za prijavu boravka.</p>
+        <ul class="reg-list">
+          <li>Ime, datum rođenja, državljanstvo, broj i rok isprave</li>
+          <li>Datumi dolaska i odlaska povezani s apartmanom</li>
+          <li>Uključujete je po apartmanu, jednim klikom</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FEATURES -->
 <section class="features-section" id="features">
   <div class="container">
@@ -728,11 +753,10 @@
       <div class="feat-card sr sr-d2"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-list" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M12 11h4"></path><path d="M12 16h4"></path><path d="M8 11h.01"></path><path d="M8 16h.01"></path></svg></div><h3>Kućni red</h3><p>Jasna pravila bez nedoumica. Gosti čitaju dobrovoljno.</p></div>
       <div class="feat-card sr"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg></div><h3>Lokacija & parking</h3><p>Google Maps link, opis parkinga, ulaz, zgrada — sve na jednom mjestu.</p></div>
       <div class="feat-card sr sr-d1"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></div><h3>Preporuke domaćina</h3><p>Vaši omiljeni restorani, atrakcije, dostava — personalizovani za svaki apartman.</p></div>
-      <div class="feat-card sr sr-d2"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-banknote" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg></div><h3>Upsell usluge</h3><p>Transferi, ture, welcome paket — zarađujte 15–30% više po rezervaciji.</p></div>
+      <div class="feat-card sr sr-d2"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-banknote" aria-hidden="true"><rect width="20" height="12" x="2" y="6" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg></div><h3>Upsell usluge</h3><p>Transferi, ture, welcome paket: dodatna zarada uz svaku rezervaciju.</p></div>
       <div class="feat-card sr"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg></div><h3>5 jezika automatski</h3><p>Bosanski, engleski, njemački, turski, italijanski — vodič se prilagođava gostu.</p></div>
       <div class="feat-card sr sr-d1"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-qr-code" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1"></rect><rect width="5" height="5" x="16" y="3" rx="1"></rect><rect width="5" height="5" x="3" y="16" rx="1"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg></div><h3>QR kod</h3><p>Odštampajte i postavite u apartman. Gost skenira, odmah ima sve.</p></div>
       <div class="feat-card sr sr-d2"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg></div><h3>Tim pristup</h3><p>Dodajte kolege. Svako ima svoja prava pristupa po nekretnini.</p></div>
-      <div class="feat-card feat-wide sr"><div class="feat-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-id-card" aria-hidden="true"><path d="M16 10h2"></path><path d="M16 14h2"></path><path d="M6.17 15a3 3 0 0 1 5.66 0"></path><circle cx="9" cy="11" r="2"></circle><rect x="2" y="5" width="20" height="14" rx="2"></rect></svg></div><div><h3>Registracija gostiju <span class="feat-new">Novo</span></h3><p>Gosti prije dolaska sami unesu podatke iz pasoša ili lične karte — ime, datum rođenja, državljanstvo, broj dokumenta. Podaci su šifrovani i stižu vam na email, spremni za prijavu boravka. Bez slikanja dokumenata i prepisivanja.</p></div></div>
     </div>
   </div>
 </section>
@@ -749,7 +773,7 @@
       <div class="how-steps sr">
         <div class="how-step active" onclick="setStep(this)">
           <div class="hs-num">1</div>
-          <div><div class="hs-title">Kreirajte profil apartmana</div><div class="hs-desc">Unesite informacije — WiFi, check-in, pravila, preporuke. Naš editor je jednostavan kao Google Docs.</div></div>
+          <div><div class="hs-title">Zalijepite link oglasa</div><div class="hs-desc">Vodič se napravi iz vašeg Airbnb ili Booking oglasa. Dopunite WiFi i upute za ulaz, ili sve popunite ručno u editoru jednostavnom kao Google Docs.</div></div>
         </div>
         <div class="how-step" onclick="setStep(this)">
           <div class="hs-num">2</div>
@@ -824,29 +848,15 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testi-section" id="testimonials">
+<!-- FOUNDER STORY -->
+<section class="story-section" id="prica">
   <div class="container">
-    <div style="text-align:center;margin-bottom:56px" class="sr">
-      <span class="chip chip-navy">Iskustva</span>
-      <h2 class="sec-headline" style="margin-top:14px">150+ domaćina. Ista priča.</h2>
-    </div>
-    <div class="testi-grid-light">
-      <div class="tc-light sr">
-        <div class="tc-stars">★★★★★</div>
-        <p class="tc-text">"Gosti su prestali da me zovu noću zbog WiFi passworda. To samo po sebi vrijedi svaki fenig pretplate. Dodao sam upsell za transfer — zarađujem ekstra 50–80 KM po rezervaciji."</p>
-        <div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#FF6700,#e05d00)">A</div><div><div class="tc-name">Armin B.</div><div class="tc-role">4 apartmana · Sarajevo</div></div></div>
-      </div>
-      <div class="tc-light featured sr sr-d1">
-        <div class="tc-stars">★★★★★</div>
-        <p class="tc-text">"Ubacila sam SmartStay link u automatsku Airbnb poruku. Ocjene su mi porasle — gosti hvale koliko je sve jasno i organizovano. Superhost status potvrđen drugi put zaredom."</p>
-        <div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#FF6700,#E8527A)">M</div><div><div class="tc-name">Maja K.</div><div class="tc-role">Airbnb Superhost · Mostar</div></div></div>
-      </div>
-      <div class="tc-light sr sr-d2">
-        <div class="tc-stars">★★★★★</div>
-        <p class="tc-text">"Sa 12 apartmana i 3 zaposlenika, organizacija je bila noćna mora. SmartStay tim-pristup je promijenio sve. Svako vidi samo apartmane za koje je zadužen."</p>
-        <div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#0F2F61,#1a3d73)">E</div><div><div class="tc-name">Edin H.</div><div class="tc-role">12 apartmana · Banja Luka</div></div></div>
-      </div>
+    <div class="story-box sr">
+      <span class="chip chip-navy">Ko stoji iza SmartStaya</span>
+      <h2 class="sec-headline" style="margin-top:14px">Napravili smo ga za sebe.</h2>
+      <p class="story-text">Sami upravljamo s više od 50 apartmana. Svaki dan smo odgovarali na ista pitanja: koja je WiFi lozinka, gdje je parking, kako se ulazi, do kada je check-out. Često u 2 ujutro, na pet jezika.</p>
+      <p class="story-text">SmartStay je alat koji smo napravili da to riješimo. Koristimo ga za svaki naš apartman, a sada ga nudimo i drugim domaćinima.</p>
+      <p class="story-sign">SmartStay tim</p>
     </div>
   </div>
 </section>
@@ -856,61 +866,10 @@
   <div class="container">
     <div style="text-align:center" class="sr">
       <span class="chip chip-navy">Cijene</span>
-      <h2 class="sec-headline" style="margin-top:14px">Bez skrivenih troškova</h2>
-      <p style="font-size:16px;color:var(--gray);margin-top:8px">Počnite besplatno 30 dana. Otkazujete kad god hoćete.</p>
+      <h2 class="sec-headline" style="margin-top:14px">Jedan paket. Jednostavna cijena.</h2>
+      <p style="font-size:16px;color:var(--gray);margin-top:8px">Plaćate samo po broju apartmana. Što ih je više, to je cijena po apartmanu niža.</p>
     </div>
-    <div class="pricing-grid-light">
-      <div class="pc-light sr">
-        <div class="pc-plan">Starter</div>
-        <div class="pc-amount"><span class="pc-curr">KM</span> 9.99</div>
-        <div class="pc-period">/nekretnina/mj</div>
-        <p class="pc-desc">Za domaćine sa 1–3 apartmana koji žele uštedjeti vrijeme.</p>
-        <div class="pc-div"></div>
-        <div class="pc-feats">
-          <div class="pf">Digitalni vodič (9 sekcija)</div>
-          <div class="pf">QR kod & link za dijeljenje</div>
-          <div class="pf">WhatsApp & Viber dijeljenje</div>
-          <div class="pf">AI Asistent (5 jezika, 24/7)</div>
-          <div class="pf">Tim pristup</div>
-          <div class="pf">Analitika posjeta</div>
-        </div>
-        <button class="btn-pc btn-outline" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">Počni besplatno</button>
-      </div>
-      <div class="pc-light hot sr sr-d1">
-        <div class="hot-badge">Najpopularniji</div>
-        <div class="pc-plan">Standard</div>
-        <div class="pc-amount"><span class="pc-curr">KM</span> 7.99</div>
-        <div class="pc-period">/nekretnina/mj</div>
-        <p class="pc-desc">Za domaćine sa 4–10 nekretnina koji žele rasti.</p>
-        <div class="pc-div"></div>
-        <div class="pc-feats">
-          <div class="pf">Digitalni vodič (9 sekcija)</div>
-          <div class="pf">QR kod & link za dijeljenje</div>
-          <div class="pf">WhatsApp & Viber dijeljenje</div>
-          <div class="pf">AI Asistent (5 jezika, 24/7)</div>
-          <div class="pf">Tim pristup</div>
-          <div class="pf">Analitika posjeta</div>
-        </div>
-        <button class="btn-pc btn-solid" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">Počni besplatno →</button>
-      </div>
-      <div class="pc-light sr sr-d2">
-        <div class="pc-plan">Pro</div>
-        <div class="pc-amount"><span class="pc-curr">KM</span> 5.99</div>
-        <div class="pc-period">/nekretnina/mj</div>
-        <p class="pc-desc">Za property menadžere s 10+ nekretnina koji trebaju sve.</p>
-        <div class="pc-div"></div>
-        <div class="pc-feats">
-          <div class="pf">Digitalni vodič (9 sekcija)</div>
-          <div class="pf">QR kod & link za dijeljenje</div>
-          <div class="pf">WhatsApp & Viber dijeljenje</div>
-          <div class="pf">AI Asistent (5 jezika, 24/7)</div>
-          <div class="pf">Tim pristup</div>
-          <div class="pf">Analitika posjeta</div>
-          <div class="pf">Upsell usluge (transferi, ture)</div>
-        </div>
-        <button class="btn-pc btn-outline" onclick="document.getElementById('kontakt').scrollIntoView({behavior:'smooth'})">Kontaktirajte nas</button>
-      </div>
-    </div>
+    <div class="ssc sr" data-calc="apartments"></div>
     <p style="text-align:center;margin-top:20px;font-size:13px;color:var(--gray-2)">✓ 30 dana besplatno &nbsp;·&nbsp; ✓ Bez kreditne kartice &nbsp;·&nbsp; ✓ Otkazujete u bilo kom momentu</p>
   </div>
 </section>
@@ -949,18 +908,13 @@
 </section>
 
 <!-- CTA / EMAIL -->
-<section class="cta-section-light" id="kontakt">
+<section class="cta-section-light" id="vodic">
   <div class="container">
     <div class="cta-box-light sr">
       <span class="chip chip-orange" style="position:relative;z-index:1;margin-bottom:14px;display:inline-flex;">Počnite danas</span>
       <h2 class="cta-h2">Manje poruka.<br>Zadovoljniji gosti.<br><em>Veći prihod.</em></h2>
-      <p class="cta-sub-txt">Ostavite email i odmah kreirajte nalog — 30 dana besplatno.</p>
-      <form class="cta-form" id="ctaForm" onsubmit="handleCtaSubmit(event)">
-        <input class="cta-input" type="email" placeholder="vas@email.com" required />
-        <button class="btn-cta" type="submit">Počni besplatno →</button>
-      </form>
-      <div id="ctaSuccess"></div>
-      <p class="cta-note">✓ 1 mjesec besplatno &nbsp;·&nbsp; ✓ Bez kreditne kartice &nbsp;·&nbsp; ✓ Otkaz kad god</p>
+      <p class="cta-sub-txt">Zalijepite link vašeg oglasa. Šaljemo vam spreman vodič na mail.</p>
+      <div class="ssv" data-kind="APARTMENT" data-center data-dark style="position:relative;z-index:1"></div>
     </div>
   </div>
 </section>
@@ -971,7 +925,7 @@
     <div class="footer-grid-light">
       <div class="f-brand-light">
         <a href="/" class="f-logo" style="text-decoration:none">Smart<span>Stay</span></a>
-        <p class="f-tagline">Digitalni vodiči za goste koji uštede domaćinima sate sedmično. Prilagođen tržištu Bosne i Hercegovine.</p>
+        <p class="f-tagline">Digitalni vodiči i komunikacija s gostima za apartmane i hotele. Na vašem jeziku, s lokalnom podrškom.</p>
         <p class="f-email-txt">info@smartstay.ba</p>
       </div>
       <div class="f-col-light">
@@ -1007,17 +961,8 @@
       <button onclick="dismissPopup()" style="background:transparent;border:none;color:rgba(255,255,255,0.7);cursor:pointer;font-size:20px;padding:4px;line-height:1;">✕</button>
     </div>
     <div style="padding:20px 24px;">
-      <p style="color:#444;font-size:14px;line-height:1.65;margin-bottom:14px;">Isprobajte SmartStay potpuno besplatno — digitalni vodič za vaše goste, AI chatbot 24/7.</p>
-      <ul style="margin-bottom:18px;list-style:none;display:flex;flex-direction:column;gap:8px;">
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:#262626;"><span style="color:#22c55e;font-weight:700;">✓</span> Neograničen broj gostiju</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:#262626;"><span style="color:#22c55e;font-weight:700;">✓</span> AI chatbot uključen</li>
-        <li style="display:flex;align-items:center;gap:8px;font-size:14px;color:#262626;"><span style="color:#22c55e;font-weight:700;">✓</span> Otkaz kad god, bez obaveze</li>
-      </ul>
-      <form id="popupForm" onsubmit="handlePopupSubmit(event)" style="display:flex;flex-direction:column;gap:10px;">
-        <input type="email" placeholder="vas@email.com" required style="height:46px;padding:0 16px;border-radius:10px;border:1.5px solid var(--border);font-size:14px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='var(--border)'"/>
-        <button type="submit" style="height:46px;background:var(--navy);color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;border:none;border-radius:10px;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--navy-2)'" onmouseout="this.style.background='var(--navy)'">Počnite besplatni trial →</button>
-      </form>
-      <div id="popupSuccess" style="display:none;"></div>
+      <p style="color:#444;font-size:14px;line-height:1.65;margin-bottom:14px;">Zalijepite link vašeg Airbnb ili Booking oglasa, a mi vam pošaljemo gotov vodič za goste na mail.</p>
+      <div class="ssv" data-kind="APARTMENT"></div>
     </div>
   </div>
 </div>
@@ -1127,6 +1072,7 @@
       localStorage.setItem('smartstay_trial_popup_v1', '1'); // don't show the popup again
     }
   }
+  document.getElementById('trialPopup').addEventListener('submit', () => { try { localStorage.setItem('smartstay_trial_popup_v1', '1'); } catch (_) {} });
   window.addEventListener('load', () => {
     if (localStorage.getItem('smartstay_trial_popup_v1')) return;
     setTimeout(() => {
@@ -1145,5 +1091,7 @@
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
 })();
 </script>
+<script src="/vodic.js" defer></script>
+<script>if (location.hash === '#kontakt') { history.replaceState(null, '', '#vodic'); window.addEventListener('load', function () { var e = document.getElementById('vodic'); if (e) e.scrollIntoView(); }); }</script>
 </body>
 </html>

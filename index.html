@@ -51,11 +51,12 @@
     // Old links like smartstay.ba/#pricing pointed at the apartments content, which now lives on /apartmani/
     (function () {
       var old = ["#features", "#how", "#pricing", "#faq", "#kontakt", "#demo-section", "#sto-je"];
-      if (old.indexOf(location.hash) !== -1) location.replace("/apartmani/" + location.hash);
+      if (old.indexOf(location.hash) !== -1) location.replace("/apartmani/" + (location.hash === "#kontakt" ? "#vodic" : location.hash));
     })();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="/vodic.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
     /* ─── TOKENS ─── */
@@ -582,6 +583,14 @@
     .hp-demo { position: absolute; top: 16px; right: 16px; z-index: 2; display: inline-flex; align-items: center; gap: 6px; background: var(--orange); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 13px; padding: 8px 14px; border-radius: 100px; text-decoration: none; box-shadow: 0 6px 20px rgba(255,103,0,.35); transition: transform .15s, background .2s; }
     .hp-demo:hover { background: var(--orange-2); transform: translateY(-1px); }
     .hp-demo svg { width: 14px; height: 14px; }
+  
+    .hero-founder { margin-top: 18px; font-size: 14px; color: var(--gray); line-height: 1.6; }
+    .hero-founder strong, .hero-founder a { color: var(--navy); font-weight: 700; }
+    .story-section { padding: 88px 0; }
+    .story-box { max-width: 760px; margin: 0 auto; text-align: center; }
+    .story-text { font-size: 18px; line-height: 1.75; color: var(--text-2); margin-top: 16px; }
+    .story-sign { margin-top: 22px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--navy); }
+    @media (max-width: 640px) { .story-text { font-size: 16px; } }
   </style>
 <style>
   /* Mobile menu (hamburger) */
@@ -625,7 +634,7 @@
         <li><a href="/resursi/">Resursi</a></li>
         <li class="nav-lang-li"><a href="/en/">🇬🇧 English version</a></li>
       </ul>
-      <a href="#pocnite" class="btn-nav">Počnite besplatno →</a>
+      <a href="#vodic" class="btn-nav">Napravite vodič →</a>
       <a class="nav-lang" href="/en/" title="English">EN</a>
       <button class="nav-burger" type="button" aria-label="Meni" aria-expanded="false" aria-controls="nav-links"><span class="bar"></span></button>
     </div>
@@ -645,23 +654,10 @@
           i <em>unaprijedite njihov boravak.</em>
         </h1>
         <p class="hero-sub">
-          Aplikacija za iznajmljivače apartmana: informacije o smještaju, check-in upute, WiFi i lokalne preporuke na jednom mjestu. Pametni digitalni vodič koji gostima olakšava boravak, a vama štedi vrijeme.
+          Aplikacija za iznajmljivače apartmana i hotele. Zalijepite link vašeg Airbnb ili Booking oglasa i vodič za goste se pravi sam: check-in, WiFi, kućni red, lokalne preporuke i AI asistent na jeziku gosta.
         </p>
-        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
-          <a href="#pocnite" class="btn-hero">
-            Počni besplatno →
-          </a>
-        </div>
-        <p class="hero-note">✓ 30 dana besplatno &nbsp;·&nbsp; ✓ Bez kreditne kartice &nbsp;·&nbsp; ✓ Otkazujete kad god</p>
-        <div class="hero-trust" style="margin-top:20px">
-          <div style="display:flex">
-            <div class="trust-av" style="background:linear-gradient(135deg,#FF6700,#e05d00)">A</div>
-            <div class="trust-av" style="background:linear-gradient(135deg,#0F2F61,#1a3d73)">M</div>
-            <div class="trust-av" style="background:linear-gradient(135deg,#34D399,#0EA5E9)">E</div>
-            <div class="trust-av" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)">S</div>
-          </div>
-          <span><strong>150+ domaćina</strong> u BiH koristi SmartStay</span>
-        </div>
+        <div id="vodic" class="ssv" data-kind="APARTMENT"></div>
+        <p class="hero-founder">Imate hotel? <a href="/hoteli/#vodic">Vodič za hotel →</a> · Napravili su ga domaćini koji sami upravljaju s <strong>50+ apartmana</strong>.</p>
       </div>
       <div class="hero-visual sr sr-d2">
         <div class="hero-img-wrap">
@@ -670,8 +666,8 @@
         <div class="hero-float">
           <div class="hf-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wifi-off" aria-hidden="true"><path d="M12 20h.01"></path><path d="M8.5 16.429a5 5 0 0 1 7 0"></path><path d="M5 12.859a10 10 0 0 1 5.17-2.69"></path><path d="M19 12.859a10 10 0 0 0-2.007-1.523"></path><path d="M2 8.82a15 15 0 0 1 4.177-2.643"></path><path d="M22 8.82a15 15 0 0 0-11.288-3.764"></path><path d="m2 2 20 20"></path></svg></div>
           <div>
-            <div class="hf-num">0</div>
-            <div class="hf-lbl">WiFi pitanja ove sedmice</div>
+            <div class="hf-num">24/7</div>
+            <div class="hf-lbl">AI odgovara gostima</div>
           </div>
         </div>
 
@@ -818,29 +814,15 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testi-section" id="testimonials">
+<!-- FOUNDER STORY -->
+<section class="story-section" id="prica">
   <div class="container">
-    <div style="text-align:center;margin-bottom:56px" class="sr">
-      <span class="chip chip-navy">Iskustva</span>
-      <h2 class="sec-headline" style="margin-top:14px">150+ domaćina. Ista priča.</h2>
-    </div>
-    <div class="testi-grid-light">
-      <div class="tc-light sr">
-        <div class="tc-stars">★★★★★</div>
-        <p class="tc-text">"Gosti su prestali da me zovu noću zbog WiFi passworda. To samo po sebi vrijedi svaki fenig pretplate. Dodao sam upsell za transfer — zarađujem ekstra 50–80 KM po rezervaciji."</p>
-        <div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#FF6700,#e05d00)">A</div><div><div class="tc-name">Armin B.</div><div class="tc-role">4 apartmana · Sarajevo</div></div></div>
-      </div>
-      <div class="tc-light featured sr sr-d1">
-        <div class="tc-stars">★★★★★</div>
-        <p class="tc-text">"Ubacila sam SmartStay link u automatsku Airbnb poruku. Ocjene su mi porasle — gosti hvale koliko je sve jasno i organizovano. Superhost status potvrđen drugi put zaredom."</p>
-        <div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#FF6700,#E8527A)">M</div><div><div class="tc-name">Maja K.</div><div class="tc-role">Airbnb Superhost · Mostar</div></div></div>
-      </div>
-      <div class="tc-light sr sr-d2">
-        <div class="tc-stars">★★★★★</div>
-        <p class="tc-text">"Sa 12 apartmana i 3 zaposlenika, organizacija je bila noćna mora. SmartStay tim-pristup je promijenio sve. Svako vidi samo apartmane za koje je zadužen."</p>
-        <div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#0F2F61,#1a3d73)">E</div><div><div class="tc-name">Edin H.</div><div class="tc-role">12 apartmana · Banja Luka</div></div></div>
-      </div>
+    <div class="story-box sr">
+      <span class="chip chip-navy">Ko stoji iza SmartStaya</span>
+      <h2 class="sec-headline" style="margin-top:14px">Napravili smo ga za sebe.</h2>
+      <p class="story-text">Sami upravljamo s više od 50 apartmana. Svaki dan smo odgovarali na ista pitanja: koja je WiFi lozinka, gdje je parking, kako se ulazi, do kada je check-out. Često u 2 ujutro, na pet jezika.</p>
+      <p class="story-text">SmartStay je alat koji smo napravili da to riješimo. Koristimo ga za svaki naš apartman, a sada ga nudimo i drugim domaćinima i hotelima.</p>
+      <p class="story-sign">SmartStay tim</p>
     </div>
   </div>
 </section>
@@ -850,11 +832,11 @@
   <div class="container">
     <div class="hp-head sr">
       <span class="chip chip-navy">Kako radi</span>
-      <h2>Od registracije do prvog gosta za jedan dan</h2>
+      <h2>Od linka do prvog gosta za jedan dan</h2>
     </div>
     <div class="hp-steps">
-      <div class="hp-step sr"><h3>Napravite nalog</h3><p>Ostavite email na stranici za apartmane ili hotele i odmah dobijate pristup — 30 dana besplatno.</p></div>
-      <div class="hp-step sr sr-d1"><h3>Popunite vodič</h3><p>WiFi, dolazak, pravila, preporuke. Prevod na strane jezike radi automatski.</p></div>
+      <div class="hp-step sr"><h3>Zalijepite link oglasa</h3><p>Airbnb ili Booking link (ili vaš sajt) i email. Vodič se napravi iz vašeg oglasa i stiže vam na mail. 30 dana besplatno.</p></div>
+      <div class="hp-step sr sr-d1"><h3>Dopunite šta fali</h3><p>WiFi, upute za ulaz i kontakt. Prevod na strane jezike radi automatski.</p></div>
       <div class="hp-step sr sr-d2"><h3>Podijelite gostima</h3><p>Link u porukama za rezervacije ili QR kod u apartmanu i hotelskoj sobi.</p></div>
     </div>
   </div>
@@ -867,8 +849,8 @@
     <h2>Izaberite svoj tip smještaja</h2>
     <p>30 dana besplatno, bez kreditne kartice. Otkazujete kad god.</p>
     <div class="hp-final-ctas">
-      <a class="hp-btn hp-btn-white" href="/apartmani/#kontakt">Počnite — Apartmani →</a>
-      <a class="hp-btn hp-btn-orange" href="/hoteli/">Počnite — Hotel →</a>
+      <a class="hp-btn hp-btn-white" href="/apartmani/#vodic">Vodič za apartman →</a>
+      <a class="hp-btn hp-btn-orange" href="/hoteli/#vodic">Vodič za hotel →</a>
     </div>
   </div>
 </section>
@@ -879,7 +861,7 @@
     <div class="footer-grid-light">
       <div class="f-brand-light">
         <a href="/" class="f-logo" style="text-decoration:none">Smart<span>Stay</span></a>
-        <p class="f-tagline">Digitalni vodiči i komunikacija s gostima za apartmane i hotele. Prilagođen tržištu Bosne i Hercegovine.</p>
+        <p class="f-tagline">Digitalni vodiči i komunikacija s gostima za apartmane i hotele. Na vašem jeziku, s lokalnom podrškom.</p>
         <p class="f-email-txt">info@smartstay.ba</p>
       </div>
       <div class="f-col-light">
@@ -927,5 +909,6 @@
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
 })();
 </script>
+<script src="/vodic.js" defer></script>
 </body>
 </html>

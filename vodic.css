@@ -1,0 +1,72 @@
+/* SmartStay shared widgets: "vodič iz linka" form, price calculators, hotel ROI (vodic.js renders them) */
+.ssv { width: 100%; max-width: 560px; }
+.ssv-form { display: flex; flex-direction: column; gap: 10px; }
+.ssv-row { display: flex; gap: 10px; }
+.ssv-row .ssv-input { flex: 1 1 auto; min-width: 0; }
+.ssv-input {
+  display: block; width: 100%; height: 52px; padding: 0 16px; border-radius: 14px;
+  border: 1.5px solid #E5E9F2; background: #fff; color: #0B1220;
+  font: 500 16px/1.2 Inter, system-ui, sans-serif; outline: none; transition: border-color .2s, box-shadow .2s;
+}
+.ssv-input:focus { border-color: #0F2F61; box-shadow: 0 0 0 4px rgba(15,47,97,.08); }
+.ssv input.ssv-input { height: 52px !important; padding: 0 16px !important; border-radius: 14px !important; border: 1.5px solid #E5E9F2 !important; font-size: 16px !important; box-sizing: border-box; }
+.ssv.on-dark input.ssv-input { border-color: transparent !important; }
+.ssv-btn {
+  height: 52px; padding: 0 24px; border: none; border-radius: 14px; cursor: pointer; white-space: nowrap;
+  background: #FF6700; color: #fff; font: 800 16px/1 'Plus Jakarta Sans', sans-serif;
+  box-shadow: 0 8px 24px rgba(255,103,0,.28); transition: background .2s, transform .15s;
+}
+.ssv-btn:hover { background: #e05d00; transform: translateY(-1px); }
+.ssv-btn:disabled { opacity: .6; cursor: default; transform: none; }
+.ssv-alt { margin-top: 4px; font-size: 14px; color: #6B7280; }
+.ssv-alt a { color: #0F2F61; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.ssv-note { margin-top: 10px; font-size: 13px; color: #6B7280; }
+.ssv-err { margin-top: 8px; font-size: 14px; color: #B91C1C; background: #FEF2F2; border-radius: 10px; padding: 10px 12px; }
+.ssv-ok { background: #F0FDF4; border: 1.5px solid #BBF7D0; border-radius: 16px; padding: 18px 20px; }
+.ssv-ok-title { font: 800 17px/1.35 'Plus Jakarta Sans', sans-serif; color: #166534; margin-bottom: 6px; }
+.ssv-ok-sub { font-size: 14px; color: #374151; line-height: 1.6; }
+.ssv-ok-sub a { color: #0F2F61; font-weight: 700; }
+.ssv-platforms { display: block; margin-bottom: 10px; font-size: 13px; color: #6B7280; align-items: center; }
+.ssv-platforms b { color: #0F2F61; font-weight: 700; }
+/* on dark/coloured backgrounds */
+.ssv.on-dark .ssv-alt, .ssv.on-dark .ssv-note, .ssv.on-dark .ssv-platforms { color: rgba(255,255,255,.75); }
+.ssv.on-dark .ssv-alt a, .ssv.on-dark .ssv-platforms b { color: #fff; }
+.ssv.center { margin-left: auto; margin-right: auto; text-align: left; }
+@media (max-width: 640px) { .ssv-row { flex-direction: column; } .ssv-row .ssv-input { flex: none; } .ssv-btn { width: 100%; } }
+
+/* Price calculator (one plan, all features) */
+.ssc { max-width: 760px; margin: 40px auto 0; background: #fff; border: 1.5px solid #E5E9F2; border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(15,47,97,.08); overflow: hidden; display: grid; grid-template-columns: 1.1fr 1fr; }
+.ssc-l { padding: 32px; }
+.ssc-r { padding: 32px; background: #F7F9FC; border-left: 1.5px solid #E5E9F2; }
+.ssc-plan { font: 800 13px/1 'Plus Jakarta Sans', sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #FF6700; margin-bottom: 14px; }
+.ssc-q { font: 700 17px/1.4 'Plus Jakarta Sans', sans-serif; color: #0B1220; margin-bottom: 14px; }
+.ssc-count { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.ssc-step { width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid #E5E9F2; background: #fff; font-size: 22px; color: #0F2F61; cursor: pointer; }
+.ssc-num { width: 90px; height: 44px; text-align: center; border-radius: 12px; border: 1.5px solid #E5E9F2; font: 800 20px/1 'Plus Jakarta Sans', sans-serif; color: #0B1220; }
+.ssc-range { width: 100%; accent-color: #FF6700; }
+.ssc-total { font: 900 44px/1 'Plus Jakarta Sans', sans-serif; color: #0B1220; margin: 18px 0 6px; letter-spacing: -.02em; }
+.ssc-total small { font-size: 16px; font-weight: 600; color: #6B7280; letter-spacing: 0; }
+.ssc-per { font-size: 14px; color: #6B7280; }
+.ssc-anchor { margin-top: 14px; font-size: 14px; color: #0F2F61; background: rgba(15,47,97,.06); border-radius: 12px; padding: 10px 12px; line-height: 1.5; }
+.ssc-feats { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+.ssc-feats div { font-size: 14px; color: #374151; padding-left: 26px; position: relative; line-height: 1.45; }
+.ssc-feats div::before { content: "✓"; position: absolute; left: 0; color: #16A34A; font-weight: 800; }
+.ssc-cta { display: block; text-align: center; padding: 15px; border-radius: 14px; background: #FF6700; color: #fff; text-decoration: none; font: 800 15px/1 'Plus Jakarta Sans', sans-serif; }
+.ssc-cta:hover { background: #e05d00; }
+.ssc-small { margin-top: 10px; font-size: 12px; color: #9CA3AF; text-align: center; }
+@media (max-width: 760px) { .ssc { grid-template-columns: 1fr; } .ssc-r { border-left: 0; border-top: 1.5px solid #E5E9F2; } .ssc-l, .ssc-r { padding: 24px; } }
+
+/* Hotel ROI */
+.ssr { max-width: 860px; margin: 32px auto 0; background: #fff; border: 1.5px solid #E5E9F2; border-radius: 24px; padding: 28px; box-shadow: 0 20px 60px rgba(15,47,97,.06); }
+.ssr-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.ssr label { display: block; font-size: 12px; font-weight: 700; color: #6B7280; margin-bottom: 6px; line-height: 1.3; }
+.ssr input { width: 100%; height: 46px; border-radius: 12px; border: 1.5px solid #E5E9F2; padding: 0 12px; font: 700 16px/1 'Plus Jakarta Sans', sans-serif; color: #0B1220; }
+.ssr-out { margin-top: 22px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.ssr-box { background: #F7F9FC; border-radius: 16px; padding: 16px; }
+.ssr-box.hi { background: #0F2F61; color: #fff; }
+.ssr-v { font: 900 26px/1.1 'Plus Jakarta Sans', sans-serif; }
+.ssr-l { font-size: 13px; opacity: .75; margin-top: 4px; line-height: 1.4; }
+.ssr-fine { margin-top: 12px; font-size: 12px; color: #9CA3AF; line-height: 1.5; }
+@media (max-width: 760px) { .ssr-grid { grid-template-columns: 1fr 1fr; } .ssr-out { grid-template-columns: 1fr; } .ssr { padding: 20px; } }
+.ssr-grid > div { display: flex; flex-direction: column; justify-content: flex-end; }

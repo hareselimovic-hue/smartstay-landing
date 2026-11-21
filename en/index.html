@@ -53,11 +53,12 @@
     // Old links like smartstay.ba/#pricing pointed at the apartments content, which now lives on /apartmani/
     (function () {
       var old = ["#features", "#how", "#pricing", "#faq", "#kontakt", "#demo-section", "#sto-je"];
-      if (old.indexOf(location.hash) !== -1) location.replace("/en/apartments/" + location.hash);
+      if (old.indexOf(location.hash) !== -1) location.replace("/en/apartments/" + (location.hash === "#kontakt" ? "#vodic" : location.hash));
     })();
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="/vodic.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
     /* ─── TOKENS ─── */
@@ -584,6 +585,14 @@
     .hp-demo { position: absolute; top: 16px; right: 16px; z-index: 2; display: inline-flex; align-items: center; gap: 6px; background: var(--orange); color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 13px; padding: 8px 14px; border-radius: 100px; text-decoration: none; box-shadow: 0 6px 20px rgba(255,103,0,.35); transition: transform .15s, background .2s; }
     .hp-demo:hover { background: var(--orange-2); transform: translateY(-1px); }
     .hp-demo svg { width: 14px; height: 14px; }
+  
+    .hero-founder { margin-top: 18px; font-size: 14px; color: var(--gray); line-height: 1.6; }
+    .hero-founder strong, .hero-founder a { color: var(--navy); font-weight: 700; }
+    .story-section { padding: 88px 0; }
+    .story-box { max-width: 760px; margin: 0 auto; text-align: center; }
+    .story-text { font-size: 18px; line-height: 1.75; color: var(--text-2); margin-top: 16px; }
+    .story-sign { margin-top: 22px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--navy); }
+    @media (max-width: 640px) { .story-text { font-size: 16px; } }
   </style>
 <style>
   /* Mobile menu (hamburger) */
@@ -627,7 +636,7 @@
         <li><a href="/en/resources/">Resources</a></li>
         <li class="nav-lang-li"><a href="/">🇧🇦 Bosanska verzija</a></li>
       </ul>
-      <a href="#pocnite" class="btn-nav">Start for free →</a>
+      <a href="#vodic" class="btn-nav">Make your guide →</a>
       <a class="nav-lang" href="/" title="Bosanski">BS</a>
       <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><span class="bar"></span></button>
     </div>
@@ -647,23 +656,10 @@
           and <em>upgrade their stay.</em>
         </h1>
         <p class="hero-sub">
-          An app for apartment hosts: accommodation details, check-in instructions, Wi-Fi and local tips in one place. A smart digital guide that makes the stay easier for guests and saves you time.
+          An app for apartment hosts and hotels. Paste the link of your Airbnb or Booking listing and your guest guide builds itself: check-in, WiFi, house rules, local tips and an AI assistant in the guest's language.
         </p>
-        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
-          <a href="#pocnite" class="btn-hero">
-            Start for free →
-          </a>
-        </div>
-        <p class="hero-note">✓ 30 days free &nbsp;·&nbsp; ✓ No credit card &nbsp;·&nbsp; ✓ Cancel anytime</p>
-        <div class="hero-trust" style="margin-top:20px">
-          <div style="display:flex">
-            <div class="trust-av" style="background:linear-gradient(135deg,#FF6700,#e05d00)">A</div>
-            <div class="trust-av" style="background:linear-gradient(135deg,#0F2F61,#1a3d73)">M</div>
-            <div class="trust-av" style="background:linear-gradient(135deg,#34D399,#0EA5E9)">E</div>
-            <div class="trust-av" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)">S</div>
-          </div>
-          <span><strong>150+ hosts</strong> in Bosnia use SmartStay</span>
-        </div>
+        <div id="vodic" class="ssv" data-kind="APARTMENT"></div>
+        <p class="hero-founder">Have a hotel? <a href="/en/hotels/#vodic">Hotel guide →</a> · Built by hosts who run <strong>50+ apartments</strong> themselves.</p>
       </div>
       <div class="hero-visual sr sr-d2">
         <div class="hero-img-wrap">
@@ -672,8 +668,8 @@
         <div class="hero-float">
           <div class="hf-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wifi-off" aria-hidden="true"><path d="M12 20h.01"></path><path d="M8.5 16.429a5 5 0 0 1 7 0"></path><path d="M5 12.859a10 10 0 0 1 5.17-2.69"></path><path d="M19 12.859a10 10 0 0 0-2.007-1.523"></path><path d="M2 8.82a15 15 0 0 1 4.177-2.643"></path><path d="M22 8.82a15 15 0 0 0-11.288-3.764"></path><path d="m2 2 20 20"></path></svg></div>
           <div>
-            <div class="hf-num">0</div>
-            <div class="hf-lbl">Wi-Fi questions this week</div>
+            <div class="hf-num">24/7</div>
+            <div class="hf-lbl">AI answers your guests</div>
           </div>
         </div>
 
@@ -820,29 +816,15 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testi-section" id="testimonials">
+<!-- FOUNDER STORY -->
+<section class="story-section" id="prica">
   <div class="container">
-    <div style="text-align:center;margin-bottom:56px" class="sr">
-      <span class="chip chip-navy">Testimonials</span>
-      <h2 class="sec-headline" style="margin-top:14px">150+ hosts. The same story.</h2>
-    </div>
-    <div class="testi-grid-light">
-      <div class="tc-light sr">
-        <div class="tc-stars">★★★★★</div>
-        <p class="tc-text">"Guests stopped calling me at night about the Wi-Fi password. That alone is worth every cent of the subscription. I added a transfer upsell — I make an extra 50–80 KM per booking."</p>
-        <div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#FF6700,#e05d00)">A</div><div><div class="tc-name">Armin B.</div><div class="tc-role">4 apartments · Sarajevo</div></div></div>
-      </div>
-      <div class="tc-light featured sr sr-d1">
-        <div class="tc-stars">★★★★★</div>
-        <p class="tc-text">"I put the SmartStay link into my automatic Airbnb message. My ratings went up — guests praise how clear and organised everything is. Superhost status confirmed for the second time in a row."</p>
-        <div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#FF6700,#E8527A)">M</div><div><div class="tc-name">Maja K.</div><div class="tc-role">Airbnb Superhost · Mostar</div></div></div>
-      </div>
-      <div class="tc-light sr sr-d2">
-        <div class="tc-stars">★★★★★</div>
-        <p class="tc-text">"With 12 apartments and 3 employees, organisation was a nightmare. SmartStay's team access changed everything. Everyone sees only the apartments they're responsible for."</p>
-        <div class="tc-author"><div class="tc-av" style="background:linear-gradient(135deg,#0F2F61,#1a3d73)">E</div><div><div class="tc-name">Edin H.</div><div class="tc-role">12 apartments · Banja Luka</div></div></div>
-      </div>
+    <div class="story-box sr">
+      <span class="chip chip-navy">Who is behind SmartStay</span>
+      <h2 class="sec-headline" style="margin-top:14px">We built it for ourselves.</h2>
+      <p class="story-text">We run more than 50 apartments ourselves. Every day we answered the same questions: what's the WiFi password, where do I park, how do I get in, when is check-out. Often at 2 a.m., in five languages.</p>
+      <p class="story-text">SmartStay is the tool we built to fix that. We use it for every apartment we run, and now we offer it to other hosts and hotels too.</p>
+      <p class="story-sign">The SmartStay team</p>
     </div>
   </div>
 </section>
@@ -852,11 +834,11 @@
   <div class="container">
     <div class="hp-head sr">
       <span class="chip chip-navy">How it works</span>
-      <h2>From sign-up to your first guest in one day</h2>
+      <h2>From a link to your first guest in one day</h2>
     </div>
     <div class="hp-steps">
-      <div class="hp-step sr"><h3>Create an account</h3><p>Leave your email on the apartments or hotels page and get access right away — 30 days free.</p></div>
-      <div class="hp-step sr sr-d1"><h3>Fill in the guide</h3><p>Wi-Fi, arrival, rules, recommendations. Translation into other languages happens automatically.</p></div>
+      <div class="hp-step sr"><h3>Paste your listing link</h3><p>Your Airbnb or Booking link (or your website) and email. The guide is built from your listing and sent to your inbox. 30 days free.</p></div>
+      <div class="hp-step sr sr-d1"><h3>Fill in what's missing</h3><p>WiFi, entry instructions and contact. Translation into other languages is automatic.</p></div>
       <div class="hp-step sr sr-d2"><h3>Share it with guests</h3><p>A link in your booking messages, or a QR code in the apartment or hotel room.</p></div>
     </div>
   </div>
@@ -869,8 +851,8 @@
     <h2>Choose your type of property</h2>
     <p>30 days free, no credit card. Cancel anytime.</p>
     <div class="hp-final-ctas">
-      <a class="hp-btn hp-btn-white" href="/en/apartments/#kontakt">Start — Apartments →</a>
-      <a class="hp-btn hp-btn-orange" href="/en/hotels/">Start — Hotel →</a>
+      <a class="hp-btn hp-btn-white" href="/en/apartments/#vodic">Apartment guide →</a>
+      <a class="hp-btn hp-btn-orange" href="/en/hotels/#vodic">Hotel guide →</a>
     </div>
   </div>
 </section>
@@ -881,7 +863,7 @@
     <div class="footer-grid-light">
       <div class="f-brand-light">
         <a href="/en/" class="f-logo" style="text-decoration:none">Smart<span>Stay</span></a>
-        <p class="f-tagline">Digital guides and guest communication for apartments and hotels. Built for the market of Bosnia and Herzegovina.</p>
+        <p class="f-tagline">Digital guides and guest communication for apartments and hotels. In your language, with local support.</p>
         <p class="f-email-txt">info@smartstay.ba</p>
       </div>
       <div class="f-col-light">
@@ -929,5 +911,6 @@
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
 })();
 </script>
+<script src="/vodic.js" defer></script>
 </body>
 </html>
