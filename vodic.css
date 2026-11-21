@@ -83,7 +83,11 @@
 @media (max-width: 600px) {
   .m-scroll.m-scroll { display: flex !important; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px;
     margin: 0 calc(-1 * var(--gutter, 24px)); padding: 0 var(--gutter, 24px) 10px; scroll-padding: 0 var(--gutter, 24px);
-    scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    overflow-y: hidden; overscroll-behavior-x: contain; touch-action: pan-x pan-y; align-items: stretch; }
+  .m-scroll.m-scroll > .sr { transform: none !important; opacity: 1 !important; }
   .m-scroll::-webkit-scrollbar { display: none; }
   .m-scroll.m-scroll > * { flex: 0 0 80%; scroll-snap-align: start; }
 }
+
+.ssv { scroll-margin-top: 110px; }

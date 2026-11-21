@@ -78,7 +78,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link rel="stylesheet" href="/vodic.css?v=202611211308"/>
+  <link rel="stylesheet" href="/vodic.css?v=202611211323"/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
     /* ─── TOKENS ─── */
@@ -554,6 +554,11 @@
     .story-text { font-size: 18px; line-height: 1.75; color: var(--text-2); margin-top: 16px; }
     .story-sign { margin-top: 22px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--navy); }
     @media (max-width: 640px) { .reg-box { flex-direction: column; padding: 26px 20px; gap: 16px; } .story-text { font-size: 16px; } }
+  
+    .demo-btn-wrap { display: flex; justify-content: center; margin-bottom: 18px; }
+    .demo-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 100px; border: 1.5px solid rgba(15,47,97,.18); background: #fff; color: var(--navy); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 15px; text-decoration: none; box-shadow: 0 6px 20px rgba(15,47,97,.08); transition: border-color .2s, transform .15s; }
+    .demo-btn:hover { border-color: rgba(15,47,97,.4); transform: translateY(-1px); }
+    .demo-play { width: 26px; height: 26px; border-radius: 50%; background: var(--orange); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; padding-left: 2px; }
   </style>
 <style>
   /* Mobile menu (hamburger) */
@@ -623,9 +628,10 @@
         <p class="hero-sub">
           Zalijepite link vašeg Airbnb ili Booking oglasa i vodič za goste se pravi sam: dobrodošlica, check-in, kućni red, lokalne preporuke i AI asistent koji gostima odgovara na njihovom jeziku.
         </p>
-        <div class="ssv" data-kind="APARTMENT" data-demo="https://app.smartstay.ba/g/modern-apartment-in-center-of-sarajevo/preview"></div>
+        <div id="vodic" class="ssv" data-kind="APARTMENT"></div>
       </div>
       <div class="hero-visual sr sr-d2" id="demo-section">
+        <div class="demo-btn-wrap"><a class="demo-btn" href="https://app.smartstay.ba/g/modern-apartment-in-center-of-sarajevo/preview" target="_blank" rel="noopener"><span class="demo-play">▶</span>Otvori demo vodič</a></div>
         <div class="apt-phones">
           <div class="apt-phone back"><img src="/apartmani/screen-wifi.webp" alt="WiFi podaci u digitalnom vodiču apartmana" width="600" height="1298" loading="eager" /></div>
           <div class="apt-phone front"><video src="/demo.mp4" autoplay muted loop playsinline preload="metadata" poster="/apartmani/screen-guide.webp" aria-label="Demo: digitalni vodič apartmana na telefonu gosta" style="display:block;width:100%;height:auto;aspect-ratio:390/846;object-fit:cover"></video></div>
@@ -859,7 +865,7 @@
 </section>
 
 <!-- CTA / EMAIL -->
-<section class="cta-section-light" id="vodic">
+<section class="cta-section-light" id="vodic-kraj">
   <div class="container">
     <div class="cta-box-light sr">
       <span class="chip chip-orange" style="position:relative;z-index:1;margin-bottom:14px;display:inline-flex;">Počnite danas</span>
@@ -1042,7 +1048,7 @@
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
 })();
 </script>
-<script src="/vodic.js?v=202611211308" defer></script>
+<script src="/vodic.js?v=202611211323" defer></script>
 <script>if (location.hash === '#kontakt') { history.replaceState(null, '', '#vodic'); window.addEventListener('load', function () { var e = document.getElementById('vodic'); if (e) e.scrollIntoView(); }); }</script>
 </body>
 </html>
