@@ -50,7 +50,7 @@
   <script>
     // Old links like smartstay.ba/#pricing pointed at the apartments content, which now lives on /apartmani/
     (function () {
-      var old = ["#features", "#how", "#pricing", "#faq", "#kontakt", "#demo-section", "#sto-je"];
+      var old = ["#features", "#how", "#pricing", "#faq", "#kontakt", "#demo-section"];
       if (old.indexOf(location.hash) !== -1) location.replace("/apartmani/" + (location.hash === "#kontakt" ? "#vodic" : location.hash));
     })();
   </script>
