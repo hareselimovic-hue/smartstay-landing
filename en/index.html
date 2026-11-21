@@ -593,6 +593,28 @@
     .story-text { font-size: 18px; line-height: 1.75; color: var(--text-2); margin-top: 16px; }
     .story-sign { margin-top: 22px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--navy); }
     @media (max-width: 640px) { .story-text { font-size: 16px; } }
+  
+    @media (min-width: 961px) { .hero-layout { grid-template-columns: 1.05fr 0.95fr; } }
+    .hero-points { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px 22px; }
+    .hero-points li { position: relative; padding-left: 24px; font-size: 15px; font-weight: 600; color: var(--navy); }
+    .hero-points li::before { content: "✓"; position: absolute; left: 0; color: #16A34A; font-weight: 800; }
+    .hero-card { background: #fff; border: 1.5px solid var(--border); border-radius: 28px; padding: 32px; box-shadow: 0 24px 70px rgba(15,47,97,.12); }
+    .hero-card .ssv { max-width: none; }
+    .hc-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 24px; font-weight: 800; color: var(--navy); letter-spacing: -.01em; line-height: 1.25; }
+    .hc-sub { font-size: 15px; color: var(--gray); line-height: 1.6; margin: 8px 0 18px; }
+    @media (max-width: 960px) {
+      .hero { min-height: 0; }
+      .hero-card { max-width: 560px; }
+    }
+    @media (max-width: 600px) {
+      .hero-sub { margin-bottom: 18px; }
+      .hero-card { padding: 22px 18px; border-radius: 22px; }
+      .hc-title { font-size: 21px; }
+      /* trends: one swipeable row instead of six stacked cards */
+      .hp-scroll { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 -24px; padding: 0 24px 10px; scroll-padding: 0 24px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+      .hp-scroll::-webkit-scrollbar { display: none; }
+      .hp-scroll .hp-card { flex: 0 0 80%; scroll-snap-align: start; }
+    }
   </style>
 <style>
   /* Mobile menu (hamburger) */
@@ -656,22 +678,18 @@
           and <em>upgrade their stay.</em>
         </h1>
         <p class="hero-sub">
-          An app for apartment hosts and hotels. Paste the link of your Airbnb or Booking listing and your guest guide builds itself: check-in, WiFi, house rules, local tips and an AI assistant in the guest's language.
+          A digital guest guide for your apartment or hotel: check-in instructions, WiFi, house rules and local tips on one link, with an AI assistant that answers guests in their language. Guests find everything themselves, and you get fewer messages.
         </p>
-        <div id="vodic" class="ssv" data-kind="CHOOSE"></div>
+        <ul class="hero-points">
+          <li>5 languages, translated automatically</li>
+          <li>AI assistant 24/7</li>
+          <li>No app for guests</li>
+        </ul>
       </div>
-      <div class="hero-visual sr sr-d2">
-        <div class="hero-img-wrap">
-          <img src="/hero-photo.webp" alt="A host using SmartStay" width="1200" height="1200" fetchpriority="high" />
-        </div>
-        <div class="hero-float">
-          <div class="hf-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wifi-off" aria-hidden="true"><path d="M12 20h.01"></path><path d="M8.5 16.429a5 5 0 0 1 7 0"></path><path d="M5 12.859a10 10 0 0 1 5.17-2.69"></path><path d="M19 12.859a10 10 0 0 0-2.007-1.523"></path><path d="M2 8.82a15 15 0 0 1 4.177-2.643"></path><path d="M22 8.82a15 15 0 0 0-11.288-3.764"></path><path d="m2 2 20 20"></path></svg></div>
-          <div>
-            <div class="hf-num">24/7</div>
-            <div class="hf-lbl">AI answers your guests</div>
-          </div>
-        </div>
-
+      <div class="hero-card sr sr-d2">
+        <h2 class="hc-title">Paste your listing link</h2>
+        <p class="hc-sub">Your guide is built from your Airbnb or Booking listing, and we email it to you.</p>
+        <div id="vodic" class="ssv" data-kind="CHOOSE"></div>
       </div>
     </div>
   </div>
@@ -769,7 +787,7 @@
       <h2>How guest stays are changing</h2>
       <p>Guests today expect to find everything themselves, instantly and on their own phone. Properties that make this possible get better reviews — and calmer hosts.</p>
     </div>
-    <div class="hp-grid3">
+    <div class="hp-grid3 hp-scroll">
       <div class="hp-card sr"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg></div><h3>Everything on the phone</h3><p>Guests no longer look for a paper binder or a PDF in their inbox. They expect one link or QR code that works right away, without an app.</p></div>
       <div class="hp-card sr sr-d1"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg></div><h3>In their own language</h3><p>Guests come from all over the world. Information in their language means fewer misunderstandings and fewer questions.</p></div>
       <div class="hp-card sr sr-d2"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-timer" aria-hidden="true"><line x1="10" x2="14" y1="2" y2="2"></line><line x1="12" x2="15" y1="14" y2="11"></line><circle cx="12" cy="14" r="8"></circle></svg></div><h3>An answer now, not tomorrow</h3><p>Guests would rather find the answer themselves in 10 seconds than wait for a host's message or call the reception.</p></div>
