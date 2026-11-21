@@ -18,9 +18,16 @@
 }
 .ssv-btn:hover { background: #e05d00; transform: translateY(-1px); }
 .ssv-btn:disabled { opacity: .6; cursor: default; transform: none; }
-.ssv-alt { margin-top: 4px; font-size: 14px; color: #6B7280; }
+.ssv-foot { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+.ssv-alt { font-size: 14px; color: #6B7280; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; }
+.ssv-sep { color: #CBD2DE; }
+.ssv-demo { color: #0F2F61; font-weight: 600; text-decoration: none; }
+.ssv-demo:hover { text-decoration: underline; }
+.ssv-kind { display: inline-flex; gap: 4px; padding: 4px; border-radius: 14px; background: #EEF2F8; margin-bottom: 14px; }
+.ssv-kind button { border: 0; background: transparent; padding: 9px 16px; border-radius: 10px; cursor: pointer; font: 700 14px/1 'Plus Jakarta Sans', sans-serif; color: #4B5563; }
+.ssv-kind button.on { background: #fff; color: #0F2F61; box-shadow: 0 2px 8px rgba(15,47,97,.12); }
 .ssv-alt a { color: #0F2F61; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
-.ssv-note { margin-top: 10px; font-size: 13px; color: #6B7280; }
+.ssv-note { font-size: 13px; color: #6B7280; }
 .ssv-err { margin-top: 8px; font-size: 14px; color: #B91C1C; background: #FEF2F2; border-radius: 10px; padding: 10px 12px; }
 .ssv-ok { background: #F0FDF4; border: 1.5px solid #BBF7D0; border-radius: 16px; padding: 18px 20px; }
 .ssv-ok-title { font: 800 17px/1.35 'Plus Jakarta Sans', sans-serif; color: #166534; margin-bottom: 6px; }
@@ -30,7 +37,8 @@
 .ssv-platforms b { color: #0F2F61; font-weight: 700; }
 /* on dark/coloured backgrounds */
 .ssv.on-dark .ssv-alt, .ssv.on-dark .ssv-note, .ssv.on-dark .ssv-platforms { color: rgba(255,255,255,.75); }
-.ssv.on-dark .ssv-alt a, .ssv.on-dark .ssv-platforms b { color: #fff; }
+.ssv.on-dark .ssv-alt a, .ssv.on-dark .ssv-platforms b, .ssv.on-dark .ssv-demo { color: #fff; }
+.ssv.on-dark .ssv-sep { color: rgba(255,255,255,.35); }
 .ssv.center { margin-left: auto; margin-right: auto; text-align: left; }
 @media (max-width: 640px) { .ssv-row { flex-direction: column; } .ssv-row .ssv-input { flex: none; } .ssv-btn { width: 100%; } }
 

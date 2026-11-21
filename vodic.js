@@ -1,5 +1,6 @@
 /* SmartStay shared widgets (BS + EN by <html lang>):
- *   <div class="ssv" data-kind="APARTMENT|HOTEL" [data-dark]></div>  → "paste your Airbnb/Booking link" form
+ *   <div class="ssv" data-kind="APARTMENT|HOTEL|CHOOSE" [data-dark] [data-demo=url]></div> → "paste your link" form
+ *       (CHOOSE = visitor picks apartment/hotel; data-demo adds a small "see the demo" link)
  *   <div class="ssc" data-calc="apartments|hotels"></div>             → one-plan price calculator
  *   <div class="ssr"></div>                                           → hotel ROI calculator
  * Prices must match guestio/src/lib/pricing.ts (apartments) and the hotel packages.
@@ -14,9 +15,11 @@
     emailPh: 'your@email.com', btn: 'Make my guide →', sending: 'Sending…',
     platforms: 'Works with <b>Airbnb</b>, <b>Booking.com</b> or your own website',
     platformsHotel: 'Works with <b>Booking.com</b> or your hotel website',
-    alt: 'No listing? <a href="{r}">Create your guide by hand →</a>',
-    altHotel: 'No link? <a href="{r}">Set up your hotel by hand →</a>',
-    note: '✓ 30 days free · ✓ No credit card · ✓ Cancel anytime',
+    alt: 'No listing? <a href="{r}">Make it by hand →</a>',
+    altHotel: 'No link? <a href="{r}">Set it up by hand →</a>',
+    demo: '▶ See the demo',
+    note: '✓ 30 days free · ✓ No credit card',
+    kindApt: '🏠 Apartment', kindHotel: '🏨 Hotel', kindQ: 'What do you rent out?',
     okTitle: '✓ Thank you! We are making your guide.', okSub: 'We will send it to <b>{e}</b>. Can\'t wait? <a href="{r}">Create your account now →</a>',
     errUrl: 'Paste the link of your Airbnb or Booking listing (or your website).', errMail: 'Please enter a valid email.', errNet: 'Something went wrong. Please try again.',
     plan: 'All features included', qApt: 'How many apartments do you have?', qHotel: 'How many rooms does your hotel have?',
@@ -35,9 +38,11 @@
     emailPh: 'vas@email.com', btn: 'Napravi moj vodič →', sending: 'Šaljem…',
     platforms: 'Radi sa <b>Airbnb</b>, <b>Booking.com</b> ili vašim sajtom',
     platformsHotel: 'Radi s <b>Booking.com</b> ili sajtom vašeg hotela',
-    alt: 'Nemate oglas? <a href="{r}">Napravite vodič ručno →</a>',
-    altHotel: 'Nemate link? <a href="{r}">Postavite hotel ručno →</a>',
-    note: '✓ 30 dana besplatno · ✓ Bez kreditne kartice · ✓ Otkazujete kad god',
+    alt: 'Nemate oglas? <a href="{r}">Napravite ručno →</a>',
+    altHotel: 'Nemate link? <a href="{r}">Postavite ručno →</a>',
+    demo: '▶ Pogledajte demo',
+    note: '✓ 30 dana besplatno · ✓ Bez kreditne kartice',
+    kindApt: '🏠 Apartman', kindHotel: '🏨 Hotel', kindQ: 'Šta izdajete?',
     okTitle: '✓ Hvala! Pravimo vaš vodič.', okSub: 'Šaljemo ga na <b>{e}</b>. Ne želite čekati? <a href="{r}">Napravite nalog odmah →</a>',
     errUrl: 'Zalijepite link vašeg Airbnb ili Booking oglasa (ili vašeg sajta).', errMail: 'Upišite ispravan email.', errNet: 'Nešto nije u redu. Pokušajte ponovo.',
     plan: 'Sve funkcije uključene', qApt: 'Koliko apartmana imate?', qHotel: 'Koliko soba ima vaš hotel?',
@@ -63,20 +68,37 @@
 
   // ── "Vodič iz linka" form ──────────────────────────────────────────────────────────────────
   function linkForm(box) {
+    var choose = box.getAttribute('data-kind') === 'CHOOSE';
     var kind = box.getAttribute('data-kind') === 'HOTEL' ? 'HOTEL' : 'APARTMENT';
+    var demo = box.getAttribute('data-demo');
     if (box.hasAttribute('data-dark')) box.classList.add('on-dark');
     if (box.hasAttribute('data-center')) box.classList.add('center');
     box.innerHTML =
-      '<div class="ssv-platforms">' + (kind === 'HOTEL' ? T.platformsHotel : T.platforms) + '</div>' +
+      (choose ? '<div class="ssv-kind" role="radiogroup" aria-label="' + esc(T.kindQ) + '">' +
+        '<button type="button" role="radio" data-k="APARTMENT">' + esc(T.kindApt) + '</button>' +
+        '<button type="button" role="radio" data-k="HOTEL">' + esc(T.kindHotel) + '</button></div>' : '') +
+      '<div class="ssv-platforms"></div>' +
       '<form class="ssv-form" novalidate>' +
-        '<input class="ssv-input ssv-url" type="url" inputmode="url" autocomplete="url" required placeholder="' + esc(kind === 'HOTEL' ? T.urlPhHotel : T.urlPh) + '" aria-label="' + esc(kind === 'HOTEL' ? T.urlPhHotel : T.urlPh) + '">' +
+        '<input class="ssv-input ssv-url" type="url" inputmode="url" autocomplete="url" required>' +
         '<div class="ssv-row">' +
           '<input class="ssv-input ssv-email" type="email" autocomplete="email" required placeholder="' + esc(T.emailPh) + '" aria-label="Email">' +
           '<button class="ssv-btn" type="submit">' + esc(T.btn) + '</button>' +
         '</div>' +
       '</form>' +
-      '<div class="ssv-alt">' + (kind === 'HOTEL' ? T.altHotel : T.alt).replace('{r}', registerUrl(kind)) + '</div>' +
-      '<div class="ssv-note">' + esc(T.note) + '</div>';
+      '<div class="ssv-foot"><div class="ssv-note">' + esc(T.note) + '</div>' +
+        '<div class="ssv-alt"><span class="ssv-alt-txt"></span>' + (demo ? '<a class="ssv-demo" href="' + esc(demo) + '"' + (demo.charAt(0) === '#' ? '' : ' target="_blank" rel="noopener"') + '>' + esc(T.demo) + '</a>' : '') + '</div></div>';
+    function setKind(k) {
+      kind = k;
+      var ph = kind === 'HOTEL' ? T.urlPhHotel : T.urlPh;
+      var u = box.querySelector('.ssv-url'); u.placeholder = ph; u.setAttribute('aria-label', ph);
+      box.querySelector('.ssv-platforms').innerHTML = kind === 'HOTEL' ? T.platformsHotel : T.platforms;
+      box.querySelector('.ssv-alt-txt').innerHTML = (kind === 'HOTEL' ? T.altHotel : T.alt).replace('{r}', registerUrl(kind));
+      box.querySelectorAll('.ssv-kind button').forEach(function (b) {
+        var on = b.getAttribute('data-k') === kind; b.classList.toggle('on', on); b.setAttribute('aria-checked', on ? 'true' : 'false');
+      });
+    }
+    box.querySelectorAll('.ssv-kind button').forEach(function (b) { b.addEventListener('click', function () { setKind(b.getAttribute('data-k')); }); });
+    setKind(kind);
     var form = box.querySelector('form');
     form.addEventListener('submit', function (e) {
       e.preventDefault();
