@@ -246,3 +246,21 @@ footer { background: var(--navy); padding: 56px 0 28px; }
 
 .res-icon svg{width:22px;height:22px;color:var(--navy);display:block}
 .ico-inline{width:15px;height:15px;vertical-align:-2px;margin-right:4px;display:inline-block}
+
+/* Gotove poruke (automatske poruke za Airbnb/Booking) */
+.msg { border: 1.5px solid var(--border); border-radius: 18px; background: #fff; margin: 18px 0 22px; overflow: hidden; }
+.msg-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 18px; background: #F7F9FC; border-bottom: 1px solid var(--border); }
+.msg-when { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--navy); font-size: 15px; }
+.msg-when small { display: block; font-family: Inter, sans-serif; font-weight: 500; color: #6B7280; font-size: 13px; margin-top: 2px; }
+.msg-actions { display: flex; gap: 6px; }
+.msg-body { display: grid; grid-template-columns: 1fr 1fr; }
+.msg-col { padding: 16px 18px; }
+.msg-col + .msg-col { border-left: 1px solid var(--border); background: #FCFCFD; }
+.msg-bs, .msg-en { font-size: 15px; line-height: 1.65; color: #1F2937; white-space: pre-line; }
+.msg-en { color: #4B5563; }
+.msg-lang { display: block; font-size: 11px; font-weight: 800; letter-spacing: .08em; color: #9CA3AF; margin-bottom: 6px; }
+@media (max-width: 700px) { .msg-body { grid-template-columns: 1fr; } .msg-col + .msg-col { border-left: 0; border-top: 1px solid var(--border); } }
+@media print { .msg-actions { display: none; } }
+.msg-btn { border: 1.5px solid var(--border); background: #fff; color: var(--navy); border-radius: 10px; padding: 7px 12px; font: 700 13px/1 'Plus Jakarta Sans', sans-serif; cursor: pointer; }
+.msg-btn:hover { border-color: var(--navy); }
+.msg-btn.primary { background: var(--orange); border-color: var(--orange); color: #fff; }

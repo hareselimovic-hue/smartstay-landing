@@ -9,6 +9,7 @@ PAGES = [
     "index.html", "apartmani/index.html", "hoteli/index.html", "resursi/index.html",
     "resursi/kucni-red-za-apartmane/index.html", "resursi/upute-za-goste/index.html",
     "resursi/self-check-in/index.html", "resursi/checklista-za-pripremu-apartmana/index.html",
+    "resursi/automatske-poruke-airbnb-booking/index.html",
 ]
 TEXT_TAGS = "title|p|h1|h2|h3|h4|h5|h6|li|a|button|span|summary|td|th|label|em|strong|small|figcaption|option|dt|dd|blockquote|b|i|div"
 BLOCK = re.compile(r"<(p|div|ul|ol|li|section|table|h[1-6]|details|form|nav|header|footer|article|blockquote|tr|img|input|select|textarea)\b", re.I)

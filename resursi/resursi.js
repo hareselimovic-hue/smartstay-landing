@@ -93,3 +93,17 @@ document.querySelectorAll('.opt-switch').forEach(sw => {
   window.resetChecklist = () => { boxes.forEach(b => { b.checked = false; }); update(); };
   update();
 })();
+
+// Gotove poruke (kartice .msg): kopira jednu poruku kao običan tekst, BS ili EN
+function copyMsg(btn, lang) {
+  const card = btn.closest('.msg');
+  const el = card && card.querySelector(lang === 'en' ? '.msg-en' : '.msg-bs');
+  if (!el) return;
+  const text = el.innerText.trim();
+  const done = () => toast(MSG.copied);
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(done, () => fallbackCopy(text, done));
+  } else {
+    fallbackCopy(text, done);
+  }
+}

@@ -17,6 +17,7 @@ OUT = {
     "resursi/upute-za-goste/index.html": "en/resources/guest-instructions/index.html",
     "resursi/self-check-in/index.html": "en/resources/self-check-in/index.html",
     "resursi/checklista-za-pripremu-apartmana/index.html": "en/resources/apartment-turnover-checklist/index.html",
+    "resursi/automatske-poruke-airbnb-booking/index.html": "en/resources/automated-messages-airbnb-booking/index.html",
 }
 def url_of(page):  # "apartmani/index.html" -> "/apartmani/"
     return "/" + page.replace("index.html", "")
