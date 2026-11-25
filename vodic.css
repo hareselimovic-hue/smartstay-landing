@@ -91,3 +91,7 @@
 }
 
 .ssv { scroll-margin-top: 110px; }
+
+/* Header: "Napravite vodič" sits on the right next to EN (the nav used to spread it into the middle) */
+.nav-inner .btn-nav { margin-left: auto; }
+.ssv-input[hidden] { display: none; }

@@ -9,6 +9,9 @@
   var EN = (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0;
   var API = window.SSV_API || 'https://app.smartstay.ba/api/guide-request';
   var REGISTER = 'https://app.smartstay.ba/register';
+  // Apartments: the self-serve wizard (link → account → review → guide right away). Hotels keep the emailed guide.
+  var START = window.SSV_START || 'https://app.smartstay.ba/start';
+  function startUrl(link) { return START + '?' + (EN ? 'lang=en' : 'lang=bs') + (link ? '&link=' + encodeURIComponent(link) : ''); }
 
   var T = EN ? {
     urlPh: 'Link to your Airbnb or Booking listing', urlPhHotel: 'Your hotel on Booking.com, or your website',
@@ -20,6 +23,8 @@
     demo: '▶ See the demo',
     note: '✓ 30 days free · ✓ No credit card',
     kindApt: '🏠 Apartment', kindHotel: '🏨 Hotel', kindQ: 'What do you rent out?',
+    subApt: 'Your guide is made from your Airbnb or Booking listing in a few minutes. You see it and edit it right away.',
+    subHotel: 'Paste your hotel on Booking.com or your website. We prepare your hotel guide and send it to you by email.',
     okTitle: '✓ Thank you! We are making your guide.', okSub: 'We will send it to <b>{e}</b>. Can\'t wait? <a href="{r}">Create your account now →</a>',
     errUrl: 'Paste the link of your Airbnb or Booking listing (or your website).', errMail: 'Please enter a valid email.', errNet: 'Something went wrong. Please try again.',
     plan: 'All features included', qApt: 'How many apartments do you have?', qHotel: 'How many rooms does your hotel have?',
@@ -43,6 +48,8 @@
     demo: '▶ Pogledajte demo',
     note: '✓ 30 dana besplatno · ✓ Bez kreditne kartice',
     kindApt: '🏠 Apartman', kindHotel: '🏨 Hotel', kindQ: 'Šta izdajete?',
+    subApt: 'Vodič se napravi iz vašeg Airbnb ili Booking oglasa za par minuta. Odmah ga vidite i uredite.',
+    subHotel: 'Zalijepite link vašeg hotela na Bookingu ili vaš sajt. Pripremimo vodič za vaš hotel i pošaljemo ga na mail.',
     okTitle: '✓ Hvala! Pravimo vaš vodič.', okSub: 'Šaljemo ga na <b>{e}</b>. Ne želite čekati? <a href="{r}">Napravite nalog odmah →</a>',
     errUrl: 'Zalijepite link vašeg Airbnb ili Booking oglasa (ili vašeg sajta).', errMail: 'Upišite ispravan email.', errNet: 'Nešto nije u redu. Pokušajte ponovo.',
     plan: 'Sve funkcije uključene', qApt: 'Koliko apartmana imate?', qHotel: 'Koliko soba ima vaš hotel?',
@@ -64,7 +71,7 @@
     return n.toLocaleString(EN ? 'en-US' : 'de-DE', { minimumFractionDigits: d, maximumFractionDigits: d });
   }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-  function registerUrl(kind) { return REGISTER + (kind === 'HOTEL' ? '?type=hotel' : ''); }
+  function registerUrl(kind) { return kind === 'HOTEL' ? REGISTER + '?type=hotel' : startUrl(''); }
 
   // ── "Vodič iz linka" form ──────────────────────────────────────────────────────────────────
   function linkForm(box) {
@@ -93,6 +100,11 @@
       var u = box.querySelector('.ssv-url'); u.placeholder = ph; u.setAttribute('aria-label', ph);
       box.querySelector('.ssv-platforms').innerHTML = kind === 'HOTEL' ? T.platformsHotel : T.platforms;
       box.querySelector('.ssv-alt-txt').innerHTML = (kind === 'HOTEL' ? T.altHotel : T.alt).replace('{r}', registerUrl(kind));
+      // Apartments don't leave an email here: the wizard asks for it when they create the account
+      box.querySelector('.ssv-email').hidden = kind !== 'HOTEL';
+      // Home hero card: apartments see their guide right away, hotels get it by email
+      var sub = box.closest('.hero-card') && box.closest('.hero-card').querySelector('.hc-sub');
+      if (sub) sub.textContent = kind === 'HOTEL' ? T.subHotel : T.subApt;
       box.querySelectorAll('.ssv-kind button').forEach(function (b) {
         var on = b.getAttribute('data-k') === kind; b.classList.toggle('on', on); b.setAttribute('aria-checked', on ? 'true' : 'false');
       });
@@ -108,6 +120,11 @@
       var old = box.querySelector('.ssv-err'); if (old) old.remove();
       function err(msg) { var d = document.createElement('div'); d.className = 'ssv-err'; d.textContent = msg; form.insertAdjacentElement('afterend', d); }
       if (url.length < 4 || url.indexOf('.') < 0) return err(T.errUrl);
+      if (kind !== 'HOTEL') {
+        try { if (window.gtag) window.gtag('event', 'generate_lead', { method: 'guide_wizard', kind: kind }); } catch (_) {}
+        window.location.href = startUrl(url);
+        return;
+      }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return err(T.errMail);
       btn.disabled = true; var label = btn.textContent; btn.textContent = T.sending;
       fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ url: url, email: email, kind: kind, lang: EN ? 'en' : 'bs' }) })
@@ -162,7 +179,7 @@
         '<div class="ssc-small">' + esc(T.small) + '</div></div>';
     var num = box.querySelector('.ssc-num'), range = box.querySelector('.ssc-range');
     var total = box.querySelector('.ssc-total'), per = box.querySelector('.ssc-per'), anchor = box.querySelector('.ssc-anchor');
-    box.querySelector('.ssc-cta').addEventListener('click', scrollToForm);
+    if (hotel) box.querySelector('.ssc-cta').addEventListener('click', scrollToForm);
     function render(n) {
       n = Math.max(1, Math.min(999, Math.round(n) || 1));
       num.value = n; range.value = Math.min(n, max);
